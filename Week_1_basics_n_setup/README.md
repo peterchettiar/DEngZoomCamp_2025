@@ -1,7 +1,3 @@
->[Back to Index](README.md)
-
->Next: [Data Ingestion](2_data_ingestion.md)
-
 ### Table of contents
 
 - [Introduction to Data Engineering](#introduction-to-data-engineering)
@@ -34,7 +30,7 @@
 
 During the course we will replicate the following architecture:
 
-![architecture diagram](https://github.com/DataTalksClub/data-engineering-zoomcamp/raw/main/images/architecture/arch_1.jpg)
+![architecture diagram](https://github.com/DataTalksClub/data-engineering-zoomcamp/images/architecture/arch_2.jpg)
 
 * [New York's Taxi and Limousine Corporation's Trip Records Dataset](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/dataset.md): the dataset we will use during the course.
 * [Spark](https://spark.apache.org/): analytics engine for large-scale data processing (distributed processing).
