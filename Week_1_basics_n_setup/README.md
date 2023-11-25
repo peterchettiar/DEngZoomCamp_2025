@@ -1,12 +1,3 @@
-> Previous: [Evaluation metrics for Classification models](04_classification_eval_metrics.md)
-
-> [Back to Index](README.md)
->> Return to: [Deployment](05a_deployment.md)
-
-> Next: [Decision Trees](06_trees.md)
-
-This is a quick & dirty guide to setting up the environment in an Intel Mac in order to complete the homework for Week 5.
-
 # Basic concepts
 
 The following are very basic definitions in order to understand what we're doing.
