@@ -190,7 +190,7 @@ We will use data from the [NYC TLC Trip Record Data website](https://www1.nyc.go
 
 To download the parquet files via terminal command, you can use the `wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet` command. If you do not have the `wget` command line tool, you can run the command `brew install wget` to install it. Once you've downloaded the parquet file to your working directory, you can run the command `parquet-tools inspect yellow_tripdata_2023-01.parquet` to inspect the data. Again, if you do not have the tool available, you can `pip install parquet-tools` and then run the previous command.
 
-Check the completed `upload-data.ipynb` [in this link](Week_1_basics_n_setup/2_docker_sql/upload-data.ipynb) for a detailed guide. Feel free to copy the file to your work directory; in the same directory you will need to have the CSV file linked above and the `ny_taxi_postgres_data` subdirectory.
+Check the completed `upload-data.ipynb` [in this link](2_docker_sql/upload-data.ipynb) for a detailed guide. Feel free to copy the file to your work directory; in the same directory you will need to have the CSV file linked above and the `ny_taxi_postgres_data` subdirectory.
 
 ## Connecting pgAdmin and Postgres with Docker networking
 
