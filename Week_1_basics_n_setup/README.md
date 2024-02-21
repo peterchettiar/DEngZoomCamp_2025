@@ -31,7 +31,7 @@
 
 During the course we will replicate the following architecture:
 
-![architecture diagram](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/images/architecture/arch_2.png)
+![arch_v3_workshops](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/f8206278-ba75-4de2-9de9-ff8ed79c0270)
 
 - [New York's Taxi and Limousine Corporation's Trip Records Dataset](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/dataset.md): the dataset we will use during the course.
 - [Spark](https://spark.apache.org/): analytics engine for large-scale data processing (distributed processing).
