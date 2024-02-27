@@ -76,6 +76,11 @@ Docker provides the following advantages:
 
 Docker containers are **_stateless_**: any changes done inside a container will **NOT** be saved when the container is killed and started again. This is an advantage because it allows us to restore any container to its initial state in a reproducible manner, but you will have to store data elsewhere if you need to do so; a common way to do so is with _volumes_.
 
+### Running Docker
+
+* `docker run hello-world` - command to run hello-world image, image would be automatically downloaded from DockerHub if it does not exist in local directory
+* `docker run -it ubuntu bash` - 
+
 > Note: you can learn more about Docker and how to set it up on a Mac [in this link](https://github.com/ziritrion/ml-zoomcamp/blob/11_kserve/notes/05b_virtenvs.md#docker). You may also be interested in a [Docker reference cheatsheet](https://gist.github.com/ziritrion/1842c8a4c4851602a8733bba19ab6050#docker).
 
 ## Creating a custom pipeline with Docker
