@@ -55,7 +55,7 @@ _([Video source](https://www.youtube.com/watch?v=EYNwNlOrpr0&list=PL3MmuxUbc_hJe
 
 **Docker** is a _containerization software_ that allows us to isolate software in a similar way to virtual machines but in a much leaner way.
 
-A **Docker image** is a _snapshot_ of a container that we can define to run our software, or in this case our data pipelines. By exporting our Docker images to Cloud providers such as Amazon Web Services or Google Cloud Platform we can run our containers there.
+A **Docker image** is a _static snapshot_ of a container that we can define to run our software, or in this case our data pipelines. By exporting our Docker images to Cloud providers such as Amazon Web Services or Google Cloud Platform we can run our containers there.
 
 Docker provides the following advantages:
 
