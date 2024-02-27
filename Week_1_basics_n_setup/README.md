@@ -57,7 +57,8 @@ _([Video source](https://www.youtube.com/watch?v=EYNwNlOrpr0&list=PL3MmuxUbc_hJe
 
 A **Docker image** is a _static snapshot_ of a container that we can define to run our software, or in this case our data pipelines. By exporting our Docker images to Cloud providers such as Amazon Web Services or Google Cloud Platform we can run our containers there.
 
-> _IMPORTANT SUMMARY OF DOCKER_
+> _IMPORTANT SUMMARY OF DOCKER_:
+
 > In the typical workflow of using Docker, you would start by creating a Dockerfile, which serves as the blueprint for building a Docker image. The Dockerfile contains instructions for assembling the image, including specifying the base image, copying files, installing dependencies, setting environment variables, and defining commands to run when the container starts.
 
 > Once you have a Dockerfile, you use the `docker build` command to build the Docker image based on the instructions provided in the Dockerfile. This process results in the creation of a Docker image, which is a static snapshot of the application and its dependencies at a particular point in time.
