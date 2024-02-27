@@ -60,6 +60,7 @@ Assuming you already installed Homebrew:
 1. Enter your instance's terminal with this command:
    _ `multipass shell test`
    _ You should see something like this.
+   
    ![image](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/98e33dcb-8bad-42dd-b5c2-d9e22db02fda)
 
 1. Exit the Ubuntu VM's terminal with this command:
