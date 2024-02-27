@@ -1,8 +1,8 @@
 # Introduction
 
-The remainder of the documentation were notes taken by another user who attended the ml-zoomcamp, another program that is run by DataTalksClub. Its not really relevant to the DE course that we are embarking on, but it contains some useful concepts and instructions such as virtual machine setups on local compute and basic git commands as well as docker setups on VMs. Maybe the notes on Docker would be useful for us.
+The remainder of the documentation were notes taken by another user who attended the ml-zoomcamp, another program that is run by DataTalksClub. Its not really relevant to the DE course that we are embarking on, but it contains some useful concepts and instructions such as virtual machine setups on local computer and basic git commands as well as docker setups on VMs. Maybe the notes on Docker would be useful for us.
 
-If interested in the program, do checkout the notes [here](https://github.com/ziritrion/ml-zoomcamp/tree/11_kserve/notes) to see the content of the course. Its really pretty interesting!
+If interested in the program, do checkout the notes [here](https://github.com/ziritrion/ml-zoomcamp/tree/11_kserve/notes) to see the content of the ml-zoomcamp course. Its really pretty interesting!
 
 # Basic concepts
 
