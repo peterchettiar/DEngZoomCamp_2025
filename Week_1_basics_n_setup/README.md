@@ -1,3 +1,5 @@
+# Week 1 Notes
+
 ### Table of contents
 
 - [Introduction to Data Engineering](#introduction-to-data-engineering)
@@ -79,7 +81,8 @@ Docker containers are **_stateless_**: any changes done inside a container will 
 ### Running Docker
 
 * `docker run hello-world` - command to run hello-world image, image would be automatically downloaded from DockerHub if it does not exist in local directory
-* `docker run -it ubuntu bash` - 
+* `docker run -it ubuntu bash` - command that creates a new Docker container (`docker run`) using the Ubuntu image (`ubuntu`) and start an interactive bash shell inside that container (`-it bash`). This allows you to interactively work within the Ubuntu environment - everything that comes after the image name is a parameter
+* `docker run -it python:3.9` - command executes similarly to previous command but it should be noted that `:3.9` refers to a tag that is suppose to be the specific version of python
 
 > Note: you can learn more about Docker and how to set it up on a Mac [in this link](https://github.com/ziritrion/ml-zoomcamp/blob/11_kserve/notes/05b_virtenvs.md#docker). You may also be interested in a [Docker reference cheatsheet](https://gist.github.com/ziritrion/1842c8a4c4851602a8733bba19ab6050#docker).
 
