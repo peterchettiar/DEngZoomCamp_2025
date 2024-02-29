@@ -139,6 +139,7 @@ Let's build the image:
 ```ssh
 docker build -t test:pandas .
 ```
+> Note: if you come across this error message `error checking context: can't stat..../ny_taxi_postgres_data`, run the command `sudo chmod -R 777 ny_taxi_postgres_data/` to be able to access the folder and hence build the image.
 
 - The image name will be `test` and its tag will be `pandas`. If the tag isn't specified it will default to `latest`.
 
