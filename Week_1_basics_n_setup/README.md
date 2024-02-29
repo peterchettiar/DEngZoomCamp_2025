@@ -195,6 +195,8 @@ pgcli -h localhost -p 5432 -u root -d ny_taxi
 - `-d` is the database name.
 - The password is not provided; it will be requested after running the command.
 
+> Note: You don't have to run the `docker run` command each time you want to run the postgres container. Once the container is created, you can just run `docker start <container name>` and then run the `pgcli` command mentioned proviously to connect to the database to run your queries. Similarly, you can run ` docker stop <container name>` to end the connection to postgres.
+
 ## Ingesting data to Postgres with Python
 
 _([Video source](https://www.youtube.com/watch?v=2JM-ziJt0WI&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=4))_
