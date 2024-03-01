@@ -212,6 +212,8 @@ To download the parquet files via terminal command, you can use the `wget https:
 
 Check the completed `upload-data.ipynb` [in this link](2_docker_sql/upload-data.ipynb) for a detailed guide. Feel free to copy the file to your work directory; in the same directory you will need to have the CSV file linked above and the `ny_taxi_postgres_data` subdirectory.
 
+> Note: Just wanted to point out that the approach used in the Jupyter notebook is an alternate way of connecting to the database and uploading the data without using the `pgcli` command-line tools. The notebook uses `sqlalchemy`library to do so, which in my opinion is a little more seamless. A detailed explantion is provided [here](https://www.youtube.com/watch?v=3IkfkTwqHx4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=6&pp=iAQB).
+
 ## Connecting pgAdmin and Postgres with Docker networking
 
 _([Video source](https://www.youtube.com/watch?v=hCAIVe9N0ow&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=5))_
