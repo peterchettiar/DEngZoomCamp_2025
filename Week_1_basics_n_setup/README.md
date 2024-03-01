@@ -214,6 +214,8 @@ Check the completed `upload-data.ipynb` [in this link](2_docker_sql/upload-data.
 
 > Note: Just wanted to point out that the approach used in the Jupyter notebook is an alternate way of connecting to the database and uploading the data without using the `pgcli` command-line tools. The notebook uses `sqlalchemy`library to do so, which in my opinion is a little more seamless. A detailed explantion is provided [here](https://www.youtube.com/watch?v=3IkfkTwqHx4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=6&pp=iAQB).
 
+> Tip: Command for running jupyter notebook on command-line is `jupyter nbconvert --to notebook --execute upload-data.ipynb`.
+
 ## Connecting pgAdmin and Postgres with Docker networking
 
 _([Video source](https://www.youtube.com/watch?v=hCAIVe9N0ow&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=5))_
