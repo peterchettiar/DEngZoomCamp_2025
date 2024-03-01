@@ -266,12 +266,13 @@ You should now be able to load pgAdmin on a web browser by browsing to `localhos
 
 Right-click on _Servers_ on the left sidebar and select _Create_ > _Server..._
 
-![steps](images/01_02.png)
+![steps](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/c2b6ec50-2c73-46d3-8ad4-e13953b589f0)
 
 Under _General_ give the Server a name and under _Connection_ add the same host name, user and password you used when running the container.
 
-![steps](images/01_03.png)
-![steps](images/01_04.png)
+![steps](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/dd607aeb-5369-48b5-bb55-d2c633c8f07a)
+![steps](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/4eaf846b-c02a-40e1-bd73-7a67254d92f6)
+
 
 Click on _Save_. You should now be connected to the database.
 
