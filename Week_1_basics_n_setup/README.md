@@ -280,6 +280,12 @@ Click on _Save_. You should now be connected to the database.
 
 We will explore using pgAdmin in later lessons.
 
+> Summary:
+> - We want to connect posgres to pgadmin via docker containers
+> - Pgadmin has a better UI to help run queries via `Query Tool` and view the table of results
+> - The key factor for enabling this is `networking`
+> - If you are using a VM instance, remember to port forward for pgadmin so that you can login into the UI locally
+
 ## Using the ingestion script with Docker
 
 _([Video source](https://www.youtube.com/watch?v=B1WwATwf-vY&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=8))_
