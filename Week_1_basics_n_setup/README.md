@@ -300,7 +300,7 @@ You can export the `ipynb` file to `py` with this command:
 jupyter nbconvert --to=script upload-data.ipynb
 ```
 
-Clean up the script by removing everything we don't need. We will also rename it to `ingest_data.py` and add a few modifications:
+Clean up the script by removing everything we don't need. We will also rename it to `ingest_data.py` (run command ` mv upload-data.py ingest_data.py`) and add a few modifications:
 
 - We will use [argparse](https://docs.python.org/3/library/argparse.html) to handle the following command line arguments:
   - Username
