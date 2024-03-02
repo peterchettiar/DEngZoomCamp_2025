@@ -39,7 +39,7 @@ def main(params):
     print(f"Writing data to table {table_name} in the database...")
 
     for chunk in tqdm(list_df):
-        chunk.to_sql(name=table_name, con=connection, if_exists="replace", index=False)
+        chunk.to_sql(name=table_name, con=connection, if_exists="append", index=False)
 
     print("Data ingestion complete")
 
