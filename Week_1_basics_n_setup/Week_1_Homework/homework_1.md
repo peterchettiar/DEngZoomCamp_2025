@@ -24,3 +24,15 @@ docker run -it --rm --entrypoint=bash python:3.9
 ```
 
 What actually happens is that docker runs the python image in its specfied version (downloads the images automatically from docker hub if not found in local repository) in interactive mode (i.e. you would be able to run other commands while the application runs in the background) and then opens `bash` shell as the entrypoint. Once we exit the programe, the container is removed.
+
+### Question 2. Understanding docker first run
+
+we run the same command as before, this time without the `--rm` option as follows:
+
+```bash
+docker run -it --entrypoint=bash python:3.9
+```
+
+And in the `bash` shell, if we run `pip list`, it would list down all the packages and their respective version. As such, the version for the package _wheel_ is `0.42.0`. See command output below.
+
+![image](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/f02da5fb-e7eb-443a-8a92-c0efed792bb1)
