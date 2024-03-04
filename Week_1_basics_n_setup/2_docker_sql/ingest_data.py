@@ -1,5 +1,3 @@
-# importing the necessary libraries
-
 import argparse
 import time
 import pandas as pd
