@@ -16,3 +16,11 @@ Automatically remove the container when it exits
 The answer is `-rm` (see image below). 
 
 ![image](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/9f90423b-f547-4a0f-8b83-814e244c4546)
+
+Using the same example from the video lectures, if we run the following command:
+
+```bash
+docker run -it --rm --entrypoint=bash python:3.9
+```
+
+What actually happens is that docker runs the python image in its specfied version (downloads the images automatically from docker hub if not found in local repository) in interactive mode (i.e. you would be able to run other commands while the application runs in the background) and then opens `bash` shell as the entrypoint. Once we exit the programe, the container is removed.
