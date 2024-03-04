@@ -36,3 +36,12 @@ docker run -it --entrypoint=bash python:3.9
 And in the `bash` shell, if we run `pip list`, it would list down all the packages and their respective version. As such, the version for the package _wheel_ is `0.42.0`. See command output below.
 
 ![image](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/f02da5fb-e7eb-443a-8a92-c0efed792bb1)
+
+## Prepare Postgres
+
+To answer Question 3 to 6, we would need to load both the datasets into `postgres` and do the queries directly on `pgadmin`. So the steps for uploading the datasets into `postgres` are as follows:
+1. Start with the ingestion notebook to test if the data get be downloaded and the connections with the database
+2. Next, we write a comprehensive ingestion python script to be used in our dockerfile
+3. Write a `Dockerfile`
+4. We can use the same docker-compose file previously generated from the lecture videos to run the `postgres` and `pgadmin` containers
+5. Now, all we need to do is to `docker build` to build the image from our `Dockerfile`, and then `docker run` the container
