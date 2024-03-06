@@ -43,5 +43,5 @@ To answer Question 3 to 6, we would need to load both the datasets into `postgre
 1. First thing we need to do is to write-up a `docker-compose.yml` file so that we can `docker-compose up` both the `postgres` and `pgadmin` containers - see [docker-compose.yml](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Week_1_basics_n_setup/Week_1_Homework/docker-compose.yaml) (there is a slight modification from the one done during lecture - `volumes` for `pgadmin` was added at the end of the file)
 2. Once that is done, we can write an ingestion notebook to test if the data can be downloaded, and the connections with the database is stable - [upload_data_hw.ipynb](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Week_1_basics_n_setup/Week_1_Homework/upload_data_hw.ipynb)
 3. Next, we write a comprehensive ingestion python script to be used in our dockerfile - [ingest_data](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Week_1_basics_n_setup/Week_1_Homework/ingest_data.py)
-4. Write a `Dockerfile`
+4. Write a `Dockerfile`([DockerFile]())
 5. Now, all we need to do is to `docker build` to build the image from our `Dockerfile`, and then `docker run` the container
