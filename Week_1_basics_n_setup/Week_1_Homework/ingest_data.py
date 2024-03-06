@@ -1,5 +1,13 @@
+"""
+This script is meant for ingesting data into postgres
+
+"""
+
 import argparse
 import time
+import urllib.request
+import gzip
+from io import BytesIO
 import pandas as pd
 from sqlalchemy import create_engine
 from tqdm import tqdm
@@ -15,17 +23,28 @@ def main(params):
     host = params.host
     port = params.port
     db = params.db
-    table_name = params.table_name
 
     # record start time
     start_time = time.time()
 
-    # read the parquet file
-    df = pd.read_parquet(params.url)
+    # download the compressed file for the green taxi dataset
+    response = urllib.request.urlopen(params.green_taxi_url)
 
-    # split df into a list of smaller frames
-    n = 100000  # specify number of rows in each chunk
-    list_df = [df[i : i + n] for i in range(0, len(df), n)]
+    # check if the request was successful
+    if response.status == 200:
+        # decompress the file
+        with gzip.GzipFile(fileobj=BytesIO(response.read())) as f:
+            # read the decompressed CSV file into pandas DataFrame
+            green_taxi_df = pd.read_csv(f, low_memory=False)
+
+    # read the parquet file
+    taxi_zone_df = pd.read_csv(params.taxi_zones_url)
+
+    # lets combine both dfs into a list
+    df_list = [
+        (params.first_table_name, green_taxi_df),
+        (params.second_table_name, taxi_zone_df),
+    ]
 
     # initialising an engine object and passing the database connection string as an argument
     engine = create_engine(f"postgresql://{user}:{password}@{host}:{port}/{db}")
@@ -33,11 +52,10 @@ def main(params):
     # connect to database
     connection = engine.connect()
 
-    # write dataframe to the database table
-    print(f"Writing data to table {table_name} in the database...")
-
-    for chunk in tqdm(list_df):
-        chunk.to_sql(name=table_name, con=connection, if_exists="append", index=False)
+    for df in tqdm(df_list):
+        # write dataframe to the database table
+        print(f"Writing data to table {df[0]} in the database...")
+        df[1].to_sql(name=df[0], con=connection, if_exists="append", index=False)
 
     print("Data ingestion complete")
 
@@ -65,8 +83,22 @@ if __name__ == "__main__":
     parser.add_argument("--host", type=str, help="Database host")
     parser.add_argument("--port", type=int, help="Database port")
     parser.add_argument("--db", type=str, help="Database name")
-    parser.add_argument("--table_name", type=str, help="Table name in the database")
-    parser.add_argument("--url", type=str, help="URL of the data file to ingest")
+    parser.add_argument(
+        "--first_table_name", type=str, help="First table name in the database"
+    )
+    parser.add_argument(
+        "--second_table_name", type=str, help="Second table name in the database"
+    )
+    parser.add_argument(
+        "--green_taxi_url",
+        type=str,
+        help="URL of the data file to ingest for green taxi",
+    )
+    parser.add_argument(
+        "--taxi_zones_url",
+        type=str,
+        help="URL of the data file to ingest for taxi zone",
+    )
 
     args = parser.parse_args()
 
