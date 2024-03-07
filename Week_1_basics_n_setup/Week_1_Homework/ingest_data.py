@@ -55,7 +55,7 @@ def main(params):
     for df in tqdm(df_list):
         # write dataframe to the database table
         print(f"Writing data to table {df[0]} in the database...")
-        df[1].to_sql(name=df[0], con=connection, if_exists="append", index=False)
+        df[1].to_sql(name=df[0], con=connection, if_exists="replace", index=False)
 
     print("Data ingestion complete")
 
