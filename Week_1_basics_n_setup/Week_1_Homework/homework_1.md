@@ -65,7 +65,7 @@ docker run -it \
 
 > Tip: Now that we have created the container after the `docker run` command, if we were to run the same container again wtih the same configs we can run `docker ps -a` to see all the containers and copy the container ID for the dockerised ingestion script to run the container again using the command `docker start <contained_id>`
 
-### Quetion 3: count records
+### Quetion 3: Count records
 
 How many trips were totally made on September 18th 2019?
 > Answer: 15612
@@ -78,4 +78,24 @@ FROM
 WHERE
 	CAST(LPEP_PICKUP_DATETIME AS DATE) = '2019-09-18'
 	AND CAST(LPEP_DROPOFF_DATETIME AS DATE) = '2019-09-18';
+```
+
+### Question 4: Longest trip for each day
+
+Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
+
+> Answer : 2019=09-26
+
+```sql
+SELECT
+	CAST(LPEP_PICKUP_DATETIME AS DATE) AS PICKUP_DATE,
+	MAX(TRIP_DISTANCE) AS MAX_DISTANCE
+FROM
+	GREEN_TAXI_TRIPS
+GROUP BY
+	CAST(LPEP_PICKUP_DATETIME AS DATE)
+ORDER BY
+	MAX_DISTANCE DESC
+LIMIT
+	1
 ```
