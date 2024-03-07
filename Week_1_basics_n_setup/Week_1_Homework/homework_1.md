@@ -99,3 +99,66 @@ ORDER BY
 LIMIT
 	1
 ```
+
+### Question 5: Three biggest pick up Boroughs
+
+Which were the 3 pick up Boroughs that had a sum of total_amount superior to 50000?
+
+> Answer: "Brooklyn" "Manhattan" "Queens"
+
+```sql
+SELECT
+	TZ."Borough",
+	SUM(GTT."total_amount") AS TOTAL_AMT_AGG
+FROM
+	GREEN_TAXI_TRIPS GTT
+	JOIN TAXI_ZONES TZ ON GTT."PULocationID" = TZ."LocationID"
+WHERE
+	CAST(LPEP_PICKUP_DATETIME AS DATE) = '2019-09-18'
+	AND TZ."Borough" != 'Unknown'
+GROUP BY
+	TZ."Borough"
+HAVING
+	SUM(GTT."total_amount") > 50000
+ORDER BY
+	TOTAL_AMT_AGG DESC
+```
+
+### Question 6: Largest tip
+
+For the passengers picked up in September 2019 in the zone name Astoria which was the drop off zone that had the largest tip? 
+
+> Answer: JFK Airport
+
+```sql
+WITH
+	PICKUP_TABLE AS (
+		SELECT
+			CAST(LPEP_PICKUP_DATETIME AS DATE) AS PICKUP_DATE,
+			GTT."PULocationID",
+			CAST(LPEP_DROPOFF_DATETIME AS DATE) AS DROPOFF_DATE,
+			GTT."DOLocationID",
+			TIP_AMOUNT,
+			TZ."Zone" AS PICK_UP_ZONE
+		FROM
+			GREEN_TAXI_TRIPS GTT
+			JOIN TAXI_ZONES TZ ON GTT."PULocationID" = TZ."LocationID"
+	)
+SELECT
+	PICKUP_DATE,
+	PU."PULocationID",
+	DROPOFF_DATE,
+	PU."DOLocationID",
+	TIP_AMOUNT,
+	PICK_UP_ZONE,
+	TZ."Zone" AS DROPOFF_ZONE
+FROM
+	PICKUP_TABLE PU
+	JOIN TAXI_ZONES TZ ON PU."DOLocationID" = TZ."LocationID"
+WHERE
+	PICK_UP_ZONE = 'Astoria'
+ORDER BY
+	TIP_AMOUNT DESC
+LIMIT
+	1
+```
