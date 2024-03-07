@@ -64,3 +64,18 @@ docker run -it \
 > Note: `network` name can be found by running `docker network ls` as mentioned in step 2 - usually network names created by `docker-compose` would start with the name of the directory in which the `docker-compose.yml` file is located, unless otherwise mentioned path.
 
 > Tip: Now that we have created the container after the `docker run` command, if we were to run the same container again wtih the same configs we can run `docker ps -a` to see all the containers and copy the container ID for the dockerised ingestion script to run the container again using the command `docker start <contained_id>`
+
+### Quetion 3: count records
+
+How many trips were totally made on September 18th 2019?
+> Answer: 15612
+
+```sql
+SELECT
+	COUNT(*)
+FROM
+	GREEN_TAXI_TRIPS
+WHERE
+	CAST(LPEP_PICKUP_DATETIME AS DATE) = '2019-09-18'
+	AND CAST(LPEP_DROPOFF_DATETIME AS DATE) = '2019-09-18';
+```
