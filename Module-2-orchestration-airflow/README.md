@@ -103,7 +103,7 @@ _[Back to the top](#table-of-contents)_
 
 _[Video source](https://www.youtube.com/watch?v=0yK7LXwYeD0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=17)_
 
-In the previous lesson we saw the definition of [data pipeline](1_intro.md#data-pipelines) and we created a [pipeline script](../1_intro/ingest_data.py) that downloaded a CSV and processed it so that we could ingest it to Postgres.
+In the previous lesson we saw the definition of [data pipeline](https://github.com/peterchettiar/DEngZoomCamp_2024/tree/main/Module-1-docker-terraform#data-pipelines) and we created a [pipeline script](../Module-1-docker-terraform/2_docker_sql/ingest_data.py) that downloaded a CSV and processed it so that we could ingest it to Postgres.
 
 The script we created is an example of how **NOT** to create a pipeline, because it contains 2 steps which could otherwise be separated (downloading and processing). The reason is that if our internet connection is slow or if we're simply testing the script, it will have to download the CSV file every single time that we run the script, which is less than ideal.
 
