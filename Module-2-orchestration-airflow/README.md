@@ -152,7 +152,7 @@ _[Video source](https://www.youtube.com/watch?v=lqDMzReAtrw&list=PL3MmuxUbc_hJed
 
 A typical Airflow installation consists of the following components:
 
-![airflow architecture](https://airflow.apache.org/docs/apache-airflow/stable/_images/arch-diag-basic.png)
+![airflow architecture](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/3c594d0b-d987-4608-a62e-fd9d5d634fbc)
 
 * The **scheduler** handles both triggering scheduled workflows as well as submitting _tasks_ to the executor to run. The scheduler is the main "core" of Airflow.
 * The **executor** handles running tasks. In a default installation, the executor runs everything inside the scheduler but most production-suitable executors push task execution out to _workers_.
