@@ -144,7 +144,7 @@ The steps in capital letters are our ***jobs*** and the objects in between are t
 
 A ***Workflow Orchestration Tool*** allows us to define data workflows and parametrize them; it also provides additional tools such as history and logging.
 
-The tool we will focus on in this course is **[Apache Airflow](https://airflow.apache.org/)**, but there are many others such as Luigi, Prefect, Argo, etc.
+The tool we will focus on in this course is **[Apache Airflow](https://airflow.apache.org/)**, but there are many others such as Luigi, Prefect, Argo, Mage, etc.
 
 ## Airflow architecture
 
