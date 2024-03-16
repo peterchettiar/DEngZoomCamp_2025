@@ -159,7 +159,7 @@ A typical Airflow installation consists of the following components:
 * A **worker** simply executes tasks given by the scheduler.
 * A **webserver** which seves as the GUI.
 * A **DAG directory**; a folder with _DAG files_ which is read by the scheduler and the executor (an by extension by any worker the executor might have)
-* A **metadata database** (Postgres) used by the scheduler, the executor and the web server to store state. The backend of Airflow.
+* A **metadata database** (Postgres) used by the scheduler, the executor and the web server to store state environments. The backend of Airflow.
 * Additional components (not shown in the diagram):
   * `redis`: a _message broker_ that forwards messages from the scheduler to workers.
   * `flower`: app for monitoring the environment, available at port `5555` by default.
