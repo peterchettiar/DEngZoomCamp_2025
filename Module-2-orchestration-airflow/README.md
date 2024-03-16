@@ -53,6 +53,8 @@ A Data Lake should be:
 
 ## Data Lake vs Data Warehouse
 
+![image](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/6f95be17-1187-42f7-ad21-78fbe5eec1b7)
+
 A Data Lake (DL) is not to be confused with a Data Warehouse (DW). There are several differences:
 
 * Data Processing:
