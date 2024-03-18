@@ -189,7 +189,7 @@ _[Video source](https://www.youtube.com/watch?v=lqDMzReAtrw&list=PL3MmuxUbc_hJed
 
 ### Pre-requisites
 
-1. This tutorial assumes that the [service account credentials JSON file](1_intro.md#gcp-initial-setup) is named `google_credentials.json` and stored in `$HOME/.google/credentials/`. Copy and rename your credentials file to the required path.
+1. This tutorial assumes that the [service account credentials JSON file](https://gist.github.com/peterchettiar/6e719cd2bbdb3e6aae4e6d1895670687#sftp-google-credentials-into-vm-instance) is named `google_credentials.json` and stored in `$HOME/.google/credentials/`. Copy and rename your credentials file to the required path.
 2. `docker-compose` should be at least version v2.x+ and Docker Engine should have at least 5GB of RAM available, ideally 8GB. On Docker Desktop this can be changed in _Preferences_ > _Resources_.
 
 ### Setup (full version)
@@ -202,7 +202,7 @@ Please follow these instructions for deploying the "full" Airflow with Docker. I
     curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.2.3/docker-compose.yaml'
     ```
     * The official `docker-compose.yaml` file is quite complex and contains [several service definitions](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#docker-compose-yaml).
-    * For a refresher on how `docker-compose` works, you can [check out this lesson from the ML Zoomcamp](https://github.com/ziritrion/ml-zoomcamp/blob/main/notes/10_kubernetes.md#connecting-docker-containers-with-docker-compose).
+    * For a refresher on how `docker-compose` works, you can [check out this Github Gist]([https://github.com/ziritrion/ml-zoomcamp/blob/main/notes/10_kubernetes.md#connecting-docker-containers-with-docker-compose](https://gist.github.com/peterchettiar/6e719cd2bbdb3e6aae4e6d1895670687#run-docker-compose).
 1. We now need to [set up the Airflow user](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#setting-the-right-airflow-user). For MacOS, create a new `.env` in the same folder as the `docker-compose.yaml` file with the content below:
     ```bash
     AIRFLOW_UID=50000
@@ -211,10 +211,10 @@ Please follow these instructions for deploying the "full" Airflow with Docker. I
         ```bash
         echo -e "AIRFLOW_UID=$(id -u)" > .env
         ```
-1. The base Airflow Docker image won't work with GCP, so we need to [customize it](https://airflow.apache.org/docs/docker-stack/build.html) to suit our needs. You may download a GCP-ready Airflow Dockerfile [from this link](../2_data_ingestion/airflow/Dockerfile). A few things of note:
+1. The base Airflow Docker image won't work with GCP, so we need to [customize it](https://airflow.apache.org/docs/docker-stack/build.html) to suit our needs. You may download a GCP-ready Airflow Dockerfile [from the course repo](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2022/week_2_data_ingestion/airflow/docker-compose.yaml). A few things of note:
     * We use the base Apache Airflow image as the base.
     * We install the GCP SDK CLI tool so that Airflow can communicate with our GCP project.
-    * We also need to provide a [`requirements.txt` file](../2_data_ingestion/airflow/requirements.txt) to install Python dependencies. The dependencies are:
+    * We also need to provide a [`requirements.txt` file](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2022/week_2_data_ingestion/airflow/requirements.txt) to install Python dependencies. The dependencies are:
       * `apache-airflow-providers-google` so that Airflow can use the GCP SDK.
       * `pyarrow` , a library to work with parquet files.
 1. Alter the `x-airflow-common` service definition inside the `docker-compose.yaml` file as follows:
@@ -233,13 +233,12 @@ Please follow these instructions for deploying the "full" Airflow with Docker. I
       GOOGLE_APPLICATION_CREDENTIALS: /.google/credentials/google_credentials.json
       AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/google_credentials.json'
       ```
-    * Add 2 new additional environment variables for your GCP project ID and the GCP bucket that Terraform should have created [in the previous lesson](1_intro.md#creating-gcp-infrastructure-with-terraform). You can find this info in your GCP project's dashboard.
+    * Add 2 new additional environment variables for your GCP project ID and the GCP bucket that Terraform should have created in the previous lesson. You can find this info in your GCP project's dashboard.
       ```yaml
       GCP_PROJECT_ID: '<your_gcp_project_id>'
       GCP_GCS_BUCKET: '<your_bucket_id>'
       ```
     * Change the `AIRFLOW__CORE__LOAD_EXAMPLES` value to `'false'`. This will prevent Airflow from populating its interface with DAG examples.
-1. You may find a modified `docker-compose.yaml` file [in this link](../2_data_ingestion/airflow/docker-compose.yaml).
 1. Additional notes:
     * The YAML file uses [`CeleryExecutor`](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) as its executor type, which means that tasks will be pushed to workers (external Docker containers) rather than running them locally (as regular processes). You can change this setting by modifying the `AIRFLOW__CORE__EXECUTOR` environment variable under the `x-airflow-common` environment definition.
 
