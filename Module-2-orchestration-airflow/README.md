@@ -203,7 +203,7 @@ Please follow these instructions for deploying the "full" Airflow with Docker. I
     curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.2.3/docker-compose.yaml'
     ```
     * The official `docker-compose.yaml` file is quite complex and contains [several service definitions](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#docker-compose-yaml).
-    * For a refresher on how `docker-compose` works, you can [check out this Github Gist]([https://github.com/ziritrion/ml-zoomcamp/blob/main/notes/10_kubernetes.md#connecting-docker-containers-with-docker-compose](https://gist.github.com/peterchettiar/6e719cd2bbdb3e6aae4e6d1895670687#run-docker-compose).
+    * For a refresher on how `docker-compose` works, you can [check out this Github Gist](https://gist.github.com/peterchettiar/6e719cd2bbdb3e6aae4e6d1895670687#run-docker-compose).
 1. We now need to [set up the Airflow user](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#setting-the-right-airflow-user). For MacOS, create a new `.env` in the same folder as the `docker-compose.yaml` file with the content below:
     ```bash
     AIRFLOW_UID=50000
@@ -212,7 +212,7 @@ Please follow these instructions for deploying the "full" Airflow with Docker. I
         ```bash
         echo -e "AIRFLOW_UID=$(id -u)" > .env
         ```
-1. The base Airflow Docker image won't work with GCP, so we need to [customize it](https://airflow.apache.org/docs/docker-stack/build.html) to suit our needs. You may download a GCP-ready Airflow Dockerfile [from the course repo](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2022/week_2_data_ingestion/airflow/docker-compose.yaml). A few things of note:
+1. The base Airflow Docker image won't work with GCP (our `docker-compose` file) as it does not contain the libraries that we need or the necessary gcloud resources,hence we need to extend the image by creating a [`Dockerfile`](https://airflow.apache.org/docs/docker-stack/build.html) that extends our current airflow image (2.2.3) with a list of python dependencies declared in the `requirements.txt` file. You may download a GCP-ready Airflow Dockerfile [from the course repo](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2022/week_2_data_ingestion/airflow/docker-compose.yaml). To summarise:
     * We use the base Apache Airflow image as the base.
     * We install the GCP SDK CLI tool so that Airflow can communicate with our GCP project.
     * We also need to provide a [`requirements.txt` file](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2022/week_2_data_ingestion/airflow/requirements.txt) to install Python dependencies. The dependencies are:
@@ -264,7 +264,7 @@ If you want a less overwhelming YAML that only runs the webserver and the schedu
 
 You should now have a simplified Airflow "lite" YAML file ready for deployment and may continue to the next section.
 
-For convenience, a simplified YAML version is available [in this link](../2_data_ingestion/airflow/extras/docker-compose-nofrills.yml).
+For convenience, a simplified YAML version is available [in this link](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2022/week_2_data_ingestion/airflow/docker-compose-nofrills.yml).
 
 ### Execution
 1. Build the image. It may take several minutes You only need to do this the first time you run Airflow or if you modified the Dockerfile or the `requirements.txt` file.
