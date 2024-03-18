@@ -154,16 +154,17 @@ A typical Airflow installation consists of the following components:
 
 ![airflow architecture](https://github.com/peterchettiar/DEngZoomCamp_2024/assets/89821181/3c594d0b-d987-4608-a62e-fd9d5d634fbc)
 
-* The **scheduler** handles both triggering scheduled workflows as well as submitting _tasks_ to the executor to run. The scheduler is the main "core" of Airflow.
+* The **scheduler** handles both triggering scheduled workflows as well as submitting _tasks_ to the executor to run. The scheduler is the main "core" of Airflow. The scheduler monitors all tasks and DAGs, then triggers the task instances once their dependencies are complete.
 * The **executor** handles running tasks. In a default installation, the executor runs everything inside the scheduler but most production-suitable executors push task execution out to _workers_.
 * A **worker** simply executes tasks given by the scheduler.
-* A **webserver** which seves as the GUI.
+* A **webserver** which seves as the GUI.  The webserver is available at `http://localhost:8080`.
 * A **DAG directory**; a folder with _DAG files_ which is read by the scheduler and the executor (an by extension by any worker the executor might have)
 * A **metadata database** (Postgres) used by the scheduler, the executor and the web server to store state environments. The backend of Airflow.
 * Additional components (not shown in the diagram):
   * `redis`: a _message broker_ that forwards messages from the scheduler to workers.
   * `flower`: app for monitoring the environment, available at port `5555` by default.
   * `airflow-init`: initialization service which we will customize for our needs.
+  * `airflow-triggerer` - The triggerer runs an event loop for deferrable tasks.
 
 Airflow will create a folder structure when running:
 * `./dags` - `DAG_FOLDER` for DAG files
@@ -243,3 +244,40 @@ Please follow these instructions for deploying the "full" Airflow with Docker. I
     * The YAML file uses [`CeleryExecutor`](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) as its executor type, which means that tasks will be pushed to workers (external Docker containers) rather than running them locally (as regular processes). You can change this setting by modifying the `AIRFLOW__CORE__EXECUTOR` environment variable under the `x-airflow-common` environment definition.
 
 You may now skip to the [Execution section](#execution) to deploy Airflow, or continue reading to modify your `docker-compose.yaml` file further for a less resource-intensive Airflow deployment.
+
+### Setup (lite version)
+
+_[Video source](https://www.youtube.com/watch?v=A1p5LQ0zzaQ&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=23)_
+
+The current `docker-compose.yaml` file we've generated will deploy multiple containers which will require lots of resources. This is the correct approach for running multiple DAGs accross multiple nodes in a Kubernetes deployment but it's very taxing on a regular local computer such as a laptop.
+
+If you want a less overwhelming YAML that only runs the webserver and the scheduler and runs the DAGs in the scheduler rather than running them in external workers, please modify the `docker-compose.yaml` file following these steps:
+
+1. Remove the `redis`, `airflow-worker`, `airflow-triggerer` and `flower` services.
+1. Change the `AIRFLOW__CORE__EXECUTOR` environment variable from `CeleryExecutor` to `LocalExecutor` .
+1. At the end of the `x-airflow-common` definition, within the `depends-on` block, remove these 2 lines:
+    ```yaml
+    redis:
+      condition: service_healthy
+    ```
+1. Comment out the `AIRFLOW__CELERY__RESULT_BACKEND` and `AIRFLOW__CELERY__BROKER_URL` environment variables.
+
+You should now have a simplified Airflow "lite" YAML file ready for deployment and may continue to the next section.
+
+For convenience, a simplified YAML version is available [in this link](../2_data_ingestion/airflow/extras/docker-compose-nofrills.yml).
+
+### Execution
+1. Build the image. It may take several minutes You only need to do this the first time you run Airflow or if you modified the Dockerfile or the `requirements.txt` file.
+    ```bash
+    docker-compose build
+    ```
+2. Initialize configs:
+    ```bash
+    docker-compose up airflow-init
+    ```
+3. Run Airflow
+    ```bash
+    docker-compose up -d
+    ```
+1. You may now access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
+>***IMPORTANT***: this is ***NOT*** a production-ready setup! The username and password for Airflow have not been modified in any way; you can find them by searching for `_AIRFLOW_WWW_USER_USERNAME` and `_AIRFLOW_WWW_USER_PASSWORD` inside the `docker-compose.yaml` file.
