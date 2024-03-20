@@ -963,6 +963,6 @@ If you cannot set up a local development environment, you may use part of the $3
 
 ## Port mapping and networks in Docker
 
-If you're having issues with Docker and networking (especially if you already have Postgres running locally in your host computer), a [videoguide is also available](https://www.youtube.com/watch?v=tOr4hTsHOzU).
+If you're having issues with Docker and networking (especially if you already have Postgres running locally in your host computer), a [video guide is also available](https://www.youtube.com/watch?v=tOr4hTsHOzU).
 
 _[Back to the top](#table-of-contents)_
