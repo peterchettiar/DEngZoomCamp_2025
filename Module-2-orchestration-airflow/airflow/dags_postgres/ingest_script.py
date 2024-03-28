@@ -7,12 +7,10 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 
-def ingest_callable(
-    user, password, host, port, db, table_name, parquet_file, execution_date
-):
+def ingest_callable(user, password, host, port, db, table_name, parquet_file):
     """Takes arguments and uploads local parquet files into postgres"""
 
-    print(table_name, parquet_file, execution_date)
+    print(table_name, parquet_file)
     print("Starting data ingestion process...")
 
     # record start time

@@ -366,3 +366,51 @@ AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-03-02T06:00:00+00:00
 [2024-03-28 01:58:55,647] {logging_mixin.py:109} INFO - yellow_taxi_2022_03 /opt/***/yellowtaxi_tripdata_2022-03.parquet 2022-03-02T06:00:00+00:00
 [2024-03-28 01:58:55,647] {logging_mixin.py:109} INFO - Starting data ingestion process...
 [2024-03-28 01:59:04,866] {logging_mixin.py:109} INFO - Writing data to table yellow_taxi_2022_03 in the database...
+[2024-03-28 09:01:54,084] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data.ingest_to_postgres_task scheduled__2022-03-02T06:00:00+00:00 [queued]>
+[2024-03-28 09:01:54,223] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data.ingest_to_postgres_task scheduled__2022-03-02T06:00:00+00:00 [queued]>
+[2024-03-28 09:01:54,223] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-28 09:01:54,224] {taskinstance.py:1239} INFO - Starting attempt 1 of 1
+[2024-03-28 09:01:54,224] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-28 09:01:54,277] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest_to_postgres_task> on 2022-03-02 06:00:00+00:00
+[2024-03-28 09:01:54,328] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data', 'ingest_to_postgres_task', 'scheduled__2022-03-02T06:00:00+00:00', '--job-id', '974', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_dag.py', '--cfg-path', '/tmp/tmpe3us0_p5', '--error-file', '/tmp/tmpiyikmc7f']
+[2024-03-28 09:01:54,338] {standard_task_runner.py:77} INFO - Job 974: Subtask ingest_to_postgres_task
+[2024-03-28 09:01:54,384] {standard_task_runner.py:52} INFO - Started process 714 to run task
+[2024-03-28 09:01:55,160] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data.ingest_to_postgres_task scheduled__2022-03-02T06:00:00+00:00 [running]> on host 05f84def3a12
+[2024-03-28 09:01:56,168] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-28 09:01:56,508] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data
+AIRFLOW_CTX_TASK_ID=ingest_to_postgres_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-03-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-03-02T06:00:00+00:00
+[2024-03-28 09:01:56,510] {logging_mixin.py:109} INFO - yellow_taxi_2022_03 /opt/***/yellowtaxi_tripdata_2022-03.parquet 2022-03-02T06:00:00+00:00
+[2024-03-28 09:01:56,511] {logging_mixin.py:109} INFO - Starting data ingestion process...
+[2024-03-28 09:02:07,838] {logging_mixin.py:109} INFO - Writing data to table yellow_taxi_2022_03 in the database...
+[2024-03-28 10:08:12,085] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data.ingest_to_postgres_task scheduled__2022-03-02T06:00:00+00:00 [queued]>
+[2024-03-28 10:08:12,146] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data.ingest_to_postgres_task scheduled__2022-03-02T06:00:00+00:00 [queued]>
+[2024-03-28 10:08:12,147] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-28 10:08:12,147] {taskinstance.py:1239} INFO - Starting attempt 1 of 1
+[2024-03-28 10:08:12,148] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-28 10:08:12,280] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest_to_postgres_task> on 2022-03-02 06:00:00+00:00
+[2024-03-28 10:08:12,296] {standard_task_runner.py:52} INFO - Started process 586 to run task
+[2024-03-28 10:08:12,307] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data', 'ingest_to_postgres_task', 'scheduled__2022-03-02T06:00:00+00:00', '--job-id', '1139', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_dag.py', '--cfg-path', '/tmp/tmpb006t0lc', '--error-file', '/tmp/tmpt1yd6f7y']
+[2024-03-28 10:08:12,308] {standard_task_runner.py:77} INFO - Job 1139: Subtask ingest_to_postgres_task
+[2024-03-28 10:08:13,050] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data.ingest_to_postgres_task scheduled__2022-03-02T06:00:00+00:00 [running]> on host 05f84def3a12
+[2024-03-28 10:08:13,449] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-28 10:08:13,622] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data
+AIRFLOW_CTX_TASK_ID=ingest_to_postgres_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-03-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-03-02T06:00:00+00:00
+[2024-03-28 10:08:13,684] {logging_mixin.py:109} INFO - yellow_taxi_2022_03 /opt/***/yellowtaxi_tripdata_2022-03.parquet 2022-03-02T06:00:00+00:00
+[2024-03-28 10:08:13,685] {logging_mixin.py:109} INFO - Starting data ingestion process...
+[2024-03-28 10:08:25,184] {logging_mixin.py:109} INFO - Writing data to table yellow_taxi_2022_03 in the database...

@@ -29,9 +29,19 @@ OUTPUT_FILE_TEMPLATE = (
 )
 TABLE_NAME_TEMPLATE = "yellow_taxi_{{ execution_date.strftime('%Y_%m') }}"
 
+# DAG default arguments
+default_args = {
+    "start_date": datetime(2021, 1, 1),
+    "end_date": datetime(2024, 2, 1),
+    "retries": 3,
+}
 
-@dag(start_date=datetime(2021, 1, 1), schedule_interval="0 6 2 * *")
-def ingest_data():
+
+@dag(
+    default_args=default_args,
+    schedule_interval="0 6 2 * *",
+)
+def ingest_data_postgres():
     """
     DAG generator function to run our tasks
     """
@@ -58,4 +68,4 @@ def ingest_data():
     download_dataset_task >> ingestion_task
 
 
-DAG = ingest_data()
+DAG = ingest_data_postgres()
