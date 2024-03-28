@@ -1,0 +1,105 @@
+[2024-03-26 14:34:40,383] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: LocalIngestionDag.ingest scheduled__2023-01-02T06:00:00+00:00 [queued]>
+[2024-03-26 14:34:40,400] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: LocalIngestionDag.ingest scheduled__2023-01-02T06:00:00+00:00 [queued]>
+[2024-03-26 14:34:40,400] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-26 14:34:40,400] {taskinstance.py:1239} INFO - Starting attempt 1 of 1
+[2024-03-26 14:34:40,400] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-26 14:34:40,415] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest> on 2023-01-02 06:00:00+00:00
+[2024-03-26 14:34:40,422] {standard_task_runner.py:52} INFO - Started process 323 to run task
+[2024-03-26 14:34:40,428] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'LocalIngestionDag', 'ingest', 'scheduled__2023-01-02T06:00:00+00:00', '--job-id', '195', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_local.py', '--cfg-path', '/tmp/tmpu6qw9lyr', '--error-file', '/tmp/tmprrt6rxqz']
+[2024-03-26 14:34:40,428] {standard_task_runner.py:77} INFO - Job 195: Subtask ingest
+[2024-03-26 14:34:40,510] {logging_mixin.py:109} INFO - Running <TaskInstance: LocalIngestionDag.ingest scheduled__2023-01-02T06:00:00+00:00 [running]> on host 55b5831905d1
+[2024-03-26 14:34:40,571] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-26 14:34:40,604] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=LocalIngestionDag
+AIRFLOW_CTX_TASK_ID=ingest
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-01-02T06:00:00+00:00
+[2024-03-26 14:34:40,605] {logging_mixin.py:109} INFO - yellow_taxi_2023_01 /opt/***/output_2023-01.csv 2023-01-02T06:00:00+00:00
+[2024-03-26 14:34:40,605] {logging_mixin.py:109} INFO - Starting data ingestion process...
+[2024-03-26 14:34:40,655] {logging_mixin.py:109} INFO - Writing data to table yellow_taxi_2023_01 in the database...
+[2024-03-26 14:34:40,655] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_scipt.py", line 38, in ingest_callable
+    chunk.tpep_pickup_datetime = pd.to_datetime(chunk.tpep_pickup_datetime)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/generic.py", line 5141, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'tpep_pickup_datetime'
+[2024-03-26 14:34:40,678] {taskinstance.py:1277} INFO - Marking task as FAILED. dag_id=LocalIngestionDag, task_id=ingest, execution_date=20230102T060000, start_date=20240326T143440, end_date=20240326T143440
+[2024-03-26 14:34:40,700] {standard_task_runner.py:92} ERROR - Failed to execute job 195 for task ingest
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_scipt.py", line 38, in ingest_callable
+    chunk.tpep_pickup_datetime = pd.to_datetime(chunk.tpep_pickup_datetime)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/generic.py", line 5141, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'tpep_pickup_datetime'
+[2024-03-26 14:34:40,720] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-26 14:34:40,756] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-26 15:30:26,239] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: LocalIngestionDag.ingest scheduled__2023-01-02T06:00:00+00:00 [queued]>
+[2024-03-26 15:30:26,287] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: LocalIngestionDag.ingest scheduled__2023-01-02T06:00:00+00:00 [queued]>
+[2024-03-26 15:30:26,290] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-26 15:30:26,291] {taskinstance.py:1239} INFO - Starting attempt 1 of 1
+[2024-03-26 15:30:26,292] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-26 15:30:26,379] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest> on 2023-01-02 06:00:00+00:00
+[2024-03-26 15:30:26,423] {standard_task_runner.py:52} INFO - Started process 1107 to run task
+[2024-03-26 15:30:26,467] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'LocalIngestionDag', 'ingest', 'scheduled__2023-01-02T06:00:00+00:00', '--job-id', '320', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_local.py', '--cfg-path', '/tmp/tmpwja2r15q', '--error-file', '/tmp/tmp6g_9mi9p']
+[2024-03-26 15:30:26,468] {standard_task_runner.py:77} INFO - Job 320: Subtask ingest
+[2024-03-26 15:30:27,099] {logging_mixin.py:109} INFO - Running <TaskInstance: LocalIngestionDag.ingest scheduled__2023-01-02T06:00:00+00:00 [running]> on host 153a478eba08
+[2024-03-26 15:30:27,346] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-26 15:30:27,454] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=LocalIngestionDag
+AIRFLOW_CTX_TASK_ID=ingest
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-01-02T06:00:00+00:00
+[2024-03-26 15:30:27,455] {logging_mixin.py:109} INFO - yellow_taxi_2023_01 /opt/***/output_2023-01.csv 2023-01-02T06:00:00+00:00
+[2024-03-26 15:30:27,455] {logging_mixin.py:109} INFO - Starting data ingestion process...
+[2024-03-26 15:30:27,743] {logging_mixin.py:109} INFO - Writing data to table yellow_taxi_2023_01 in the database...
+[2024-03-26 15:30:27,790] {logging_mixin.py:109} INFO - Data ingestion complete
+[2024-03-26 15:30:27,791] {logging_mixin.py:109} INFO - Data ingestion process completed in 0.34 seconds.
+[2024-03-26 15:30:27,792] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-26 15:30:28,200] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=LocalIngestionDag, task_id=ingest, execution_date=20230102T060000, start_date=20240326T153026, end_date=20240326T153028
+[2024-03-26 15:30:28,336] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-26 15:30:28,470] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

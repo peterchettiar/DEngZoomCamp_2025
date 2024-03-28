@@ -110,9 +110,8 @@ with DAG(
                 "tableId": "external_table",
             },
             "externalDataConfiguration": {
-                "source_format": "PARQUET",
-                "source_uris": [f"gs://{BUCKET}/raw/{parquet_file}"],
-                "autodetect": True,
+                "sourceFormat": "PARQUET",
+                "sourceUris": [f"gs://{BUCKET}/raw/{parquet_file}"],
             },
         },
     )

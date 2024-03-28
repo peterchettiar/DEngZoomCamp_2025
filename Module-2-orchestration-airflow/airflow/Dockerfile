@@ -9,7 +9,9 @@ RUN apt-get update -qq && apt-get install vim -qqq
 # git gcc g++ -qqq
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# specifying --no-cache-dir means to disable caching to make smaller images - good practice when using pip
+RUN pip install --no-cache-dir -r requirements.txt 
+RUN pip install --no-cache-dir pandas sqlalchemy psycopg2-binary
 
 # Ref: https://airflow.apache.org/docs/docker-stack/recipes.html
 
