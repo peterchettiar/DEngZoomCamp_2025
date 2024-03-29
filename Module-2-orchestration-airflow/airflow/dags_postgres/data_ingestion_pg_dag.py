@@ -7,7 +7,7 @@ from datetime import datetime
 from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from ingest_script import ingest_callable
+from ingest_script_pg import ingest_callable
 
 # environment variable - if variable is set then "AIRFLOW HOME" else "/opt/airflow/"
 AIRFLOW_HOME = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
