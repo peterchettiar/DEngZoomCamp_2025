@@ -1,0 +1,81 @@
+[2024-05-02 17:28:22,392] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [queued]>
+[2024-05-02 17:28:22,406] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [queued]>
+[2024-05-02 17:28:22,406] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 17:28:22,406] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-05-02 17:28:22,406] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 17:28:22,419] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2019-12-02 06:00:00+00:00
+[2024-05-02 17:28:22,428] {standard_task_runner.py:52} INFO - Started process 2970 to run task
+[2024-05-02 17:28:22,434] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'bigquery_external_table_task', 'scheduled__2019-12-02T06:00:00+00:00', '--job-id', '3800', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpzes714os', '--error-file', '/tmp/tmp8kuiby50']
+[2024-05-02 17:28:22,440] {standard_task_runner.py:77} INFO - Job 3800: Subtask bigquery_external_table_task
+[2024-05-02 17:28:22,514] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [running]> on host 1ed1a38cd1e3
+[2024-05-02 17:28:22,582] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-12-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-12-02T06:00:00+00:00
+[2024-05-02 17:28:22,585] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-05-02 17:28:22,594] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-05-02 17:28:22,595] {bigquery.py:700} INFO - Creating external table: nyc_tlc_data.yellowtaxi_trips
+[2024-05-02 17:28:22,979] {bigquery.py:704} INFO - External table created successfully: nyc_tlc_data.yellowtaxi_trips
+[2024-05-02 17:28:22,991] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_yt, task_id=bigquery_external_table_task, execution_date=20191202T060000, start_date=20240502T172822, end_date=20240502T172822
+[2024-05-02 17:28:23,020] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-02 17:28:23,057] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-03 17:41:41,401] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [queued]>
+[2024-05-03 17:41:41,447] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [queued]>
+[2024-05-03 17:41:41,447] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 17:41:41,447] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-03 17:41:41,447] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 17:41:41,476] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2019-12-02 06:00:00+00:00
+[2024-05-03 17:41:41,485] {standard_task_runner.py:52} INFO - Started process 1256 to run task
+[2024-05-03 17:41:41,501] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'bigquery_external_table_task', 'scheduled__2019-12-02T06:00:00+00:00', '--job-id', '4320', '--raw', '--subdir', 'DAGS_FOLDER/data_ingstion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmprlqlwz73', '--error-file', '/tmp/tmp7bpg07fg']
+[2024-05-03 17:41:41,508] {standard_task_runner.py:77} INFO - Job 4320: Subtask bigquery_external_table_task
+[2024-05-03 17:41:41,626] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [running]> on host f0ab9bf9b587
+[2024-05-03 17:41:41,723] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-12-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-12-02T06:00:00+00:00
+[2024-05-03 17:41:41,732] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-05-03 17:41:41,743] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-05-03 17:41:41,744] {bigquery.py:700} INFO - Creating external table: nyc_tlc_data.yellowtaxi_trips
+[2024-05-03 17:41:42,074] {bigquery.py:704} INFO - External table created successfully: nyc_tlc_data.yellowtaxi_trips
+[2024-05-03 17:41:42,096] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_yt, task_id=bigquery_external_table_task, execution_date=20191202T060000, start_date=20240503T174141, end_date=20240503T174142
+[2024-05-03 17:41:42,141] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-03 17:41:42,179] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-12 11:52:39,035] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [queued]>
+[2024-05-12 11:52:39,049] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [queued]>
+[2024-05-12 11:52:39,049] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-12 11:52:39,049] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-12 11:52:39,049] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-12 11:52:39,063] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2019-12-02 06:00:00+00:00
+[2024-05-12 11:52:39,069] {standard_task_runner.py:52} INFO - Started process 1194 to run task
+[2024-05-12 11:52:39,073] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'bigquery_external_table_task', 'scheduled__2019-12-02T06:00:00+00:00', '--job-id', '4794', '--raw', '--subdir', 'DAGS_FOLDER/data_ingstion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmprgp_95tg', '--error-file', '/tmp/tmpjc54iy92']
+[2024-05-12 11:52:39,078] {standard_task_runner.py:77} INFO - Job 4794: Subtask bigquery_external_table_task
+[2024-05-12 11:52:39,148] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.bigquery_external_table_task scheduled__2019-12-02T06:00:00+00:00 [running]> on host 0d4ef9daeab6
+[2024-05-12 11:52:39,213] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-12-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-12-02T06:00:00+00:00
+[2024-05-12 11:52:39,217] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-05-12 11:52:39,224] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-05-12 11:52:39,224] {bigquery.py:700} INFO - Creating external table: nyc_tlc_data.yellowtaxi_trips
+[2024-05-12 11:52:39,501] {bigquery.py:704} INFO - External table created successfully: nyc_tlc_data.yellowtaxi_trips
+[2024-05-12 11:52:39,515] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_yt, task_id=bigquery_external_table_task, execution_date=20191202T060000, start_date=20240512T115239, end_date=20240512T115239
+[2024-05-12 11:52:39,572] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-12 11:52:39,606] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

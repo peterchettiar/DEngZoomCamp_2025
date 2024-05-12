@@ -1,0 +1,3044 @@
+[2024-05-02 03:33:57,125] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 03:33:57,143] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 03:33:57,143] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 03:33:57,143] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-05-02 03:33:57,143] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 03:33:57,163] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-02 03:33:57,175] {standard_task_runner.py:52} INFO - Started process 3321 to run task
+[2024-05-02 03:33:57,228] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '3665', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpszvrn67j', '--error-file', '/tmp/tmptk_ok5f_']
+[2024-05-02 03:33:57,242] {standard_task_runner.py:77} INFO - Job 3665: Subtask download_dataset_task
+[2024-05-02 03:33:57,882] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host bef445d594dc
+[2024-05-02 03:33:58,294] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-02 03:33:58,456] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-02 03:33:58,457] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-02 03:33:58,459] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz | gzip -d > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv | rm /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-02 03:33:58,615] {subprocess.py:85} INFO - Output:
+[2024-05-02 03:33:58,752] {subprocess.py:89} INFO - rm: cannot remove '/opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz': No such file or directory
+[2024-05-02 03:33:58,762] {subprocess.py:89} INFO - 
+[2024-05-02 03:33:58,762] {subprocess.py:89} INFO - gzip: stdin: unexpected end of file
+[2024-05-02 03:34:01,945] {subprocess.py:93} INFO - Command exited with return code 1
+[2024-05-02 03:34:02,017] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 03:34:02,039] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240502T033357, end_date=20240502T033402
+[2024-05-02 03:34:02,133] {standard_task_runner.py:92} ERROR - Failed to execute job 3665 for task download_dataset_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 03:34:02,194] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-02 03:34:02,418] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-02 03:39:47,659] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 03:39:47,799] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 03:39:47,800] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 03:39:47,800] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-05-02 03:39:47,800] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 03:39:47,907] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-02 03:39:47,964] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '3695', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmp1ahwo0cf', '--error-file', '/tmp/tmphydoq_mh']
+[2024-05-02 03:39:47,998] {standard_task_runner.py:77} INFO - Job 3695: Subtask download_dataset_task
+[2024-05-02 03:39:47,960] {standard_task_runner.py:52} INFO - Started process 3789 to run task
+[2024-05-02 03:39:48,304] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host bef445d594dc
+[2024-05-02 03:39:48,369] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-02 03:39:48,421] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-02 03:39:48,423] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-02 03:39:48,424] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz | gzip -d > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv && rm /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-02 03:39:48,452] {subprocess.py:85} INFO - Output:
+[2024-05-02 03:39:48,502] {subprocess.py:89} INFO - 
+[2024-05-02 03:39:48,503] {subprocess.py:89} INFO - gzip: stdin: unexpected end of file
+[2024-05-02 03:39:51,457] {subprocess.py:93} INFO - Command exited with return code 1
+[2024-05-02 03:39:51,497] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 03:39:51,559] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240502T033947, end_date=20240502T033951
+[2024-05-02 03:39:51,879] {standard_task_runner.py:92} ERROR - Failed to execute job 3695 for task download_dataset_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 03:39:51,926] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-02 03:39:52,348] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-02 03:57:55,647] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 03:57:55,770] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 03:57:55,771] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 03:57:55,771] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-05-02 03:57:55,771] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 03:57:55,891] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-02 03:57:55,966] {standard_task_runner.py:52} INFO - Started process 4725 to run task
+[2024-05-02 03:57:55,963] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '3708', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpovust863', '--error-file', '/tmp/tmp2yjrr8np']
+[2024-05-02 03:57:56,030] {standard_task_runner.py:77} INFO - Job 3708: Subtask download_dataset_task
+[2024-05-02 03:57:56,387] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host bef445d594dc
+[2024-05-02 03:57:56,671] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-02 03:57:56,827] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-02 03:57:56,829] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-02 03:57:56,834] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz | gzip -d > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv && rm /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-02 03:57:56,967] {subprocess.py:85} INFO - Output:
+[2024-05-02 03:57:57,048] {subprocess.py:89} INFO - 
+[2024-05-02 03:57:57,049] {subprocess.py:89} INFO - gzip: stdin: unexpected end of file
+[2024-05-02 03:58:01,492] {subprocess.py:93} INFO - Command exited with return code 1
+[2024-05-02 03:58:01,822] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 03:58:01,991] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240502T035755, end_date=20240502T035801
+[2024-05-02 03:58:02,365] {standard_task_runner.py:92} ERROR - Failed to execute job 3708 for task download_dataset_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 03:58:02,391] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-02 03:58:02,706] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-02 17:52:39,255] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 17:52:39,387] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-02 17:52:39,392] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 17:52:39,393] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-05-02 17:52:39,394] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-02 17:52:39,503] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-02 17:52:39,603] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '3807', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpyleextpf', '--error-file', '/tmp/tmpwjze1bil']
+[2024-05-02 17:52:39,648] {standard_task_runner.py:77} INFO - Job 3807: Subtask download_dataset_task
+[2024-05-02 17:52:39,571] {standard_task_runner.py:52} INFO - Started process 4131 to run task
+[2024-05-02 17:52:40,246] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host 1ed1a38cd1e3
+[2024-05-02 17:52:40,488] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-02 17:52:40,606] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-02 17:52:40,609] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-02 17:52:40,610] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz && gunzip /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-02 17:52:40,720] {subprocess.py:85} INFO - Output:
+[2024-05-02 17:53:11,231] {subprocess.py:89} INFO - 
+[2024-05-02 17:53:11,233] {subprocess.py:89} INFO - gzip: /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv: No space left on device
+[2024-05-02 17:53:11,385] {subprocess.py:93} INFO - Command exited with return code 1
+[2024-05-02 17:53:11,828] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 17:53:11,906] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240502T175239, end_date=20240502T175311
+[2024-05-02 17:53:11,986] {standard_task_runner.py:92} ERROR - Failed to execute job 3807 for task download_dataset_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-02 17:53:12,096] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-02 17:53:12,886] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-03 08:54:19,682] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-03 08:54:19,921] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-03 08:54:19,921] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 08:54:19,923] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-05-03 08:54:19,924] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 08:54:20,145] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-03 08:54:20,427] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '3928', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpsdjl8h5i', '--error-file', '/tmp/tmp1ncgnfyh']
+[2024-05-03 08:54:20,534] {standard_task_runner.py:77} INFO - Job 3928: Subtask download_dataset_task
+[2024-05-03 08:54:20,254] {standard_task_runner.py:52} INFO - Started process 1416 to run task
+[2024-05-03 08:54:21,339] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host 5bfe1025092b
+[2024-05-03 08:54:21,797] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-03 08:54:22,065] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-03 08:54:22,074] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-03 08:54:22,097] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz && gunzip /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-03 08:54:22,323] {subprocess.py:85} INFO - Output:
+[2024-05-03 08:54:41,411] {base_job.py:230} ERROR - LocalTaskJob heartbeat got an exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
+    cursor, statement, parameters, context
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DiskFull: could not extend file "base/16384/16589": No space left on device
+HINT:  Check free disk space.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/jobs/base_job.py", line 203, in heartbeat
+    previous_heartbeat = self.latest_heartbeat
+  File "/usr/local/lib/python3.6/contextlib.py", line 88, in __exit__
+    next(self.gen)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 32, in create_session
+    session.commit()
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 1046, in commit
+    self.transaction.commit()
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 2540, in flush
+    self._flush(objects)
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 2682, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    with_traceback=exc_tb,
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 2642, in _flush
+    flush_context.execute()
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/persistence.py", line 236, in save_obj
+    update,
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/orm/persistence.py", line 995, in _emit_update_statements
+    statement, multiparams
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1130, in _execute_clauseelement
+    distilled_params,
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1317, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1511, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
+    cursor, statement, parameters, context
+  File "/home/airflow/.local/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+   [2024-05-03 08:54:41,585] {subprocess.py:89} INFO - 
+[2024-05-03 08:54:41,585] {logging_mixin.py:109} WARNING - --- Logging error ---
+[2024-05-03 08:54:41,585] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,585] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,586] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,587] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,587] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,587] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,587] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,587] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,587] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,607] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 182, in execute
+    cwd=self.cwd,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/hooks/subprocess.py", line 89, in run_command
+    self.log.info("%s", line)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1308, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1444, in _log
+    self.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1454, in handle
+    self.callHandlers(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1516, in callHandlers
+    hdlr.handle(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 865, in handle
+    self.emit(record)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/file_task_handler.py", line 67, in emit
+    self.handler.emit(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1072, in emit
+    StreamHandler.emit(self, record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1000, in emit
+    self.handleError(record)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 917, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 121, in write
+    self._propagate_log(self._buffer.rstrip())
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/log/logging_mixin.py", line 109, in _propagate_log
+    self.logger.log(self.level, remove_escape_codes(message))
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1374, in log
+    self._log(level, msg, args, **kwargs)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1432, in _log
+    fn, lno, func, sinfo = self.findCaller(stack_info)
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 1381, in findCaller
+    f = currentframe()
+RecursionError: maximum recursion depth exceeded
+ cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.errors.DiskFull) could not extend file "base/16384/16589": No space left on device
+HINT:  Check free disk space.
+
+[SQL: UPDATE job SET latest_heartbeat=%(latest_heartbeat)s WHERE job.id = %(job_id)s]
+[parameters: {'latest_heartbeat': datetime.datetime(2024, 5, 3, 8, 54, 36, 239872, tzinfo=Timezone('UTC')), 'job_id': 3928}]
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+[2024-05-03 08:54:41,509] {logging_mixin.py:109} WARNING - --- Logging error ---
+[2024-05-03 08:54:41,509] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,509] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,509] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,509] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,509] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,510] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,510] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,510] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,510] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,511] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,511] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,512] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,512] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:41,512] {logging_mixin.py:109} WARNING - --- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+--- Logging error ---
+[2024-05-03 08:54:42,231] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240503T085419, end_date=20240503T085442
+[2024-05-03 08:54:43,189] {standard_task_runner.py:92} ERROR - Failed to execute job 3928 for task download_dataset_task
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+    self.flush()
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 978, in flush
+    self.stream.flush()
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/logging/__init__.py", line 998, in emit
+[2024-05-03 09:50:38,548] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-03 09:50:38,677] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-03 09:50:38,680] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 09:50:38,681] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-03 09:50:38,682] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 09:50:38,783] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-03 09:50:38,858] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '3993', '--raw', '--subdir', 'DAGS_FOLDER/data_ingstion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpjb3tc_r8', '--error-file', '/tmp/tmpqv5l1khf']
+[2024-05-03 09:50:38,884] {standard_task_runner.py:77} INFO - Job 3993: Subtask download_dataset_task
+[2024-05-03 09:50:38,841] {standard_task_runner.py:52} INFO - Started process 613 to run task
+[2024-05-03 09:50:39,275] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host b81c18b6cf72
+[2024-05-03 09:50:39,504] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-03 09:50:39,614] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-03 09:50:39,616] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-03 09:50:39,621] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz && gunzip /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-03 09:50:39,757] {subprocess.py:85} INFO - Output:
+[2024-05-03 09:51:01,810] {subprocess.py:89} INFO - 
+[2024-05-03 09:51:01,810] {subprocess.py:89} INFO - gzip: /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv: No space left on device
+[2024-05-03 09:51:02,012] {subprocess.py:93} INFO - Command exited with return code 1
+[2024-05-03 09:51:02,098] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-03 09:51:02,202] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240503T095038, end_date=20240503T095102
+[2024-05-03 09:51:02,654] {standard_task_runner.py:92} ERROR - Failed to execute job 3993 for task download_dataset_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 188, in execute
+    f'Bash command failed. The command returned a non-zero exit code {result.exit_code}.'
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-05-03 09:51:02,740] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-03 09:51:03,090] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-03 16:39:49,614] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-03 16:39:49,729] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-03 16:39:49,729] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 16:39:49,729] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-03 16:39:49,729] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-03 16:39:49,864] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-03 16:39:49,929] {standard_task_runner.py:52} INFO - Started process 294 to run task
+[2024-05-03 16:39:49,994] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '4217', '--raw', '--subdir', 'DAGS_FOLDER/data_ingstion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpm34nadvl', '--error-file', '/tmp/tmphxpyq5_i']
+[2024-05-03 16:39:50,061] {standard_task_runner.py:77} INFO - Job 4217: Subtask download_dataset_task
+[2024-05-03 16:39:50,393] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host f0ab9bf9b587
+[2024-05-03 16:39:50,722] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-03 16:39:50,914] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-03 16:39:50,926] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-03 16:39:50,928] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz && gunzip /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-03 16:39:50,951] {subprocess.py:85} INFO - Output:
+[2024-05-03 16:40:44,537] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-03 16:40:44,687] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240503T163949, end_date=20240503T164044
+[2024-05-03 16:40:44,877] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-03 16:40:45,249] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-05-05 12:01:18,677] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-05 12:01:18,756] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-05 12:01:18,756] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-05 12:01:18,756] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-05 12:01:18,756] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-05 12:01:18,824] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-05 12:01:18,869] {standard_task_runner.py:52} INFO - Started process 976 to run task
+[2024-05-05 12:01:18,920] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '4340', '--raw', '--subdir', 'DAGS_FOLDER/data_ingstion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpc2em7wgv', '--error-file', '/tmp/tmp2xwjegmn']
+[2024-05-05 12:01:18,923] {standard_task_runner.py:77} INFO - Job 4340: Subtask download_dataset_task
+[2024-05-05 12:01:19,157] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host 19865117eb6d
+[2024-05-05 12:01:19,268] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-05 12:01:19,424] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-05 12:01:19,425] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-05 12:01:19,425] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz && gunzip /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-05 12:01:19,562] {subprocess.py:85} INFO - Output:
+[2024-05-05 12:02:11,841] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-05 12:02:12,056] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240505T120118, end_date=20240505T120212
+[2024-05-05 12:02:12,184] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-05 12:02:12,544] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-05-06 07:39:54,547] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-06 07:39:54,600] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [queued]>
+[2024-05-06 07:39:54,600] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-06 07:39:54,601] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-06 07:39:54,601] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-06 07:39:54,677] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-04-02 06:00:00+00:00
+[2024-05-06 07:39:54,687] {standard_task_runner.py:52} INFO - Started process 3235 to run task
+[2024-05-06 07:39:54,729] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_yt', 'download_dataset_task', 'scheduled__2019-04-02T06:00:00+00:00', '--job-id', '4495', '--raw', '--subdir', 'DAGS_FOLDER/data_ingstion_gcs_yt_dag.py', '--cfg-path', '/tmp/tmpxdf8x5r1', '--error-file', '/tmp/tmpiaz6fsnv']
+[2024-05-06 07:39:54,773] {standard_task_runner.py:77} INFO - Job 4495: Subtask download_dataset_task
+[2024-05-06 07:39:55,110] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_yt.download_dataset_task scheduled__2019-04-02T06:00:00+00:00 [running]> on host 1aa5194a14e3
+[2024-05-06 07:39:55,373] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-06 07:39:55,490] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_yt
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-04-02T06:00:00+00:00
+[2024-05-06 07:39:55,491] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-06 07:39:55,493] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2019-04.csv.gz > /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz && gunzip /opt/***/raw_data/yellowtaxi_tripdata_2019-04.csv.gz']
+[2024-05-06 07:39:55,585] {subprocess.py:85} INFO - Output:
+[2024-05-06 07:40:41,025] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-06 07:40:41,213] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_yt, task_id=download_dataset_task, execution_date=20190402T060000, start_date=20240506T073954, end_date=20240506T074041
+[2024-05-06 07:40:41,371] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-06 07:40:41,546] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
