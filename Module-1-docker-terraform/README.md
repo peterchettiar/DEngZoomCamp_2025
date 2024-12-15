@@ -959,7 +959,7 @@ _[Back to the top](#table-of-contents)_
 
 If you cannot set up a local development environment, you may use part of the $300 credits of GCP in creating a Cloud VM and access to it via SSH to set up the environment there.
 
-[Follow the instructions in this video](https://www.youtube.com/watch?v=ae-CV2KfoN0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=11).
+[Follow the instructions in this video](https://www.youtube.com/watch?v=ae-CV2KfoN0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=11) or you can read my notes for this video lecture [here](https://gist.github.com/peterchettiar/6e719cd2bbdb3e6aae4e6d1895670687).
 
 ## Port mapping and networks in Docker
 
