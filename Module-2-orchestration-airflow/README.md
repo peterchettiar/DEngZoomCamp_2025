@@ -281,3 +281,213 @@ For convenience, a simplified YAML version is available [in this link](https://g
     ```
 1. You may now access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
 >***IMPORTANT***: this is ***NOT*** a production-ready setup! The username and password for Airflow have not been modified in any way; you can find them by searching for `_AIRFLOW_WWW_USER_USERNAME` and `_AIRFLOW_WWW_USER_PASSWORD` inside the `docker-compose.yaml` file.
+
+## Creating a DAG
+
+_For reference, check out [Airflow's docs](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html)._
+
+A DAG is created as a Python script which imports a series of libraries from Airflow.
+
+There are [3 different ways of declaring a DAG](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#declaring-a-dag). Here's an example definition using a _[context manager](https://book.pythontips.com/en/latest/context_managers.html)_:
+
+```python
+with DAG(dag_id="my_dag_name") as dag:
+    op1 = DummyOperator(task_id="task1")
+    op2 = DummyOperator(task_id="task2")
+    op1 >> op2
+```
+* When declaring a DAG we must provide at least a `dag_id` parameter. There are many additional parameters available.
+* The content of the DAG is composed of _tasks_. This example contains 2 _operators_, which are predefined tasks provided by Airflow's libraries and plugins.
+  * An operator only has to be declared with any parameters that it may require. There is no need to define anything inside them.
+  * All operators must have at least a `task_id` parameter.
+* Finally, at the end of the definition we define the _task dependencies_, which is what ties the tasks together and defines the actual structure of the DAG.
+  * Task dependencies are primarily defined with the `>>` (downstream) and `<<` (upstream) control flow operators.
+  * Additional functions are available for more complex control flow definitions.
+* A single Python script may contain multiple DAGs.
+
+Many operators inside a DAG may have common arguments with the same values (such as `start_date`). We can define a `default_args` dict which all tasks within the DAG will inherit:
+
+```python
+default_args = {
+    'start_date': datetime(2016, 1, 1),
+    'owner': 'airflow'
+}
+
+with DAG('my_dag', default_args=default_args) as dag:
+    op = DummyOperator(task_id='dummy')
+    print(op.owner)  # "airflow"
+```
+
+For this lesson we will focus mostly on operator tasks. Here are some examples:
+
+```python
+download_dataset_task = BashOperator(
+    task_id="download_dataset_task",
+    bash_command=f"curl -sS {dataset_url} > {path_to_local_home}/{dataset_file}"
+)
+```
+* A `BashOperator` is a simple bash command which is passed on the `bash_command` parameter. In this example, we're doenloading some file.
+
+```python
+  format_to_parquet_task = PythonOperator(
+      task_id="format_to_parquet_task",
+      python_callable=format_to_parquet,
+      op_kwargs={
+          "src_file": f"{path_to_local_home}/{dataset_file}",
+      },
+  )
+```
+* A `PythonOperator` calls a Python method rather than a bash command.
+* In this example, the `python_callable` argument receives a function that we've defined before in the DAG file, which receives a file name as a parameter then opens that file and saves it in parquet format.
+* the `op_kwargs` parameter is a dict with all necessary parameters for the function we're calling. This example contains a single argument with a file name.
+
+A list of operators is available on [Airflow's Operators docs](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html). A list of GCP-specific operators [is also available](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/index.html).
+
+As mentioned before, DAGs can be scheduled. We can define a schedule in the DAG definition by including the `start_date` and `schedule_interval` parameters, like this:
+
+```python
+from datetime import datetime
+
+with DAG(
+    dag_id="my_dag_name",
+    schedule_interval="0 6 2 * *",
+    start_date=datetime(2021, 1, 1)
+  ) as dag:
+    op1 = DummyOperator(task_id="task1")
+    op2 = DummyOperator(task_id="task2")
+    op1 >> op2
+```
+* The scheduler will run a job ***AFTER*** the start date, at the ***END*** of the interval
+* The interval is defined as a [cron job](https://www.wikiwand.com/en/Cron) expression. You can use [crontab guru](https://www.wikiwand.com/en/Cron) to define your own.
+  * In this example, `0 6 2 * *` means that the job will run at 6:00 AM on the second day of the month each month.
+* The starting date is what it sounds like: defines when the jobs will start.
+  * The jobs will start ***AFTER*** the start date. In this example, the starting date is January 1st, which means that the job won't run until January 2nd.
+
+## Running DAGs
+
+DAG management is carried out via Airflow's web UI.
+
+![airflow ui](images/02_01.png)
+
+There are 2 main ways to run DAGs:
+* Triggering them manually via the web UI or programatically via API
+* Scheduling them
+
+When you trigger or schedule a DAG, a DAG instance is created, called a ***DAG run***. DAG runs can run in **parallel for the same DAG** for separate data intervals.
+
+Each task inside a DAG is also instantiated, and a state is given to each task instance. Ideally, a task should flow from `none`, to `scheduled`, to `queued`, to `running`, and finally to `success`.
+
+In the DAGs dashboard, all available DAGs are shown along with their schedule, last and next runs and the status of the DAG's tasks.
+
+You may manually trigger a DAG by clicking on the Play button on the left of each DAG.
+
+A more detailed view and options for each DAG can be accessed by clicking on the DAG's name.
+
+![dag details](images/02_02.png)
+
+The tree view is offered by default, but you can get a graph view of the DAG by clicking on the _Graph_ button.
+
+![dag details](images/02_03.png)
+
+The status of each task can be seen in both views as you trigger a DAG.
+
+## Airflow and DAG tips and tricks
+
+* The default Airflow Docker image does not have `wget` by default. You can either add a line to your custom image to install it or you can use `curl` instead. Here's how to handle file downloading:
+  ```python
+  import os
+  AIRFLOW_HOME = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
+  URL_PREFIX = 'https://s3.amazonaws.com/nyc-tlc/trip+data' 
+  URL_TEMPLATE = URL_PREFIX + '/yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
+  OUTPUT_FILE_TEMPLATE = AIRFLOW_HOME + '/output_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
+
+  with my_worflow as dag:
+    download_task = BashOperator(
+      task_id = 'download'
+      bash_command=f'curl -sSL {URL_TEMPLATE} > {OUTPUT_FILE_TEMPLATE}'
+    )
+  ```
+  * We want to periodically download data each month and the filename changes according to the name and month. We can use _templating_ to parametrize the filename.
+    * Airflow uses the [Jinja template engine](https://jinja.palletsprojects.com/en/3.0.x/).
+    * Jinja templates make use of `{%...%}` for statements (control structures such as `if` and `for`, macros, etc) and `{{...}}` for expressions (literals, math and logic operators, variables, Python methods, etc). 
+    * Airflow offers a series of predefined variables and macros which can be consulted [in this link](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
+    * We use a template to rename the file with the current year and month that the task is running:
+      * `execution_date` is an Airflow variable that returns the _execution date_ (or _logical date_ in newer versions of Airflow) of the task, which denotes the current data interval as specified by the `start_date` of the DAG and the number of executions. In this example, this is useful to download past data, since we can trigger this DAG manually and in each execution the execution date will increase by the amount specified in the `schedule_interval`, thus allowing us to download data for multiple months by simply rerunning the DAG.
+        * Do not confuse this variable with the actual current date!
+      * `strftime()` is a Python function that returns a string representing a date. You can check how to define the format of the string [in this link](https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior). In this example we're outputting the year and month.   
+  * `curl` command:
+    * Like all other commands, options can be stacked if there aren't additional parameters. In this case, `-sS` is the same as `-s -S`.
+    * `-s` is the same as `--silent`; it won't output any progress meters on the console.
+    * `-S` is the same as `--show-error`; when combined with silent mode as `-sS`, it will print error messages if any but will not show any progress output.
+    * `-L` will follow a link in case the original URL redirects somewhere else.
+    * By default, `curl` outputs to console. We could use the `-o` option to print to a file or redirect the output in the shell with `>` as shown here.
+* When creating a custom Airflow Docker image, in the Dockerfile, when installing additional packages with `pip`, it's a good idea to disable caching in order to make smaller images:
+  ```dockerfile
+  RUN pip install --no-cache-dir -r requirements.txt
+  ```
+* The `.env` file we created during [Airflow setup](#setup) is useful por passing environment variables which can later be reused in multiple places rather than having them hardcoded:
+  1. Define your variables inside `.env`. For example:
+      ```bash
+      PG_HOST=pgdatabase
+      PG_USER=root
+      PG_PASSWORD=root
+      ```
+  1. Add the environment variables in `docker-compose.yaml` inside the `x-airflow-common` environment definition:
+      ```yaml
+      PG_HOST: "${PG_HOST}"
+      PG_USER: "${PG_USER}"
+      PG_PASSWORD: "${PG_PASSWORD}"
+      ```
+  1. In your DAG, grab the variables with `os.getenv()`:
+      ```python
+      PG_HOST = os.getenv('PG_HOST')
+      PG_USER = os.getenv('PG_USER')
+      PG_PASSWORD = os.getenv('PG_PASSWORD')
+      ```
+  1. In Python Operator tasks inside a DAG, you can pass arguments as a dict. Instead of `op_kwargs={'key':'value'}`, you can use `op_kwargs=dict(host=PG_HOST, ...)` to define the arguments dictionay in an easier way.
+* A key design principle of tasks and DAGs is ***idempotency***. A task is ***idempotent*** if the end result is identical regardless of whether we run the task once or multiple times.
+  * For example, if we create a DAG to handle ingestion to our database, the DAG is idempotent if the final table in the database is the same whether we run the DAG once or many times. If it created multiple duplicate tables or multiple records in a single table, then the DAG is NOT idempotent.
+  * In our ingestion code, we managed idempotency by dropping any pre-existing databases and recreataing them from scratch.
+* You can define multiple DAGs in a single file. Remember that there are [multiple ways of declaring a DAG](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#declaring-a-dag); we can use this to recycle code for multiple different DAGs:
+  * Define a function with all the arguments you may need such as filenames or buckets as well as a `dag` parameter, and inside the function declare the DAG with a context manager with all of your base tasks:
+    ```python
+    def my_cool_dag_function(dag, param_1, param_2, ...):
+      with dag:
+        task_1 = BashOperator(task_id=param_1, ...)
+        task_2 = PythonOperator(task_id=param_2, ...)
+        # ...
+        task_1 >> task_2 >> ...
+    ```
+  * Create as many DAG objects as you need using standard constructors:
+    ```python
+    first_dag = DAG(
+      dag_id='first_dag',
+      schedule_interval=@daily,
+      ...
+    )
+
+    second_dag = DAG(
+      dag_id='second_dag',
+      ...
+    )
+
+    # ...
+    ```
+  * Call your function as many times as the amount of DAGs you've defined and pass the DAG objects as params to your function.
+    ```python
+    my_cool_dag_function(
+      first_dag,
+      param_1=...,
+      param_2=...,
+      ...
+    )
+
+    my_cool_dag_function(
+      second_dag,
+      param_1=...,
+      param_2=...,
+      ...
+    )
+
+    #...
+    ```
