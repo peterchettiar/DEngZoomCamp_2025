@@ -1,0 +1,145 @@
+[2024-05-18 13:49:11,410] {processor.py:163} INFO - Started process (PID=15465) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:49:11,411] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:49:11,412] {logging_mixin.py:109} INFO - [2024-05-18 13:49:11,411] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:49:12,118] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:49:12,630] {logging_mixin.py:109} INFO - [2024-05-18 13:49:12,629] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:49:12,815] {logging_mixin.py:109} INFO - [2024-05-18 13:49:12,815] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:49:12,832] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 1.426 seconds
+[2024-05-18 13:49:43,734] {processor.py:163} INFO - Started process (PID=15516) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:49:43,735] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:49:43,736] {logging_mixin.py:109} INFO - [2024-05-18 13:49:43,736] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:49:44,480] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:49:44,491] {logging_mixin.py:109} INFO - [2024-05-18 13:49:44,490] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:49:44,504] {logging_mixin.py:109} INFO - [2024-05-18 13:49:44,504] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:49:44,510] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.779 seconds
+[2024-05-18 13:50:14,789] {processor.py:163} INFO - Started process (PID=15557) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:50:14,792] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:50:14,792] {logging_mixin.py:109} INFO - [2024-05-18 13:50:14,792] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:50:15,588] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:50:15,603] {logging_mixin.py:109} INFO - [2024-05-18 13:50:15,602] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:50:15,623] {logging_mixin.py:109} INFO - [2024-05-18 13:50:15,622] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:50:15,634] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.848 seconds
+[2024-05-18 13:50:46,486] {processor.py:163} INFO - Started process (PID=15607) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:50:46,488] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:50:46,489] {logging_mixin.py:109} INFO - [2024-05-18 13:50:46,489] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:50:47,344] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:50:47,355] {logging_mixin.py:109} INFO - [2024-05-18 13:50:47,354] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:50:47,371] {logging_mixin.py:109} INFO - [2024-05-18 13:50:47,371] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:50:47,378] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.896 seconds
+[2024-05-18 13:51:17,420] {processor.py:163} INFO - Started process (PID=15647) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:51:17,427] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:51:17,428] {logging_mixin.py:109} INFO - [2024-05-18 13:51:17,428] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:51:18,093] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:51:18,104] {logging_mixin.py:109} INFO - [2024-05-18 13:51:18,103] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:51:18,122] {logging_mixin.py:109} INFO - [2024-05-18 13:51:18,122] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:51:18,135] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.719 seconds
+[2024-05-18 13:51:48,381] {processor.py:163} INFO - Started process (PID=15697) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:51:48,382] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:51:48,383] {logging_mixin.py:109} INFO - [2024-05-18 13:51:48,383] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:51:49,049] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:51:49,061] {logging_mixin.py:109} INFO - [2024-05-18 13:51:49,059] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:51:49,081] {logging_mixin.py:109} INFO - [2024-05-18 13:51:49,081] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:51:49,097] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.719 seconds
+[2024-05-18 13:52:19,745] {processor.py:163} INFO - Started process (PID=15737) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:52:19,751] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:52:19,752] {logging_mixin.py:109} INFO - [2024-05-18 13:52:19,752] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:52:20,419] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:52:20,435] {logging_mixin.py:109} INFO - [2024-05-18 13:52:20,433] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:52:20,455] {logging_mixin.py:109} INFO - [2024-05-18 13:52:20,455] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:52:20,463] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.721 seconds
+[2024-05-18 13:52:39,730] {processor.py:163} INFO - Started process (PID=15777) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:52:39,731] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:52:39,732] {logging_mixin.py:109} INFO - [2024-05-18 13:52:39,731] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:52:40,551] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:52:40,567] {logging_mixin.py:109} INFO - [2024-05-18 13:52:40,565] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:52:40,586] {logging_mixin.py:109} INFO - [2024-05-18 13:52:40,586] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:52:40,605] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.879 seconds
+[2024-05-18 13:53:11,169] {processor.py:163} INFO - Started process (PID=15828) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:11,171] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:53:11,172] {logging_mixin.py:109} INFO - [2024-05-18 13:53:11,172] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:12,052] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:12,064] {logging_mixin.py:109} INFO - [2024-05-18 13:53:12,062] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:53:12,085] {logging_mixin.py:109} INFO - [2024-05-18 13:53:12,085] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:53:12,098] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.935 seconds
+[2024-05-18 13:53:15,145] {processor.py:163} INFO - Started process (PID=15833) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:15,146] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:53:15,147] {logging_mixin.py:109} INFO - [2024-05-18 13:53:15,147] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:15,969] {processor.py:690} INFO - Deactivated 1 DAGs which are no longer present in /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:15,969] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:18,521] {logging_mixin.py:109} INFO - [2024-05-18 13:53:18,521] {manager.py:496} INFO - Created Permission View: can read on DAG:ingest_data_bigquery_fhvhv
+[2024-05-18 13:53:18,530] {logging_mixin.py:109} INFO - [2024-05-18 13:53:18,530] {manager.py:496} INFO - Created Permission View: can edit on DAG:ingest_data_bigquery_fhvhv
+[2024-05-18 13:53:18,532] {logging_mixin.py:109} INFO - [2024-05-18 13:53:18,530] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:53:18,546] {logging_mixin.py:109} INFO - [2024-05-18 13:53:18,544] {dag.py:2415} INFO - Creating ORM DAG for ingest_data_bigquery_fhvhv
+[2024-05-18 13:53:18,559] {logging_mixin.py:109} INFO - [2024-05-18 13:53:18,559] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery_fhvhv to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:53:18,578] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 3.437 seconds
+[2024-05-18 13:53:49,450] {processor.py:163} INFO - Started process (PID=15883) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:49,455] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:53:49,456] {logging_mixin.py:109} INFO - [2024-05-18 13:53:49,456] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:50,281] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:53:50,291] {logging_mixin.py:109} INFO - [2024-05-18 13:53:50,290] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:53:50,305] {logging_mixin.py:109} INFO - [2024-05-18 13:53:50,305] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery_fhvhv to 2021-01-02 06:00:00+00:00
+[2024-05-18 13:53:50,312] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 0.866 seconds
+[2024-05-18 13:54:19,419] {processor.py:163} INFO - Started process (PID=15923) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:54:19,427] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:54:19,428] {logging_mixin.py:109} INFO - [2024-05-18 13:54:19,428] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:54:20,309] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:54:20,511] {logging_mixin.py:109} INFO - [2024-05-18 13:54:20,509] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:54:20,527] {logging_mixin.py:109} INFO - [2024-05-18 13:54:20,527] {dag.py:2935} INFO - Setting next_dagrun for ingest_data_bigquery_fhvhv to 2019-01-02 06:00:00+00:00
+[2024-05-18 13:54:20,541] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 1.128 seconds
+[2024-05-18 13:54:50,715] {processor.py:163} INFO - Started process (PID=15967) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:54:50,722] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:54:50,724] {logging_mixin.py:109} INFO - [2024-05-18 13:54:50,723] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:54:52,497] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:54:52,528] {logging_mixin.py:109} INFO - [2024-05-18 13:54:52,526] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:54:52,577] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 1.874 seconds
+[2024-05-18 13:55:22,783] {processor.py:163} INFO - Started process (PID=16007) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:55:22,797] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:55:22,799] {logging_mixin.py:109} INFO - [2024-05-18 13:55:22,799] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:55:26,618] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:55:26,673] {logging_mixin.py:109} INFO - [2024-05-18 13:55:26,668] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:55:26,776] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 4.026 seconds
+[2024-05-18 13:56:07,393] {processor.py:163} INFO - Started process (PID=16055) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:56:07,468] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:56:07,469] {logging_mixin.py:109} INFO - [2024-05-18 13:56:07,469] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:56:44,574] {logging_mixin.py:109} INFO - [2024-05-18 13:56:44,573] {timeout.py:36} ERROR - Process timed out, PID: 16055
+[2024-05-18 13:56:45,059] {logging_mixin.py:109} INFO - [2024-05-18 13:56:44,640] {dagbag.py:334} ERROR - Failed to import: /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/dagbag.py", line 331, in _load_modules_from_file
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py", line 8, in <module>
+    import pandas as pd
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/__init__.py", line 52, in <module>
+    from pandas.core.api import (
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/api.py", line 15, in <module>
+    from pandas.core.arrays import Categorical
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/arrays/__init__.py", line 10, in <module>
+    from pandas.core.arrays.interval import IntervalArray
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 832, in get_data
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 16055
+[2024-05-18 13:56:45,490] {processor.py:690} INFO - Deactivated 1 DAGs which are no longer present in /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:56:45,493] {processor.py:656} WARNING - No viable dags retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:56:45,560] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 38.181 seconds
+[2024-05-18 13:57:18,640] {processor.py:163} INFO - Started process (PID=16084) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:57:18,665] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:57:18,670] {logging_mixin.py:109} INFO - [2024-05-18 13:57:18,667] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:57:24,793] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:57:24,865] {logging_mixin.py:109} INFO - [2024-05-18 13:57:24,864] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:57:25,101] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 6.476 seconds
+[2024-05-18 13:57:56,024] {processor.py:163} INFO - Started process (PID=16124) to work on /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:57:56,036] {processor.py:642} INFO - Processing file /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py for tasks to queue
+[2024-05-18 13:57:56,037] {logging_mixin.py:109} INFO - [2024-05-18 13:57:56,037] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:58:00,608] {processor.py:654} INFO - DAG(s) dict_keys(['ingest_data_bigquery_fhvhv']) retrieved from /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py
+[2024-05-18 13:58:00,654] {logging_mixin.py:109} INFO - [2024-05-18 13:58:00,652] {dag.py:2396} INFO - Sync 1 DAGs
+[2024-05-18 13:58:00,740] {processor.py:171} INFO - Processing /opt/airflow/dags/data_ingestion_gcs_fhvhv_dag.py took 4.721 seconds

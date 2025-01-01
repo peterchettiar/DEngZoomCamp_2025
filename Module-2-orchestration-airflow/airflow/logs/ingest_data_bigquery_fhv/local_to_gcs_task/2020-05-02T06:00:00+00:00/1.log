@@ -1,0 +1,242 @@
+[2024-05-18 12:24:55,970] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:24:55,984] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:24:55,985] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:24:55,986] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 12:24:55,986] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:24:56,003] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2020-05-02 06:00:00+00:00
+[2024-05-18 12:24:56,010] {standard_task_runner.py:52} INFO - Started process 5418 to run task
+[2024-05-18 12:24:56,013] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'local_to_gcs_task', 'scheduled__2020-05-02T06:00:00+00:00', '--job-id', '5065', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpn2n4mq7w', '--error-file', '/tmp/tmpm3f0gae1']
+[2024-05-18 12:24:56,017] {standard_task_runner.py:77} INFO - Job 5065: Subtask local_to_gcs_task
+[2024-05-18 12:24:56,088] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 12:24:56,128] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 12:24:56,155] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2020-05-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-05-02T06:00:00+00:00
+[2024-05-18 12:24:56,169] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 82, in upload_to_gcs
+    __clean_file(raw_file_name, clean_file_name)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 59, in __clean_file
+    parse_dates=["pickup_datetime", "dropOff_datetime"],
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 688, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 454, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 948, in __init__
+    self._make_engine(self.engine)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1180, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 2068, in __init__
+    self._validate_parse_dates_presence(self.names)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1546, in _validate_parse_dates_presence
+    f"Missing column provided to 'parse_dates': '{missing_cols}'"
+ValueError: Missing column provided to 'parse_dates': 'dropOff_datetime'
+[2024-05-18 12:24:56,185] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_fhv, task_id=local_to_gcs_task, execution_date=20200502T060000, start_date=20240518T122455, end_date=20240518T122456
+[2024-05-18 12:24:56,204] {standard_task_runner.py:92} ERROR - Failed to execute job 5065 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 82, in upload_to_gcs
+    __clean_file(raw_file_name, clean_file_name)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 59, in __clean_file
+    parse_dates=["pickup_datetime", "dropOff_datetime"],
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 688, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 454, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 948, in __init__
+    self._make_engine(self.engine)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1180, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 2068, in __init__
+    self._validate_parse_dates_presence(self.names)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1546, in _validate_parse_dates_presence
+    f"Missing column provided to 'parse_dates': '{missing_cols}'"
+ValueError: Missing column provided to 'parse_dates': 'dropOff_datetime'
+[2024-05-18 12:24:56,233] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-18 12:24:56,316] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 12:50:12,294] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:50:12,348] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:50:12,351] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:50:12,352] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 12:50:12,353] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:50:12,409] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2020-05-02 06:00:00+00:00
+[2024-05-18 12:50:12,478] {standard_task_runner.py:52} INFO - Started process 7066 to run task
+[2024-05-18 12:50:12,540] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'local_to_gcs_task', 'scheduled__2020-05-02T06:00:00+00:00', '--job-id', '5171', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmp0fad5de_', '--error-file', '/tmp/tmpijy_qn39']
+[2024-05-18 12:50:12,555] {standard_task_runner.py:77} INFO - Job 5171: Subtask local_to_gcs_task
+[2024-05-18 12:50:12,965] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 12:50:13,217] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 12:50:13,385] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2020-05-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-05-02T06:00:00+00:00
+[2024-05-18 12:50:13,493] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 84, in upload_to_gcs
+    __clean_file(raw_file_name, clean_file_name)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 59, in __clean_file
+    parse_dates=["pickup_datetime", "dropOff_datetime"],
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 688, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 454, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 948, in __init__
+    self._make_engine(self.engine)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1180, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 2068, in __init__
+    self._validate_parse_dates_presence(self.names)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1546, in _validate_parse_dates_presence
+    f"Missing column provided to 'parse_dates': '{missing_cols}'"
+ValueError: Missing column provided to 'parse_dates': 'dropOff_datetime'
+[2024-05-18 12:50:13,572] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery_fhv, task_id=local_to_gcs_task, execution_date=20200502T060000, start_date=20240518T125012, end_date=20240518T125013
+[2024-05-18 12:50:13,665] {standard_task_runner.py:92} ERROR - Failed to execute job 5171 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 84, in upload_to_gcs
+    __clean_file(raw_file_name, clean_file_name)
+  File "/opt/airflow/dags/data_ingestion_gcs_fhv_dag .py", line 59, in __clean_file
+    parse_dates=["pickup_datetime", "dropOff_datetime"],
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 688, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 454, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 948, in __init__
+    self._make_engine(self.engine)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1180, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 2068, in __init__
+    self._validate_parse_dates_presence(self.names)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parsers.py", line 1546, in _validate_parse_dates_presence
+    f"Missing column provided to 'parse_dates': '{missing_cols}'"
+ValueError: Missing column provided to 'parse_dates': 'dropOff_datetime'
+[2024-05-18 12:50:13,864] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-05-18 12:50:14,067] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 13:04:29,362] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:04:29,387] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:04:29,387] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:04:29,388] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 13:04:29,388] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:04:29,411] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2020-05-02 06:00:00+00:00
+[2024-05-18 13:04:29,429] {standard_task_runner.py:52} INFO - Started process 8164 to run task
+[2024-05-18 13:04:29,436] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'local_to_gcs_task', 'scheduled__2020-05-02T06:00:00+00:00', '--job-id', '5271', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpkzu363s4', '--error-file', '/tmp/tmpg00ttqa1']
+[2024-05-18 13:04:29,449] {standard_task_runner.py:77} INFO - Job 5271: Subtask local_to_gcs_task
+[2024-05-18 13:04:29,599] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 13:04:29,696] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 13:04:29,750] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2020-05-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-05-02T06:00:00+00:00
+[2024-05-18 13:04:42,118] {python.py:175} INFO - Done. Returned value was: None
+[2024-05-18 13:04:42,226] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhv, task_id=local_to_gcs_task, execution_date=20200502T060000, start_date=20240518T130429, end_date=20240518T130442
+[2024-05-18 13:04:42,867] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 13:04:43,527] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 13:14:33,350] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:14:33,379] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:14:33,380] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:14:33,380] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 13:14:33,380] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:14:33,399] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2020-05-02 06:00:00+00:00
+[2024-05-18 13:14:33,418] {standard_task_runner.py:52} INFO - Started process 9126 to run task
+[2024-05-18 13:14:33,435] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'local_to_gcs_task', 'scheduled__2020-05-02T06:00:00+00:00', '--job-id', '5365', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpnl5nsy5h', '--error-file', '/tmp/tmpycbtqb3w']
+[2024-05-18 13:14:33,439] {standard_task_runner.py:77} INFO - Job 5365: Subtask local_to_gcs_task
+[2024-05-18 13:14:33,571] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.local_to_gcs_task scheduled__2020-05-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 13:14:33,699] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 13:14:33,746] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2020-05-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-05-02T06:00:00+00:00
+[2024-05-18 13:14:37,172] {python.py:175} INFO - Done. Returned value was: None
+[2024-05-18 13:14:37,194] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhv, task_id=local_to_gcs_task, execution_date=20200502T060000, start_date=20240518T131433, end_date=20240518T131437
+[2024-05-18 13:14:37,305] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 13:14:37,365] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check

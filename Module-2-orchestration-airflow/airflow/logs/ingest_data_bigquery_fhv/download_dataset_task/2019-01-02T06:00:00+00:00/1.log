@@ -1,0 +1,116 @@
+[2024-05-18 12:22:26,867] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:22:26,903] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:22:26,903] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:22:26,904] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 12:22:26,905] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:22:26,948] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-01-02 06:00:00+00:00
+[2024-05-18 12:22:27,003] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'download_dataset_task', 'scheduled__2019-01-02T06:00:00+00:00', '--job-id', '5005', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpgud1zqet', '--error-file', '/tmp/tmpvt_xf30j']
+[2024-05-18 12:22:27,031] {standard_task_runner.py:77} INFO - Job 5005: Subtask download_dataset_task
+[2024-05-18 12:22:26,971] {standard_task_runner.py:52} INFO - Started process 4999 to run task
+[2024-05-18 12:22:27,238] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 12:22:27,337] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 12:22:27,418] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-01-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-01-02T06:00:00+00:00
+[2024-05-18 12:22:27,420] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-18 12:22:27,422] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/fhv/fhv_tripdata_2019-01.csv.gz > /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz && gunzip /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz']
+[2024-05-18 12:22:27,522] {subprocess.py:85} INFO - Output:
+[2024-05-18 12:23:46,081] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-18 12:23:46,207] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhv, task_id=download_dataset_task, execution_date=20190102T060000, start_date=20240518T122226, end_date=20240518T122346
+[2024-05-18 12:23:46,312] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 12:23:46,529] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 12:48:54,820] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:48:54,840] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 12:48:54,840] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:48:54,841] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 12:48:54,841] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 12:48:54,884] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-01-02 06:00:00+00:00
+[2024-05-18 12:48:54,918] {standard_task_runner.py:52} INFO - Started process 6718 to run task
+[2024-05-18 12:48:54,937] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'download_dataset_task', 'scheduled__2019-01-02T06:00:00+00:00', '--job-id', '5117', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpf2ne1w8y', '--error-file', '/tmp/tmppx2tvmc_']
+[2024-05-18 12:48:54,959] {standard_task_runner.py:77} INFO - Job 5117: Subtask download_dataset_task
+[2024-05-18 12:48:55,120] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 12:48:55,274] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 12:48:55,397] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-01-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-01-02T06:00:00+00:00
+[2024-05-18 12:48:55,399] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-18 12:48:55,400] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/fhv/fhv_tripdata_2019-01.csv.gz > /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz && gunzip /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz']
+[2024-05-18 12:48:55,617] {subprocess.py:85} INFO - Output:
+[2024-05-18 12:49:54,057] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-18 12:49:54,121] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhv, task_id=download_dataset_task, execution_date=20190102T060000, start_date=20240518T124854, end_date=20240518T124954
+[2024-05-18 12:49:54,211] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 12:49:54,302] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 13:03:19,084] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:03:19,137] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:03:19,138] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:03:19,139] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 13:03:19,140] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:03:19,232] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-01-02 06:00:00+00:00
+[2024-05-18 13:03:19,299] {standard_task_runner.py:52} INFO - Started process 7868 to run task
+[2024-05-18 13:03:19,328] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'download_dataset_task', 'scheduled__2019-01-02T06:00:00+00:00', '--job-id', '5224', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpaoew6ep_', '--error-file', '/tmp/tmp4akqi84m']
+[2024-05-18 13:03:19,349] {standard_task_runner.py:77} INFO - Job 5224: Subtask download_dataset_task
+[2024-05-18 13:03:19,642] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 13:03:19,796] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 13:03:19,857] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-01-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-01-02T06:00:00+00:00
+[2024-05-18 13:03:19,859] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-18 13:03:19,860] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/fhv/fhv_tripdata_2019-01.csv.gz > /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz && gunzip /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz']
+[2024-05-18 13:03:20,031] {subprocess.py:85} INFO - Output:
+[2024-05-18 13:04:22,180] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-18 13:04:22,346] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhv, task_id=download_dataset_task, execution_date=20190102T060000, start_date=20240518T130319, end_date=20240518T130422
+[2024-05-18 13:04:22,439] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 13:04:22,606] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 13:13:25,437] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:13:25,468] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [queued]>
+[2024-05-18 13:13:25,478] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:13:25,479] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 13:13:25,479] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 13:13:25,536] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2019-01-02 06:00:00+00:00
+[2024-05-18 13:13:25,568] {standard_task_runner.py:52} INFO - Started process 8828 to run task
+[2024-05-18 13:13:25,593] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhv', 'download_dataset_task', 'scheduled__2019-01-02T06:00:00+00:00', '--job-id', '5317', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhv_dag .py', '--cfg-path', '/tmp/tmpl4ke86mb', '--error-file', '/tmp/tmpcyllom8d']
+[2024-05-18 13:13:25,627] {standard_task_runner.py:77} INFO - Job 5317: Subtask download_dataset_task
+[2024-05-18 13:13:25,825] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhv.download_dataset_task scheduled__2019-01-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 13:13:26,007] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 13:13:26,127] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhv
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-01-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-01-02T06:00:00+00:00
+[2024-05-18 13:13:26,129] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2024-05-18 13:13:26,130] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSL https://github.com/DataTalksClub/nyc-tlc-data/releases/download/fhv/fhv_tripdata_2019-01.csv.gz > /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz && gunzip /opt/***/raw_data/fhvtaxi_tripdata_2019-01.csv.gz']
+[2024-05-18 13:13:26,207] {subprocess.py:85} INFO - Output:
+[2024-05-18 13:14:26,655] {subprocess.py:93} INFO - Command exited with return code 0
+[2024-05-18 13:14:26,846] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhv, task_id=download_dataset_task, execution_date=20190102T060000, start_date=20240518T131325, end_date=20240518T131426
+[2024-05-18 13:14:26,929] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 13:14:27,062] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,49 @@
+[2024-12-16 15:54:09,668] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhvhv.local_to_gcs_task scheduled__2019-08-02T06:00:00+00:00 [queued]>
+[2024-12-16 15:54:09,747] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhvhv.local_to_gcs_task scheduled__2019-08-02T06:00:00+00:00 [queued]>
+[2024-12-16 15:54:09,747] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-12-16 15:54:09,747] {taskinstance.py:1239} INFO - Starting attempt 3 of 3
+[2024-12-16 15:54:09,747] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-12-16 15:54:09,781] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2019-08-02 06:00:00+00:00
+[2024-12-16 15:54:09,804] {standard_task_runner.py:52} INFO - Started process 99 to run task
+[2024-12-16 15:54:09,819] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhvhv', 'local_to_gcs_task', 'scheduled__2019-08-02T06:00:00+00:00', '--job-id', '5714', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhvhv_dag.py', '--cfg-path', '/tmp/tmpwat28t1f', '--error-file', '/tmp/tmpmkga0gd6']
+[2024-12-16 15:54:09,849] {standard_task_runner.py:77} INFO - Job 5714: Subtask local_to_gcs_task
+[2024-12-16 15:54:10,209] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhvhv.local_to_gcs_task scheduled__2019-08-02T06:00:00+00:00 [running]> on host 78f99e82b508
+[2024-12-16 15:54:10,504] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-12-16 15:54:10,686] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhvhv
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-08-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-08-02T06:00:00+00:00
+[2024-12-16 15:56:32,470] {local_task_job.py:154} INFO - Task exited with return code Negsignal.SIGKILL
+[2024-12-16 15:56:32,948] {taskinstance.py:1277} INFO - Marking task as FAILED. dag_id=ingest_data_bigquery_fhvhv, task_id=local_to_gcs_task, execution_date=20190802T060000, start_date=20241216T155409, end_date=20241216T155632
+[2024-12-16 15:56:34,042] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-29 15:50:13,721] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhvhv.local_to_gcs_task scheduled__2019-08-02T06:00:00+00:00 [queued]>
+[2024-12-29 15:50:13,734] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_fhvhv.local_to_gcs_task scheduled__2019-08-02T06:00:00+00:00 [queued]>
+[2024-12-29 15:50:13,734] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-12-29 15:50:13,734] {taskinstance.py:1239} INFO - Starting attempt 3 of 5
+[2024-12-29 15:50:13,734] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-12-29 15:50:13,745] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2019-08-02 06:00:00+00:00
+[2024-12-29 15:50:13,752] {standard_task_runner.py:52} INFO - Started process 609 to run task
+[2024-12-29 15:50:13,758] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_fhvhv', 'local_to_gcs_task', 'scheduled__2019-08-02T06:00:00+00:00', '--job-id', '6031', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_fhvhv_dag.py', '--cfg-path', '/tmp/tmpzw5cyxie', '--error-file', '/tmp/tmp688380s_']
+[2024-12-29 15:50:13,763] {standard_task_runner.py:77} INFO - Job 6031: Subtask local_to_gcs_task
+[2024-12-29 15:50:13,830] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_fhvhv.local_to_gcs_task scheduled__2019-08-02T06:00:00+00:00 [running]> on host 0c347e2f1967
+[2024-12-29 15:50:13,868] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-12-29 15:50:13,892] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_fhvhv
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2019-08-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-08-02T06:00:00+00:00
+[2024-12-29 15:50:59,582] {python.py:175} INFO - Done. Returned value was: None
+[2024-12-29 15:50:59,596] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_fhvhv, task_id=local_to_gcs_task, execution_date=20190802T060000, start_date=20241229T155013, end_date=20241229T155059
+[2024-12-29 15:50:59,701] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-12-29 15:50:59,738] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
