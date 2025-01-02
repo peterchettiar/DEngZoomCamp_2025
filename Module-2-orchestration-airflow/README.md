@@ -24,9 +24,6 @@
 - [Airflow in action](#airflow-in-action)
   - [Ingesting data to local Postgres with Airflow](#ingesting-data-to-local-postgres-with-airflow)
   - [Ingesting data to GCP](#ingesting-data-to-gcp)
-- [GCP's Transfer Service](#gcps-transfer-service)
-  - [Creating a Transfer Service from GCP's web UI](#creating-a-transfer-service-from-gcps-web-ui)
-  - [Creating a Transfer Service with Terraform](#creating-a-transfer-service-with-terraform)
 
 # Data Ingestion
 
@@ -542,24 +539,24 @@ _[Video source](https://www.youtube.com/watch?v=9ksX9REfL8w&list=PL3MmuxUbc_hJed
 
 We will now run a slightly more complex DAG that will download the NYC taxi trip data, convert it to parquet, upload it to a GCP bucket and ingest it to GCP's BigQuery.
 
-1. Prepare a DAG for the aforementioned tasks. We will use [this DAG file](../2_data_ingestion/airflow/dags/data_ingestion_gcs_dag.py). Copy it to the `/dags` subdirectory in your work folder.
+1. Prepare a DAG for the aforementioned tasks. We will use [this DAG folder](https://github.com/peterchettiar/DEngZoomCamp_2024/tree/main/Module-2-orchestration-airflow/airflow/dags_bigquery).
     * A `BashOperator` is used to download the dataset and then 2 `PythonOperator` tasks are used to format the file to parquet and then upload the file to a GCP bucket.
         * You may find more info on how to programatically upload to a bucket with Python [in this link](https://cloud.google.com/storage/docs/uploading-objects#storage-upload-object-python).
     * A `BigQueryCreateExternalTableOperator` is used for ingesting the data into BigQuery. You may read more about it [in this link](https://airflow.apache.org/docs/apache-airflow/1.10.12/_api/airflow/contrib/operators/bigquery_operator/index.html).
 1. If not started, run Airflow with `docker-compose up airflow-init` and then `docker-compose up`.
 1. Select the DAG from Airflow's dashboard and trigger it.
 1. Once the DAG finishes, you can go to your GCP project's dashboard and search for BigQuery. You should see your project ID; expand it and you should see a new `trips_data_all` database with an `external_table` table.
-    ![bigquery](images/02_08.png)
+    ![image](https://github.com/user-attachments/assets/1c1ccab3-c39d-4006-8107-251ecd60b9a8)
 1. Click on the 3 dots next to `external_table` and click on _Open_ to display the table's schema.
-    ![bigquery](images/02_09.png)
+    ![image](https://github.com/user-attachments/assets/589fe67a-bca0-4eea-bba4-73770eef6a57)
 1. Click on the 3 dots next to `external_table` and click on _Query_. Run the following SQL query to show the top 10 rows in the database:
     ```sql
     SELECT * FROM `animated-surfer-338618.trips_data_all.external_table` LIMIT 10
     ```
-    ![bigquery](images/02_10.png)
+    ![image](https://github.com/user-attachments/assets/917fd0a2-afc4-4a57-baac-fc274fa941ec)
 1. You can also see the uploaded parquet file by searching the _Cloud Storage_ service, selecting your bucket and then clickin on the `raw/` folder. You may click on the filename to access an info panel.
-    ![bigquery](images/02_11.png)
-    ![bigquery](images/02_12.png)
-    ![bigquery](images/02_13.png)
-    ![bigquery](images/02_14.png)
+    ![image](https://github.com/user-attachments/assets/0fca73f7-536c-4bd6-8dda-54554b3b2bea)
+    ![image](https://github.com/user-attachments/assets/b94784c7-5bfa-4a25-be43-5307f588307a)
+    ![image](https://github.com/user-attachments/assets/93016b06-5885-4d37-8275-de55e17e209d)
+    ![image](https://github.com/user-attachments/assets/fadc6c9d-76e0-440f-8817-c02096cc4736)
 1. You may now shutdown Airflow by running `docker-compose down` on the terminal where you run it.
