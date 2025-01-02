@@ -367,13 +367,13 @@ with DAG(
 
 DAG management is carried out via Airflow's web UI.
 
-![airflow ui](images/02_01.png)
+![image](https://github.com/user-attachments/assets/18b09de5-c90e-4a66-b398-63c813896ddc)
 
 There are 2 main ways to run DAGs:
 * Triggering them manually via the web UI or programatically via API
 * Scheduling them
 
-When you trigger or schedule a DAG, a DAG instance is created, called a ***DAG run***. DAG runs can run in **parallel for the same DAG** for separate data intervals.
+When you trigger or schedule a DAG, a DAG instance is created, called a ***DAG run***. DAG runs can run in **parallel for the same DAG** for separate date intervals.
 
 Each task inside a DAG is also instantiated, and a state is given to each task instance. Ideally, a task should flow from `none`, to `scheduled`, to `queued`, to `running`, and finally to `success`.
 
@@ -383,11 +383,11 @@ You may manually trigger a DAG by clicking on the Play button on the left of eac
 
 A more detailed view and options for each DAG can be accessed by clicking on the DAG's name.
 
-![dag details](images/02_02.png)
+![image](https://github.com/user-attachments/assets/dcb405ca-442c-4a03-aac2-d42b85f1b95f)
 
 The tree view is offered by default, but you can get a graph view of the DAG by clicking on the _Graph_ button.
 
-![dag details](images/02_03.png)
+![image](https://github.com/user-attachments/assets/59ff3bae-109a-4687-b5fc-5331816a8b8e)
 
 The status of each task can be seen in both views as you trigger a DAG.
 
