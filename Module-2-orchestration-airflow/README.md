@@ -491,3 +491,74 @@ The status of each task can be seen in both views as you trigger a DAG.
 
     #...
     ```
+# Airflow in action
+
+We will now learn how to use Airflow to populate a Postgres database locally and in GCP's BigQuery.
+
+## Ingesting data to local Postgres with Airflow
+
+_[Video source](https://www.youtube.com/watch?v=s2U8MWJH5xA&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=20)_
+
+We want to run our Postgres setup from last section locally as well as Airflow, and we will use the `ingest_data.py` script from a DAG to ingest the NYC taxi trip data to our local Postgres.
+
+1. Prepare an ingestion script. We will use [this `ingest_script.py` file](../2_data_ingestion/airflow/dags/ingest_script.py).
+    * This script is heavily based on the script from last session, but the code has been wrapped inside a `ingest_callable()` method that will receive parameters from Airflow in order to connect to the database.
+    * We originally ran a dockerized version of the script; we could dockerize it again with a special `DockerOperator` task but we will simply run it with `PythonOperator` in our DAG for simplicity.
+1. Prepare a DAG. We will use [this `data_ingestion_local.py` DAG file](../2_data_ingestion/airflow/dags/data_ingestion_local.py). The DAG will have the following tasks:
+    1. A download `BashOperator` task that will download the NYC taxi data.
+    1. A `PythonOperator` task that will call our ingest script in order to fill our database.
+    1. All the necessary info for connecting to the database will be defined as environment variables.
+1. Modify the `.env` file to include all the necessary environment files. We will use [this `.env` file](../2_data_ingestion/airflow/.env).
+1. Modify the Airflow `docker-compose.yaml` file to include the environment variables. We will use [this `docker-compose.yaml` file](../2_data_ingestion/airflow/docker-compose.yaml).
+1. Modify the custom Airflow Dockerfile so that we can run our script (this is only for the purposes of this exercise) by installing the additional Python libraries that the `ingest_script.py` file needs. We will use [this Dockerfile](../2_data_ingestion/airflow/Dockerfile).
+    * Add this right after installing the `requirements.txt` file: `RUN pip install --no-cache-dir pandas sqlalchemy psycopg2-binary`
+1. Rebuild the Airflow image with `docker-compose build` and initialize the Airflow config with `docker-compose up airflow-init`.
+1. Start Airflow by using `docker-compose up` and on a separate terminal, find out which virtual network it's running on with `docker network ls`. It most likely will be something like `airflow_default`.
+1. Modify the `docker-compose.yaml` file from lesson 1 by adding the network info and commenting away the pgAdmin service in order to reduce the amount of resources we will consume (we can use `pgcli` to check the database). We will use [this `docker-compose-lesson2.yaml` file](../1_intro/docker-compose-lesson2.yaml).
+1. Run the updated `docker-compose-lesson2.yaml` with `docker-compose -f docker-compose-lesson2.yaml up` . We need to explicitly call the file because we're using a non-standard name.
+1. Optionally, you can login to a worker container and try to access the database from there.
+    1. Run `docker ps` and look for a `airflow_airflow-worker` container. Copy the container ID.
+    1. Login to the worker container with `docker exec -it <container_id> bash`
+    1. Run `python` to start Python's interactive mode. Run the following lines:
+        ```python
+        from sqlalchemy import create_engine
+        engine = create_engine('postgresql://root:root@pgdatabase:5432/ny_taxi')
+        engine.connect()
+        ```
+    1. You should see the output of the `connect()` method. You may now exit both the Python console and logout from the container.
+1. Open the Airflow dashboard and trigger the `LocalIngestionDag` DAG by clicking on the Play icon. Inside the detailed DAG view you will find the status of the tasks as they download the files and ingest them to the database. Note that the DAG will run as many times as stated in the drop down menu, which is 25 by default.
+    ![DAG in progress](images/02_04.png)
+1. Click on any of the colored squares to see the details of the task.
+    ![task details](images/02_05.png)
+    ![task details](images/02_06.png)
+    ![task details](images/02_07.png)
+1. As both the download and ingest tasks finish and the squares for both turn dark green, you may use `pgcli -h localhost -p 5432 -u root -d ny_taxi` on a separate terminal to check the tables on your local Postgres database. You should see a new table per run.
+1. Once you're finished, remember to use `docker-compose down` on both the Airflow and Postgres terminals.
+
+## Ingesting data to GCP
+
+_[Video source](https://www.youtube.com/watch?v=9ksX9REfL8w&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=19)_
+
+We will now run a slightly more complex DAG that will download the NYC taxi trip data, convert it to parquet, upload it to a GCP bucket and ingest it to GCP's BigQuery.
+
+1. Prepare a DAG for the aforementioned tasks. We will use [this DAG file](../2_data_ingestion/airflow/dags/data_ingestion_gcs_dag.py). Copy it to the `/dags` subdirectory in your work folder.
+    * A `BashOperator` is used to download the dataset and then 2 `PythonOperator` tasks are used to format the file to parquet and then upload the file to a GCP bucket.
+        * You may find more info on how to programatically upload to a bucket with Python [in this link](https://cloud.google.com/storage/docs/uploading-objects#storage-upload-object-python).
+    * A `BigQueryCreateExternalTableOperator` is used for ingesting the data into BigQuery. You may read more about it [in this link](https://airflow.apache.org/docs/apache-airflow/1.10.12/_api/airflow/contrib/operators/bigquery_operator/index.html).
+1. If not started, run Airflow with `docker-compose up airflow-init` and then `docker-compose up`.
+1. Select the DAG from Airflow's dashboard and trigger it.
+1. Once the DAG finishes, you can go to your GCP project's dashboard and search for BigQuery. You should see your project ID; expand it and you should see a new `trips_data_all` database with an `external_table` table.
+    ![bigquery](images/02_08.png)
+1. Click on the 3 dots next to `external_table` and click on _Open_ to display the table's schema.
+    ![bigquery](images/02_09.png)
+1. Click on the 3 dots next to `external_table` and click on _Query_. Run the following SQL query to show the top 10 rows in the database:
+    ```sql
+    SELECT * FROM `animated-surfer-338618.trips_data_all.external_table` LIMIT 10
+    ```
+    ![bigquery](images/02_10.png)
+1. You can also see the uploaded parquet file by searching the _Cloud Storage_ service, selecting your bucket and then clickin on the `raw/` folder. You may click on the filename to access an info panel.
+    ![bigquery](images/02_11.png)
+    ![bigquery](images/02_12.png)
+    ![bigquery](images/02_13.png)
+    ![bigquery](images/02_14.png)
+1. You may now shutdown Airflow by running `docker-compose down` on the terminal where you run it.
