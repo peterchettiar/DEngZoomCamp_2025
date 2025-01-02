@@ -501,20 +501,20 @@ _[Video source](https://www.youtube.com/watch?v=s2U8MWJH5xA&list=PL3MmuxUbc_hJed
 
 We want to run our Postgres setup from last section locally as well as Airflow, and we will use the `ingest_data.py` script from a DAG to ingest the NYC taxi trip data to our local Postgres.
 
-1. Prepare an ingestion script. We will use [this `ingest_script.py` file](../2_data_ingestion/airflow/dags/ingest_script.py).
+1. Prepare an ingestion script. We will use [this `ingest_script.py` file](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Module-2-orchestration-airflow/airflow/dags_postgres/ingest_script_pg.py).
     * This script is heavily based on the script from last session, but the code has been wrapped inside a `ingest_callable()` method that will receive parameters from Airflow in order to connect to the database.
     * We originally ran a dockerized version of the script; we could dockerize it again with a special `DockerOperator` task but we will simply run it with `PythonOperator` in our DAG for simplicity.
-1. Prepare a DAG. We will use [this `data_ingestion_local.py` DAG file](../2_data_ingestion/airflow/dags/data_ingestion_local.py). The DAG will have the following tasks:
+1. Prepare a DAG. We will use [this `data_ingestion_local.py` DAG file](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Module-2-orchestration-airflow/airflow/dags_postgres/data_ingestion_pg_dag.py). The DAG will have the following tasks:
     1. A download `BashOperator` task that will download the NYC taxi data.
     1. A `PythonOperator` task that will call our ingest script in order to fill our database.
     1. All the necessary info for connecting to the database will be defined as environment variables.
-1. Modify the `.env` file to include all the necessary environment files. We will use [this `.env` file](../2_data_ingestion/airflow/.env).
+1. Modify the `.env` file to include all the necessary environment files. We will use [this `.env` file](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Module-2-orchestration-airflow/airflow/.env).
 1. Modify the Airflow `docker-compose.yaml` file to include the environment variables. We will use [this `docker-compose.yaml` file](../2_data_ingestion/airflow/docker-compose.yaml).
 1. Modify the custom Airflow Dockerfile so that we can run our script (this is only for the purposes of this exercise) by installing the additional Python libraries that the `ingest_script.py` file needs. We will use [this Dockerfile](../2_data_ingestion/airflow/Dockerfile).
     * Add this right after installing the `requirements.txt` file: `RUN pip install --no-cache-dir pandas sqlalchemy psycopg2-binary`
 1. Rebuild the Airflow image with `docker-compose build` and initialize the Airflow config with `docker-compose up airflow-init`.
 1. Start Airflow by using `docker-compose up` and on a separate terminal, find out which virtual network it's running on with `docker network ls`. It most likely will be something like `airflow_default`.
-1. Modify the `docker-compose.yaml` file from lesson 1 by adding the network info and commenting away the pgAdmin service in order to reduce the amount of resources we will consume (we can use `pgcli` to check the database). We will use [this `docker-compose-lesson2.yaml` file](../1_intro/docker-compose-lesson2.yaml).
+1. Modify the `docker-compose.yaml` file from lesson 1 by adding the network info and commenting away the pgAdmin service in order to reduce the amount of resources we will consume (we can use `pgcli` to check the database). We will use [this `docker-compose-lesson2.yaml` file](https://github.com/peterchettiar/DEngZoomCamp_2024/blob/main/Module-2-orchestration-airflow/airflow/docker-compose.yaml) - uncomment `/dags_postgress` under volumes.
 1. Run the updated `docker-compose-lesson2.yaml` with `docker-compose -f docker-compose-lesson2.yaml up` . We need to explicitly call the file because we're using a non-standard name.
 1. Optionally, you can login to a worker container and try to access the database from there.
     1. Run `docker ps` and look for a `airflow_airflow-worker` container. Copy the container ID.
@@ -527,11 +527,12 @@ We want to run our Postgres setup from last section locally as well as Airflow, 
         ```
     1. You should see the output of the `connect()` method. You may now exit both the Python console and logout from the container.
 1. Open the Airflow dashboard and trigger the `LocalIngestionDag` DAG by clicking on the Play icon. Inside the detailed DAG view you will find the status of the tasks as they download the files and ingest them to the database. Note that the DAG will run as many times as stated in the drop down menu, which is 25 by default.
-    ![DAG in progress](images/02_04.png)
+    ![image](https://github.com/user-attachments/assets/e28310c3-9c62-47b9-b3f9-df9d10a2929f)
 1. Click on any of the colored squares to see the details of the task.
-    ![task details](images/02_05.png)
-    ![task details](images/02_06.png)
-    ![task details](images/02_07.png)
+    ![image](https://github.com/user-attachments/assets/9ba133b5-18b9-45be-a5c8-3fcf11a593ee)
+    ![image](https://github.com/user-attachments/assets/c4a46ba6-1c2a-47f2-ac85-a7323be20ce7)
+    ![image](https://github.com/user-attachments/assets/3b444040-7166-4f65-83b6-000d055f8c18)
+   
 1. As both the download and ingest tasks finish and the squares for both turn dark green, you may use `pgcli -h localhost -p 5432 -u root -d ny_taxi` on a separate terminal to check the tables on your local Postgres database. You should see a new table per run.
 1. Once you're finished, remember to use `docker-compose down` on both the Airflow and Postgres terminals.
 
