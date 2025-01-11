@@ -107,7 +107,7 @@ _Video sources: [1](https://www.youtube.com/watch?v=jrHljAoD6nM&list=PL3MmuxUbc_
 
 BQ tables can be ***partitioned*** into multiple smaller tables. For example, if we often filter queries based on date, we could partition a table based on date so that we only query a specific sub-table based on the date we're interested in.
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/e9ba6a76-a7b4-4e28-a125-2c64f861d132)
 
 [Partition tables](https://cloud.google.com/bigquery/docs/partitioned-tables) are very useful to improve performance and reduce costs, because BQ will not process as much data per query.
 
