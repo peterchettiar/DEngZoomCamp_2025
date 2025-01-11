@@ -45,8 +45,9 @@ An intuitive way of looking at both of these systems is that OLTP systems are "c
 
 ## What is a Data Warehouse?
 
-A **Data Warehouse** (DW) is an ***OLAP solution*** meant for ***reporting and data analysis***. Unlike Data Lakes, which follow the ELT model, DWs commonly use the ETL model which was [explained in lesson 2](2_data_ingestion.md#etl-vs-elt).
+A **Data Warehouse** (DW) is an ***OLAP solution*** meant for ***reporting and data analysis***. Unlike Data Lakes, which follow the ELT model, DWs commonly use the ETL model which was [explained in lesson 2](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-2-workflow-orchestration/README.md#etl-vs-elt).
 
 A DW receives data from different ***data sources*** which is then processed in a ***staging area*** before being ingested to the actual warehouse (a database) and arranged as needed. DWs may then feed data to separate ***Data Marts***; smaller database systems which end users may use for different purposes.
 
-![dw arch](images/03_01.jpeg)
+![image](https://github.com/user-attachments/assets/6c2b9869-9193-41ee-925e-042b0779ce62)
+
