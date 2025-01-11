@@ -23,8 +23,6 @@
 
 ## OLAP vs OLTP
 
-_[Video source](https://www.youtube.com/watch?v=jrHljAoD6nM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=25)_
-
 In Data Science, when we're discussing data processing systems, there are 2 main types: **OLAP** and **OLTP** systems.
 
 * ***OLTP***: Online Transaction Processing.
@@ -101,9 +99,7 @@ You may import an external table into BQ as a regular internal table by copying 
 CREATE OR REPLACE TABLE taxi-rides-ny.nytaxi.yellow_tripdata_non_partitoned AS
 SELECT * FROM taxi-rides-ny.nytaxi.external_yellow_tripdata;
 ```
-## Partitions
-
-_Video sources: [1](https://www.youtube.com/watch?v=jrHljAoD6nM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=25), [2](https://www.youtube.com/watch?v=-CqXf7vhhDs&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=26)_
+### Partitions
 
 BQ tables can be ***partitioned*** into multiple smaller tables. For example, if we often filter queries based on date, we could partition a table based on date so that we only query a specific sub-table based on the date we're interested in.
 
@@ -139,7 +135,7 @@ FROM taxi-rides-ny.nytaxi.yellow_tripdata_non_partitoned
 WHERE DATE(tpep_pickup_datetime) BETWEEN '2019-06-01' AND '2019-06-30';
 ```
 * Query to non-partitioned table.
-* It will process around 1.6GB of data/
+* It will process around 1.6GB of data.
 
 ```sql
 SELECT DISTINCT(VendorID)
@@ -159,3 +155,53 @@ ORDER BY total_rows DESC;
 ```
 
 This is useful to check if there are data imbalances and/or biases in your partitions.
+
+### Clustering
+
+***Clustering*** consists of rearranging a table based on the values of its columns so that the table is ordered according to any criteria. Clustering can be done based on one or multiple columns up to 4; the ***order*** of the columns in which the clustering is specified is important in order to determine the column priority.
+
+Clustering may improve performance and lower costs on big datasets for certain types of queries, such as queries that use filter clauses and queries that aggregate data.
+
+>Note: tables with less than 1GB don't show significant improvement with partitioning and clustering; doing so in a small table could even lead to increased cost due to the additional metadata reads and maintenance needed for these features.
+
+Clustering columns must be ***top-level***, ***non-repeated*** columns. The following datatypes are supported:
+* `DATE`
+* `BOOL`
+* `GEOGRAPHY`
+* `INT64`
+* `NUMERIC`
+* `BIGNUMERIC`
+* `STRING`
+* `TIMESTAMP`
+* `DATETIME`
+
+A partitioned table can also be clustered. Here's an example query for creating a partitioned and clustered table:
+
+```sql
+CREATE OR REPLACE TABLE taxi-rides-ny.nytaxi.yellow_tripdata_partitoned_clustered
+PARTITION BY DATE(tpep_pickup_datetime)
+CLUSTER BY VendorID AS
+SELECT * FROM taxi-rides-ny.nytaxi.external_yellow_tripdata;
+```
+
+Just like for partitioned tables, the _Details_ tab for the table will also display the fields by which the table is clustered.
+
+Here are 2 identical queries, one for a partitioned table and the other for a partitioned and clustered table:
+
+```sql
+SELECT count(*) as trips
+FROM taxi-rides-ny.nytaxi.yellow_tripdata_partitoned
+WHERE DATE(tpep_pickup_datetime) BETWEEN '2019-06-01' AND '2020-12-31'
+  AND VendorID=1;
+```
+* Query to non-clustered, partitioned table.
+* This will process about 1.1GB of data.
+
+```sql
+SELECT count(*) as trips
+FROM taxi-rides-ny.nytaxi.yellow_tripdata_partitoned_clustered
+WHERE DATE(tpep_pickup_datetime) BETWEEN '2019-06-01' AND '2020-12-31'
+  AND VendorID=1;
+```
+* Query to partitioned and clustered data.
+* This will process about 865MB of data.
