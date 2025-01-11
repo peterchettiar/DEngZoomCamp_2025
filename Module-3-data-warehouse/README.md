@@ -2,7 +2,6 @@
 
 ### Table of contents
 
-- [Data Warehouse](#data-warehouse)
 - [OLAP vs OLTP](#olap-vs-oltp)
 - [What is a Data Warehouse?](#what-is-a-data-warehouse)
 - [BigQuery](#bigquery)
@@ -22,10 +21,7 @@
   - [Airflow setup](#airflow-setup)
   - [Creating a Cloud Storage to BigQuery DAG](#creating-a-cloud-storage-to-bigquery-dag)
 
-# Data Warehouse
-
-This lesson will cover the topics of _Data Warehouse_ and _BigQuery_.
-# OLAP vs OLTP
+## OLAP vs OLTP
 
 _[Video source](https://www.youtube.com/watch?v=jrHljAoD6nM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=25)_
 
@@ -46,3 +42,11 @@ An intuitive way of looking at both of these systems is that OLTP systems are "c
 | Productivity | Increases productivity of end users | Increases productivity of business managers, data analysts and executives |
 | Data view | Lists day-to-day business transactions | Multi-dimensional view of enterprise data |
 | User examples | Customer-facing personnel, clerks, online shoppers | Knowledge workers such as data analysts, business analysts and executives |
+
+## What is a Data Warehouse?
+
+A **Data Warehouse** (DW) is an ***OLAP solution*** meant for ***reporting and data analysis***. Unlike Data Lakes, which follow the ELT model, DWs commonly use the ETL model which was [explained in lesson 2](2_data_ingestion.md#etl-vs-elt).
+
+A DW receives data from different ***data sources*** which is then processed in a ***staging area*** before being ingested to the actual warehouse (a database) and arranged as needed. DWs may then feed data to separate ***Data Marts***; smaller database systems which end users may use for different purposes.
+
+![dw arch](images/03_01.jpeg)
