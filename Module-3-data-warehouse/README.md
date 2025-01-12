@@ -256,7 +256,7 @@ _[Additional source](https://cloud.google.com/blog/products/data-analytics/new-b
 
 While it's not strictly necessary to understand how the internals of BigQuery work, it can be useful to know in order to understand the reasoning behind the [best practices](#best-practices).
 
-#### 1. BigQuery Architecture
+#### BigQuery Architecture
 
 BigQuery is built on 4 infrastructure technologies.
 * ***Dremel***: the _compute_ part of BQ. It executes the SQL queries.
@@ -275,7 +275,7 @@ BigQuery is built on 4 infrastructure technologies.
 
 ![image](https://github.com/user-attachments/assets/d4b96e15-baa0-47fb-9eeb-396decca6638)
 
-#### 2. Column-oriented vs record-oriented storage
+#### Column-oriented vs record-oriented storage
 
 Traditional methods for tabular data storage are ***record-oriented*** (also known as _row-oriented_). Data is read sequentially row by row and then the columns are accessed per row. An example of this is a CSV file: each new line in the file is a record and all the info for that specific record is contained within that line.
 
