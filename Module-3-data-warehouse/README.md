@@ -239,7 +239,7 @@ Here's a list of [best practices for BigQuery](https://cloud.google.com/bigquery
   * Use [nested or repeated columns](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-explained-working-joins-nested-repeated-data).
   * Use external data sources appropiately. Constantly reading data from a bucket may incur in additional costs and has worse performance.
   * Reduce data before using a `JOIN`.
-  * Do not threat `WITH` clauses as [prepared statements](https://www.wikiwand.com/en/Prepared_statement).
+  * Do not treat `WITH` clauses as [prepared statements](https://www.wikiwand.com/en/Prepared_statement).
   * Avoid [oversharding tables](https://cloud.google.com/bigquery/docs/partitioned-tables#dt_partition_shard).
   * Avoid JavaScript user-defined functions.
   * Use [approximate aggregation functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions) rather than complete ones such as [HyperLogLog++](https://cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions).
@@ -247,3 +247,45 @@ Here's a list of [best practices for BigQuery](https://cloud.google.com/bigquery
   * [Optimize join patterns](https://cloud.google.com/bigquery/docs/best-practices-performance-compute#optimize_your_join_patterns).
   * Place the table with the _largest_ number of rows first, followed by the table with the _fewest_ rows, and then place the remaining tables by decreasing size.
     * This is due to how BigQuery works internally: the first table will be distributed evenly and the second table will be broadcasted to all the nodes. Check the [Internals section](#internals) for more details.
+
+### Internals
+
+_[Video source](https://www.youtube.com/watch?v=k81mLJVX08w&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=27)_
+
+_[Additional source](https://cloud.google.com/blog/products/data-analytics/new-blog-series-bigquery-explained-overview)_
+
+While it's not strictly necessary to understand how the internals of BigQuery work, it can be useful to know in order to understand the reasoning behind the [best practices](#best-practices).
+
+#### 1. BigQuery Architecture
+
+BigQuery is built on 4 infrastructure technologies.
+* ***Dremel***: the _compute_ part of BQ. It executes the SQL queries.
+  * Dremel turns SQL queries into _execution trees_. The leaves of these trees are called _slots_ and the branches are called _mixers_.
+  * The _slots_ are in charge of reading data from storage and perform calculations.
+  * The _mixers_ perform aggregation.
+  * Dremel dinamically apportions slots to queries as needed, while maintaining fairness for concurrent queries from multiple users.
+* ***Colossus***: Google's global storage system.
+  * BQ leverages a _columnar storage format_ and compression algorithms to store data.
+  * Colossus is optimized for reading large amounts of structured data.
+  * Colossus also handles replication, recovery and distributed management.
+* ***Jupiter***: the network that connects Dremel and Colossus.
+  * Jupiter is an in-house network technology created by Google which is used for interconnecting its datacenters.
+* ***Borg***: an orchestration solution that handles everything.
+  * Borg is a precursor of Kubernetes.
+
+![image](https://github.com/user-attachments/assets/d4b96e15-baa0-47fb-9eeb-396decca6638)
+
+#### 2. Column-oriented vs record-oriented storage
+
+Traditional methods for tabular data storage are ***record-oriented*** (also known as _row-oriented_). Data is read sequentially row by row and then the columns are accessed per row. An example of this is a CSV file: each new line in the file is a record and all the info for that specific record is contained within that line.
+
+BigQuery uses a ***columnar storage format***. Data is stored according to the columns of the table rather than the rows. This is beneficial when dealing with massive amounts of data because it allows us to discard right away the columns we're not interested in when performing queries, thus reducing the amount of processed data.
+
+![image](https://github.com/user-attachments/assets/015e4633-10cc-402f-98b4-3344bd498fa9)
+
+When performing queries, Dremel modifies them in order to create an _execution tree_: parts of the query are assigned to different mixers which in turn assign even smaller parts to different slots which will access Colossus and retrieve the data.
+
+The columnar storage format is perfect for this workflow as it allows very fast data retrieval from colossus by multiple workers, which then perform any needed computation on the retrieved datapoints and return them to the mixers, which will perform any necessary aggregation before returning that data to the root server, which will compose the final output of the query.
+
+![image](https://github.com/user-attachments/assets/272058c2-e278-4e8c-abe5-f95d0ef24f71)
+
