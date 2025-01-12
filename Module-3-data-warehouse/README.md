@@ -250,8 +250,6 @@ Here's a list of [best practices for BigQuery](https://cloud.google.com/bigquery
 
 ### Internals
 
-_[Video source](https://www.youtube.com/watch?v=k81mLJVX08w&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=27)_
-
 _[Additional source](https://cloud.google.com/blog/products/data-analytics/new-blog-series-bigquery-explained-overview)_
 
 While it's not strictly necessary to understand how the internals of BigQuery work, it can be useful to know in order to understand the reasoning behind the [best practices](#best-practices).
