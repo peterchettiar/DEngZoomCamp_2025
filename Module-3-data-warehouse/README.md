@@ -17,9 +17,6 @@
 - [Machine Learning with BigQuery](#machine-learning-with-bigquery)
   - [Introduction to BigQuery ML](#introduction-to-bigquery-ml)
   - [BigQuery ML deployment](#bigquery-ml-deployment)
-- [Integrating BigQuery with Airflow](#integrating-bigquery-with-airflow)
-  - [Airflow setup](#airflow-setup)
-  - [Creating a Cloud Storage to BigQuery DAG](#creating-a-cloud-storage-to-bigquery-dag)
 
 ## OLAP vs OLTP
 
@@ -434,3 +431,52 @@ tip_amount IS NOT NULL;
 * All of the regular arguments used for creating a model are available for tuning. In this example we opt to tune the L1 and L2 regularizations.
 
 All of the necessary reference documentation is available [in this link](https://cloud.google.com/bigquery-ml/docs/reference).
+
+### BigQuery ML deployment
+
+ML models created within BQ can be exported and deployed to Docker containers running TensorFlow Serving.
+
+The following steps are based on [this official tutorial](https://cloud.google.com/bigquery-ml/docs/export-model-tutorial). All of these commands are to be run from a terminal and the gcloud sdk must be installed.
+
+1. Authenticate to your GCP project.
+    ```sh
+    gcloud auth login
+    ```
+1. Export the model to a Cloud Storage bucket.
+    ```sh
+    bq --project_id taxi-rides-ny extract -m nytaxi.tip_model gs://taxi_ml_model/tip_model
+    ```
+1. Download the exported model files to a temporary directory.
+    ```sh
+    mkdir /tmp/model
+
+    gsutil cp -r gs://taxi_ml_model/tip_model /tmp/model
+    ```
+1. Create a version subdirectory
+    ```sh
+    mkdir -p serving_dir/tip_model/1
+
+    cp -r /tmp/model/tip_model/* serving_dir/tip_model/1
+
+    # Optionally you may erase the temporary directoy
+    rm -r /tmp/model
+    ```
+1. Pull the TensorFlow Serving Docker image
+    ```sh
+    docker pull tensorflow/serving
+    ```
+1. Run the Docker image. Mount the version subdirectory as a volume and provide a value for the `MODEL_NAME` environment variable.
+    ```sh
+    # Make sure you don't mess up the spaces!
+    docker run \
+      -p 8501:8501 \
+      --mount type=bind,source=`pwd`/serving_dir/tip_model,target=/models/tip_model \
+      -e MODEL_NAME=tip_model \
+      -t tensorflow/serving &
+    ```
+1. With the image running, run a prediction with curl, providing values for the features used for the predictions.
+    ```sh
+    curl \
+      -d '{"instances": [{"passenger_count":1, "trip_distance":12.2, "PULocationID":"193", "DOLocationID":"264", "payment_type":"2","fare_amount":20.4,"tolls_amount":0.0}]}' \
+      -X POST http://localhost:8501/v1/models/tip_model:predict
+    ```
