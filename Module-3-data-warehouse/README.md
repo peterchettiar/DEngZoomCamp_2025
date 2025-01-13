@@ -297,7 +297,7 @@ The pricing for BigQuery ML is slightly different and more complex than regular 
 
 BQ ML offers a variety of ML models depending on the use case, as the image below shows:
 
-![bq ml](images/03_05.png)
+![image](https://github.com/user-attachments/assets/1c1b6f01-e04b-465f-af00-723d5d6aa821)
 
 We will now create a few example queries to show how BQ ML works. Let's begin with creating a custom table:
 
@@ -434,5 +434,3 @@ tip_amount IS NOT NULL;
 * All of the regular arguments used for creating a model are available for tuning. In this example we opt to tune the L1 and L2 regularizations.
 
 All of the necessary reference documentation is available [in this link](https://cloud.google.com/bigquery-ml/docs/reference).
-
-_[Back to the top](#table-of-contents)_
