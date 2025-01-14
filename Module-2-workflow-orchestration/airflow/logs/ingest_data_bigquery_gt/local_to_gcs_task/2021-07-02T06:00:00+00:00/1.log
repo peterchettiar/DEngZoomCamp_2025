@@ -1,0 +1,56 @@
+[2024-05-12 12:42:42,745] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_gt.local_to_gcs_task scheduled__2021-07-02T06:00:00+00:00 [queued]>
+[2024-05-12 12:42:42,836] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_gt.local_to_gcs_task scheduled__2021-07-02T06:00:00+00:00 [queued]>
+[2024-05-12 12:42:42,836] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-12 12:42:42,836] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-12 12:42:42,837] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-12 12:42:42,956] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2021-07-02 06:00:00+00:00
+[2024-05-12 12:42:43,024] {standard_task_runner.py:52} INFO - Started process 1001 to run task
+[2024-05-12 12:42:43,059] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_gt', 'local_to_gcs_task', 'scheduled__2021-07-02T06:00:00+00:00', '--job-id', '4893', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_gt_dag .py', '--cfg-path', '/tmp/tmph01qlm83', '--error-file', '/tmp/tmprss2brip']
+[2024-05-12 12:42:43,141] {standard_task_runner.py:77} INFO - Job 4893: Subtask local_to_gcs_task
+[2024-05-12 12:42:43,677] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_gt.local_to_gcs_task scheduled__2021-07-02T06:00:00+00:00 [running]> on host 31858b145400
+[2024-05-12 12:42:43,825] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-12 12:42:43,913] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_gt
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-07-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-07-02T06:00:00+00:00
+[2024-05-12 12:42:44,681] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/operators/python.py:174: DtypeWarning: Columns (3) have mixed types.Specify dtype option on import or set low_memory=False.
+  return_value = self.execute_callable()
+
+[2024-05-12 12:42:45,924] {python.py:175} INFO - Done. Returned value was: None
+[2024-05-12 12:42:45,943] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_gt, task_id=local_to_gcs_task, execution_date=20210702T060000, start_date=20240512T124242, end_date=20240512T124245
+[2024-05-12 12:42:46,082] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-12 12:42:46,378] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-18 11:10:31,379] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_gt.local_to_gcs_task scheduled__2021-07-02T06:00:00+00:00 [queued]>
+[2024-05-18 11:10:31,488] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery_gt.local_to_gcs_task scheduled__2021-07-02T06:00:00+00:00 [queued]>
+[2024-05-18 11:10:31,489] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 11:10:31,489] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2024-05-18 11:10:31,489] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-18 11:10:31,516] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2021-07-02 06:00:00+00:00
+[2024-05-18 11:10:31,572] {standard_task_runner.py:52} INFO - Started process 1549 to run task
+[2024-05-18 11:10:31,631] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery_gt', 'local_to_gcs_task', 'scheduled__2021-07-02T06:00:00+00:00', '--job-id', '4990', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_gt_dag .py', '--cfg-path', '/tmp/tmpbtvflkad', '--error-file', '/tmp/tmp0zazrvqy']
+[2024-05-18 11:10:31,709] {standard_task_runner.py:77} INFO - Job 4990: Subtask local_to_gcs_task
+[2024-05-18 11:10:32,386] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery_gt.local_to_gcs_task scheduled__2021-07-02T06:00:00+00:00 [running]> on host 45b18388e83d
+[2024-05-18 11:10:33,489] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-05-18 11:10:33,730] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery_gt
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-07-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-07-02T06:00:00+00:00
+[2024-05-18 11:10:35,907] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/operators/python.py:174: DtypeWarning: Columns (3) have mixed types.Specify dtype option on import or set low_memory=False.
+  return_value = self.execute_callable()
+
+[2024-05-18 11:10:37,533] {python.py:175} INFO - Done. Returned value was: None
+[2024-05-18 11:10:37,591] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery_gt, task_id=local_to_gcs_task, execution_date=20210702T060000, start_date=20240518T111031, end_date=20240518T111037
+[2024-05-18 11:10:37,802] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-05-18 11:10:37,941] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check

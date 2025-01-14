@@ -1,0 +1,26 @@
+[2025-01-01 14:29:51,053] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: data_ingestion_gcs_dag_homework_q4.download_dataset_task scheduled__2024-12-31T00:00:00+00:00 [queued]>
+[2025-01-01 14:29:51,074] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: data_ingestion_gcs_dag_homework_q4.download_dataset_task scheduled__2024-12-31T00:00:00+00:00 [queued]>
+[2025-01-01 14:29:51,074] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2025-01-01 14:29:51,074] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2025-01-01 14:29:51,075] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2025-01-01 14:29:51,098] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): download_dataset_task> on 2024-12-31 00:00:00+00:00
+[2025-01-01 14:29:51,109] {standard_task_runner.py:52} INFO - Started process 116 to run task
+[2025-01-01 14:29:51,129] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'data_ingestion_gcs_dag_homework_q4', 'download_dataset_task', 'scheduled__2024-12-31T00:00:00+00:00', '--job-id', '6373', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_tz_dag.py', '--cfg-path', '/tmp/tmph1saeo6i', '--error-file', '/tmp/tmpuhicjy8o']
+[2025-01-01 14:29:51,135] {standard_task_runner.py:77} INFO - Job 6373: Subtask download_dataset_task
+[2025-01-01 14:29:51,252] {logging_mixin.py:109} INFO - Running <TaskInstance: data_ingestion_gcs_dag_homework_q4.download_dataset_task scheduled__2024-12-31T00:00:00+00:00 [running]> on host ca209906e0d5
+[2025-01-01 14:29:51,440] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=data_ingestion_gcs_dag_homework_q4
+AIRFLOW_CTX_TASK_ID=download_dataset_task
+AIRFLOW_CTX_EXECUTION_DATE=2024-12-31T00:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2024-12-31T00:00:00+00:00
+[2025-01-01 14:29:51,445] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2025-01-01 14:29:51,446] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sSLf https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv > /opt/***/raw_data/taxi_zone_lookup.csv']
+[2025-01-01 14:29:51,508] {subprocess.py:85} INFO - Output:
+[2025-01-01 14:29:52,328] {subprocess.py:93} INFO - Command exited with return code 0
+[2025-01-01 14:29:52,446] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=data_ingestion_gcs_dag_homework_q4, task_id=download_dataset_task, execution_date=20241231T000000, start_date=20250101T142951, end_date=20250101T142952
+[2025-01-01 14:29:52,513] {local_task_job.py:154} INFO - Task exited with return code 0
+[2025-01-01 14:29:52,592] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check

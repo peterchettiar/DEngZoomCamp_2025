@@ -1,0 +1,824 @@
+[2024-03-29 07:24:46,682] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:24:46,839] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:24:46,849] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:24:46,850] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 07:24:46,853] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:24:47,523] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-29 07:24:47,590] {standard_task_runner.py:52} INFO - Started process 602 to run task
+[2024-03-29 07:24:47,630] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '1467', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp1v34dwxp', '--error-file', '/tmp/tmp2nwjs6_e']
+[2024-03-29 07:24:47,656] {standard_task_runner.py:77} INFO - Job 1467: Subtask local_to_gcs_task
+[2024-03-29 07:24:48,250] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host b8c510ab3cfc
+[2024-03-29 07:24:48,674] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-29 07:24:48,973] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-29 07:24:50,921] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/2022-04.parquet.
+[2024-03-29 07:24:50,921] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-29 07:24:50,974] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240329T072446, end_date=20240329T072450
+[2024-03-29 07:24:51,135] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-29 07:24:51,251] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-29 08:08:45,882] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:08:45,936] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:08:45,936] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:08:45,936] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 08:08:45,937] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:08:46,080] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-29 08:08:46,171] {standard_task_runner.py:52} INFO - Started process 299 to run task
+[2024-03-29 08:08:46,218] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '1652', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmphj5v4i2b', '--error-file', '/tmp/tmpj_lnmmiu']
+[2024-03-29 08:08:46,281] {standard_task_runner.py:77} INFO - Job 1652: Subtask local_to_gcs_task
+[2024-03-29 08:08:47,109] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host b5e5a5778b83
+[2024-03-29 08:08:47,558] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-29 08:08:47,689] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-29 08:08:49,248] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/{TABLE_NAME_TEMPLATE}.parquet.
+[2024-03-29 08:08:49,248] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-29 08:08:49,318] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240329T080845, end_date=20240329T080849
+[2024-03-29 08:08:49,481] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-29 08:08:49,980] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-29 08:11:20,706] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:11:20,829] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:11:20,829] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:11:20,830] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 08:11:20,830] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:11:20,937] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-29 08:11:21,089] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '1704', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp402g5ehb', '--error-file', '/tmp/tmpw3rfjps5']
+[2024-03-29 08:11:21,164] {standard_task_runner.py:77} INFO - Job 1704: Subtask local_to_gcs_task
+[2024-03-29 08:11:21,022] {standard_task_runner.py:52} INFO - Started process 607 to run task
+[2024-03-29 08:11:21,519] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host b5e5a5778b83
+[2024-03-29 08:11:21,845] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-29 08:11:22,028] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-29 08:11:23,296] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-29 08:11:23,297] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-29 08:11:23,345] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240329T081120, end_date=20240329T081123
+[2024-03-29 08:11:23,468] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-29 08:11:23,628] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 03:53:03,088] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 03:53:03,134] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 03:53:03,135] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 03:53:03,137] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 03:53:03,137] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 03:53:03,199] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 03:53:03,208] {standard_task_runner.py:52} INFO - Started process 2011 to run task
+[2024-03-30 03:53:03,248] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '1972', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpbx0jimpw', '--error-file', '/tmp/tmpkphimo37']
+[2024-03-30 03:53:03,264] {standard_task_runner.py:77} INFO - Job 1972: Subtask local_to_gcs_task
+[2024-03-30 03:53:03,432] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 03:53:03,564] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 03:53:03,619] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 03:53:04,334] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-30 03:53:04,334] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-30 03:53:04,389] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T035303, end_date=20240330T035304
+[2024-03-30 03:53:04,448] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 03:53:04,517] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:18:30,350] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:18:30,380] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:18:30,381] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:18:30,381] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:18:30,381] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:18:30,446] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 04:18:30,472] {standard_task_runner.py:52} INFO - Started process 3627 to run task
+[2024-03-30 04:18:30,504] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2108', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpbobsl_qm', '--error-file', '/tmp/tmpp3qaz2uc']
+[2024-03-30 04:18:30,771] {standard_task_runner.py:77} INFO - Job 2108: Subtask local_to_gcs_task
+[2024-03-30 04:18:31,329] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:18:31,445] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 04:18:31,614] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 04:18:33,052] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-30 04:18:33,053] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-30 04:18:33,113] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T041830, end_date=20240330T041833
+[2024-03-30 04:18:33,338] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 04:18:33,461] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:25:03,393] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:25:03,467] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:25:03,467] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:25:03,467] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:25:03,467] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:25:03,497] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 04:25:03,520] {standard_task_runner.py:52} INFO - Started process 4260 to run task
+[2024-03-30 04:25:03,566] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2187', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpkox2f_r3', '--error-file', '/tmp/tmpwkw2iilv']
+[2024-03-30 04:25:03,589] {standard_task_runner.py:77} INFO - Job 2187: Subtask local_to_gcs_task
+[2024-03-30 04:25:03,892] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:25:04,049] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 04:25:04,111] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 04:25:04,862] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-30 04:25:04,863] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-30 04:25:04,913] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T042503, end_date=20240330T042504
+[2024-03-30 04:25:05,027] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 04:25:05,140] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:39:17,813] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:39:18,012] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:39:18,013] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:39:18,013] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:39:18,013] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:39:18,091] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 04:39:18,133] {standard_task_runner.py:52} INFO - Started process 5326 to run task
+[2024-03-30 04:39:18,152] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2302', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpe20fj41z', '--error-file', '/tmp/tmpzt6vgmfh']
+[2024-03-30 04:39:18,234] {standard_task_runner.py:77} INFO - Job 2302: Subtask local_to_gcs_task
+[2024-03-30 04:39:18,749] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:39:19,085] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 04:39:19,267] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 04:39:20,672] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-30 04:39:20,672] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-30 04:39:20,709] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T043917, end_date=20240330T043920
+[2024-03-30 04:39:20,971] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 04:39:21,218] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 05:00:05,245] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 05:00:05,321] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 05:00:05,321] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 05:00:05,322] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 05:00:05,322] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 05:00:05,373] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 05:00:05,401] {standard_task_runner.py:52} INFO - Started process 6800 to run task
+[2024-03-30 05:00:05,459] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2453', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpwp2qambo', '--error-file', '/tmp/tmp4zc0268r']
+[2024-03-30 05:00:05,496] {standard_task_runner.py:77} INFO - Job 2453: Subtask local_to_gcs_task
+[2024-03-30 05:00:05,917] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 05:00:06,174] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 05:00:06,290] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 05:00:07,296] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-30 05:00:07,296] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-30 05:00:07,323] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T050005, end_date=20240330T050007
+[2024-03-30 05:00:07,482] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 05:00:07,602] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 09:01:51,847] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 09:01:51,896] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 09:01:51,896] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 09:01:51,896] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 09:01:51,897] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 09:01:51,963] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 09:01:52,066] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2549', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpl1o0pcaf', '--error-file', '/tmp/tmpi0vid2tv']
+[2024-03-30 09:01:52,128] {standard_task_runner.py:77} INFO - Job 2549: Subtask local_to_gcs_task
+[2024-03-30 09:01:52,024] {standard_task_runner.py:52} INFO - Started process 18230 to run task
+[2024-03-30 09:01:52,502] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 09:01:52,752] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 09:01:52,874] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 09:01:54,745] {logging_mixin.py:109} INFO - File /opt/***/yellowtaxi_tripdata_2022-04.parquet uploaded to yellowtaxi_tripdata/yellow_taxi_2022_04.parquet.
+[2024-03-30 09:01:54,746] {python.py:175} INFO - Done. Returned value was: None
+[2024-03-30 09:01:54,834] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T090151, end_date=20240330T090154
+[2024-03-30 09:01:55,113] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 09:01:55,248] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 11:30:11,904] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 11:30:11,916] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 11:30:11,916] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 11:30:11,916] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 11:30:11,916] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 11:30:11,928] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 11:30:11,935] {standard_task_runner.py:52} INFO - Started process 26524 to run task
+[2024-03-30 11:30:11,941] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2783', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpoi7zkrop', '--error-file', '/tmp/tmpx3ycjh0g']
+[2024-03-30 11:30:11,946] {standard_task_runner.py:77} INFO - Job 2783: Subtask local_to_gcs_task
+[2024-03-30 11:30:12,008] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 11:30:12,044] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 11:30:12,073] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 11:30:14,247] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 68, in upload_to_gcs
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-03-30 11:30:14,265] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T113011, end_date=20240330T113014
+[2024-03-30 11:30:14,278] {standard_task_runner.py:92} ERROR - Failed to execute job 2783 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 68, in upload_to_gcs
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-03-30 11:30:14,333] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-30 11:30:14,375] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 11:51:21,148] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 11:51:21,169] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 11:51:21,169] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 11:51:21,170] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 11:51:21,170] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 11:51:21,191] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-03-30 11:51:21,207] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '2854', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpu0oabr4j', '--error-file', '/tmp/tmpvxrzttw5']
+[2024-03-30 11:51:21,214] {standard_task_runner.py:77} INFO - Job 2854: Subtask local_to_gcs_task
+[2024-03-30 11:51:21,202] {standard_task_runner.py:52} INFO - Started process 27784 to run task
+[2024-03-30 11:51:21,307] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 11:51:21,350] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 11:51:21,391] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-03-30 11:51:25,483] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 68, in upload_to_gcs
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-03-30 11:51:25,516] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240330T115121, end_date=20240330T115125
+[2024-03-30 11:51:25,541] {standard_task_runner.py:92} ERROR - Failed to execute job 2854 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 68, in upload_to_gcs
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-03-30 11:51:25,613] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-30 11:51:25,702] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-28 09:15:49,489] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-28 09:15:49,564] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-28 09:15:49,566] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-28 09:15:49,566] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-04-28 09:15:49,566] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-28 09:15:49,638] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-04-28 09:15:49,665] {standard_task_runner.py:52} INFO - Started process 1587 to run task
+[2024-04-28 09:15:49,729] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '3020', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpzgrqrzed', '--error-file', '/tmp/tmpj_yox3d0']
+[2024-04-28 09:15:49,915] {standard_task_runner.py:77} INFO - Job 3020: Subtask local_to_gcs_task
+[2024-04-28 09:15:53,059] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 6c6a4ca9ff8e
+[2024-04-28 09:15:53,339] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-04-28 09:15:53,680] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-04-28 09:16:38,061] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 68, in upload_to_gcs
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-04-28 09:16:38,084] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240428T091549, end_date=20240428T091638
+[2024-04-28 09:16:38,096] {standard_task_runner.py:92} ERROR - Failed to execute job 3020 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 68, in upload_to_gcs
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-04-28 09:16:38,202] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-04-28 09:16:38,245] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30 02:14:06,101] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 02:14:06,296] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 02:14:06,296] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 02:14:06,296] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-04-30 02:14:06,297] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 02:14:06,724] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-04-30 02:14:06,756] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '3054', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpf_rgasgz', '--error-file', '/tmp/tmpjjuoolti']
+[2024-04-30 02:14:06,777] {standard_task_runner.py:77} INFO - Job 3054: Subtask local_to_gcs_task
+[2024-04-30 02:14:06,739] {standard_task_runner.py:52} INFO - Started process 480 to run task
+[2024-04-30 02:14:07,264] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host a1ae6a0259c5
+[2024-04-30 02:14:07,421] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-04-30 02:14:07,602] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-04-30 02:14:58,271] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 75, in upload_to_gcs
+    __clean_file(raw_file_name, clean_file_name)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 61, in __clean_file
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-04-30 02:14:58,309] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240430T021406, end_date=20240430T021458
+[2024-04-30 02:14:58,330] {standard_task_runner.py:92} ERROR - Failed to execute job 3054 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 75, in upload_to_gcs
+    __clean_file(raw_file_name, clean_file_name)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 61, in __clean_file
+    df.to_parquet(clean_file_name, index=False)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/util/_decorators.py", line 199, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/core/frame.py", line 2372, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 276, in to_parquet
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/pandas/io/parquet.py", line 101, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1561, in pyarrow.lib.Table.from_pandas
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/home/airflow/.local/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 302, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'int' object", 'Conversion failed for column store_and_fwd_flag with type object')
+[2024-04-30 02:14:58,466] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-04-30 02:14:58,526] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30 02:58:27,015] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 02:58:27,072] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 02:58:27,072] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 02:58:27,072] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-04-30 02:58:27,073] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 02:58:27,387] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-04-30 02:58:27,430] {standard_task_runner.py:52} INFO - Started process 483 to run task
+[2024-04-30 02:58:27,468] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '3117', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp6q0ttnxw', '--error-file', '/tmp/tmpa04loxag']
+[2024-04-30 02:58:27,500] {standard_task_runner.py:77} INFO - Job 3117: Subtask local_to_gcs_task
+[2024-04-30 02:58:28,138] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 02dc49e0e362
+[2024-04-30 02:58:28,389] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-04-30 02:58:28,524] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-04-30 02:58:28,640] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 92, in upload_to_gcs
+    blob.upload_from_filename(clean_file_name)
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/storage/blob.py", line 2720, in upload_from_filename
+    with open(filename, "rb") as file_obj:
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/cleaned_data/yellowtaxi_tripdata_2022-04.parquet'
+[2024-04-30 02:58:28,687] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240430T025827, end_date=20240430T025828
+[2024-04-30 02:58:28,759] {standard_task_runner.py:92} ERROR - Failed to execute job 3117 for task local_to_gcs_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_ingestion_gcs_dag.py", line 92, in upload_to_gcs
+    blob.upload_from_filename(clean_file_name)
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/storage/blob.py", line 2720, in upload_from_filename
+    with open(filename, "rb") as file_obj:
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/cleaned_data/yellowtaxi_tripdata_2022-04.parquet'
+[2024-04-30 02:58:28,843] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-04-30 02:58:28,990] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30 03:01:45,951] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 03:01:46,058] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 03:01:46,058] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 03:01:46,058] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-04-30 03:01:46,058] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 03:01:46,150] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-04-30 03:01:46,191] {standard_task_runner.py:52} INFO - Started process 859 to run task
+[2024-04-30 03:01:46,256] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '3177', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp2fdo1m2m', '--error-file', '/tmp/tmp_1oqfvmn']
+[2024-04-30 03:01:46,316] {standard_task_runner.py:77} INFO - Job 3177: Subtask local_to_gcs_task
+[2024-04-30 03:01:46,816] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 02dc49e0e362
+[2024-04-30 03:01:46,988] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-04-30 03:01:47,075] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-04-30 03:01:47,961] {python.py:175} INFO - Done. Returned value was: None
+[2024-04-30 03:01:48,452] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240430T030145, end_date=20240430T030148
+[2024-04-30 03:01:48,594] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-04-30 03:01:48,746] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-04-30 04:30:58,986] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 04:30:59,304] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 04:30:59,316] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 04:30:59,330] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-04-30 04:30:59,331] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 04:30:59,525] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): local_to_gcs_task> on 2022-04-02 06:00:00+00:00
+[2024-04-30 04:30:59,608] {standard_task_runner.py:52} INFO - Started process 5386 to run task
+[2024-04-30 04:30:59,706] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'local_to_gcs_task', 'scheduled__2022-04-02T06:00:00+00:00', '--job-id', '3267', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpubdgxwso', '--error-file', '/tmp/tmpq88ikvqk']
+[2024-04-30 04:30:59,790] {standard_task_runner.py:77} INFO - Job 3267: Subtask local_to_gcs_task
+[2024-04-30 04:31:00,397] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.local_to_gcs_task scheduled__2022-04-02T06:00:00+00:00 [running]> on host 02dc49e0e362
+[2024-04-30 04:31:01,305] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-04-30 04:31:05,199] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=local_to_gcs_task
+AIRFLOW_CTX_EXECUTION_DATE=2022-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-04-02T06:00:00+00:00
+[2024-04-30 04:33:22,046] {python.py:175} INFO - Done. Returned value was: None
+[2024-04-30 04:33:22,121] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=local_to_gcs_task, execution_date=20220402T060000, start_date=20240430T043059, end_date=20240430T043322
+[2024-04-30 04:33:22,520] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-04-30 04:33:23,090] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,904 @@
+[2024-03-29 07:24:56,821] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:24:56,862] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:24:56,862] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:24:56,862] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 07:24:56,862] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:24:56,919] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-29 07:24:56,944] {standard_task_runner.py:52} INFO - Started process 647 to run task
+[2024-03-29 07:24:56,970] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1480', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpr_jipzf2', '--error-file', '/tmp/tmphs4iy_r8']
+[2024-03-29 07:24:56,992] {standard_task_runner.py:77} INFO - Job 1480: Subtask bigquery_external_table_task
+[2024-03-29 07:24:57,219] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host b8c510ab3cfc
+[2024-03-29 07:24:57,399] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-29 07:24:57,404] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-29 07:24:58,097] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.NotFound: 404 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/trips_data_all/tables?prettyPrint=false: Not found: Dataset ny-rides-peter-415106:trips_data_all
+[2024-03-29 07:24:58,201] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240329T072456, end_date=20240329T072458
+[2024-03-29 07:24:58,237] {standard_task_runner.py:92} ERROR - Failed to execute job 1480 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.NotFound: 404 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/trips_data_all/tables?prettyPrint=false: Not found: Dataset ny-rides-peter-415106:trips_data_all
+[2024-03-29 07:24:58,296] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-29 07:24:58,365] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-29 07:31:10,955] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:31:11,064] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:31:11,065] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:31:11,072] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 07:31:11,073] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:31:11,181] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-29 07:31:11,250] {standard_task_runner.py:52} INFO - Started process 1134 to run task
+[2024-03-29 07:31:11,301] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1535', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp51pxrzu3', '--error-file', '/tmp/tmp3hv30c2s']
+[2024-03-29 07:31:11,343] {standard_task_runner.py:77} INFO - Job 1535: Subtask bigquery_external_table_task
+[2024-03-29 07:31:11,647] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host b8c510ab3cfc
+[2024-03-29 07:31:11,968] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-29 07:31:11,993] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-29 07:31:12,073] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 404, in create_empty_table
+    table_id=table_id,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 172, in _resolve_table_reference
+    TableReference.from_api_repr(table_resource["tableReference"])
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/table.py", line 277, in from_api_repr
+    return cls(DatasetReference(project, dataset_id), table_id)
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/dataset.py", line 265, in __init__
+    raise ValueError("Pass a string for dataset_id")
+ValueError: Pass a string for dataset_id
+[2024-03-29 07:31:12,154] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240329T073110, end_date=20240329T073112
+[2024-03-29 07:31:12,253] {standard_task_runner.py:92} ERROR - Failed to execute job 1535 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 404, in create_empty_table
+    table_id=table_id,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 172, in _resolve_table_reference
+    TableReference.from_api_repr(table_resource["tableReference"])
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/table.py", line 277, in from_api_repr
+    return cls(DatasetReference(project, dataset_id), table_id)
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/dataset.py", line 265, in __init__
+    raise ValueError("Pass a string for dataset_id")
+ValueError: Pass a string for dataset_id
+[2024-03-29 07:31:12,336] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-29 07:31:12,460] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-29 07:37:48,842] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:37:48,874] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 07:37:48,874] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:37:48,875] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 07:37:48,875] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 07:37:48,915] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-29 07:37:48,948] {standard_task_runner.py:52} INFO - Started process 1627 to run task
+[2024-03-29 07:37:48,969] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1587', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpxxfpqah8', '--error-file', '/tmp/tmpemx7a193']
+[2024-03-29 07:37:49,010] {standard_task_runner.py:77} INFO - Job 1587: Subtask bigquery_external_table_task
+[2024-03-29 07:37:49,216] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host b8c510ab3cfc
+[2024-03-29 07:37:49,517] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-29 07:37:49,522] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-29 07:37:50,863] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: Error while reading table: external_table, error message: Failed to expand table external_table with file pattern gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet: matched no files. File: gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet
+[2024-03-29 07:37:50,921] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240329T073748, end_date=20240329T073750
+[2024-03-29 07:37:51,029] {standard_task_runner.py:92} ERROR - Failed to execute job 1587 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: Error while reading table: external_table, error message: Failed to expand table external_table with file pattern gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet: matched no files. File: gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet
+[2024-03-29 07:37:51,095] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-29 07:37:51,257] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-29 08:08:56,678] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:08:56,792] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:08:56,796] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:08:56,797] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 08:08:56,799] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:08:56,895] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-29 08:08:56,962] {standard_task_runner.py:52} INFO - Started process 337 to run task
+[2024-03-29 08:08:56,990] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1658', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpqwfnl8us', '--error-file', '/tmp/tmpip5hejc5']
+[2024-03-29 08:08:57,067] {standard_task_runner.py:77} INFO - Job 1658: Subtask bigquery_external_table_task
+[2024-03-29 08:08:57,375] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host b5e5a5778b83
+[2024-03-29 08:08:57,482] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-29 08:08:57,549] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-29 08:08:57,552] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-29 08:08:57,603] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-29 08:08:57,607] {bigquery.py:700} INFO - Creating external table: test_dataset.external_table
+[2024-03-29 08:08:58,006] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: When defining a table with an ExternalDataConfiguration, a schema must be present on either the Table or the ExternalDataConfiguration. If the schema is present on both, the schemas must be the same.
+[2024-03-29 08:08:58,066] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240329T080856, end_date=20240329T080858
+[2024-03-29 08:08:58,217] {standard_task_runner.py:92} ERROR - Failed to execute job 1658 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: When defining a table with an ExternalDataConfiguration, a schema must be present on either the Table or the ExternalDataConfiguration. If the schema is present on both, the schemas must be the same.
+[2024-03-29 08:08:58,399] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-29 08:08:58,788] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-29 08:11:19,659] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:11:19,783] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-29 08:11:19,792] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:11:19,793] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-29 08:11:19,798] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-29 08:11:19,879] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-29 08:11:19,914] {standard_task_runner.py:52} INFO - Started process 601 to run task
+[2024-03-29 08:11:19,955] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1700', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp3fpuu5lt', '--error-file', '/tmp/tmp49ph_thf']
+[2024-03-29 08:11:20,010] {standard_task_runner.py:77} INFO - Job 1700: Subtask bigquery_external_table_task
+[2024-03-29 08:11:20,363] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host b5e5a5778b83
+[2024-03-29 08:11:20,536] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-29 08:11:20,648] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-29 08:11:20,650] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-29 08:11:20,723] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-29 08:11:20,733] {bigquery.py:700} INFO - Creating external table: test_dataset.external_table
+[2024-03-29 08:11:21,299] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: When defining a table with an ExternalDataConfiguration, a schema must be present on either the Table or the ExternalDataConfiguration. If the schema is present on both, the schemas must be the same.
+[2024-03-29 08:11:21,380] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240329T081119, end_date=20240329T081121
+[2024-03-29 08:11:21,497] {standard_task_runner.py:92} ERROR - Failed to execute job 1700 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: When defining a table with an ExternalDataConfiguration, a schema must be present on either the Table or the ExternalDataConfiguration. If the schema is present on both, the schemas must be the same.
+[2024-03-29 08:11:21,547] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-29 08:11:21,725] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 03:30:30,850] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 03:30:30,900] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 03:30:30,900] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 03:30:30,901] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 03:30:30,901] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 03:30:30,959] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 03:30:30,996] {standard_task_runner.py:52} INFO - Started process 575 to run task
+[2024-03-30 03:30:31,045] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1847', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpy2_u5xgh', '--error-file', '/tmp/tmphq9qwdz5']
+[2024-03-30 03:30:31,087] {standard_task_runner.py:77} INFO - Job 1847: Subtask bigquery_external_table_task
+[2024-03-30 03:30:31,597] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 03:30:31,888] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 03:30:32,023] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 03:30:32,031] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 03:30:32,073] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-30 03:30:32,074] {bigquery.py:700} INFO - Creating external table: test_dataset.external_table
+[2024-03-30 03:30:32,578] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: When defining a table with an ExternalDataConfiguration, a schema must be present on either the Table or the ExternalDataConfiguration. If the schema is present on both, the schemas must be the same.
+[2024-03-30 03:30:32,627] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T033030, end_date=20240330T033032
+[2024-03-30 03:30:32,701] {standard_task_runner.py:92} ERROR - Failed to execute job 1847 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: When defining a table with an ExternalDataConfiguration, a schema must be present on either the Table or the ExternalDataConfiguration. If the schema is present on both, the schemas must be the same.
+[2024-03-30 03:30:32,782] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-30 03:30:32,892] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 03:42:23,550] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 03:42:23,623] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 03:42:23,626] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 03:42:23,626] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 03:42:23,627] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 03:42:23,715] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 03:42:23,742] {standard_task_runner.py:52} INFO - Started process 1400 to run task
+[2024-03-30 03:42:23,782] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '1928', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpq8wvy560', '--error-file', '/tmp/tmp5ocvtags']
+[2024-03-30 03:42:23,853] {standard_task_runner.py:77} INFO - Job 1928: Subtask bigquery_external_table_task
+[2024-03-30 03:42:24,137] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 03:42:24,426] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 03:42:24,636] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 03:42:24,656] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 03:42:24,770] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-30 03:42:24,776] {bigquery.py:700} INFO - Creating external table: test_dataset.external_table
+[2024-03-30 03:42:25,176] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: Invalid value for type: NUMBER is not a valid value
+[2024-03-30 03:42:25,248] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T034223, end_date=20240330T034225
+[2024-03-30 03:42:25,313] {standard_task_runner.py:92} ERROR - Failed to execute job 1928 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1226, in execute
+    encryption_configuration=self.encryption_configuration,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 702, in create_external_table
+    table_resource=table.to_api_repr(), project_id=project_id, location=location, exists_ok=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: Invalid value for type: NUMBER is not a valid value
+[2024-03-30 03:42:25,358] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-30 03:42:25,608] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:18:30,115] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:18:30,171] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:18:30,172] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:18:30,172] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:18:30,173] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:18:30,463] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 04:18:30,843] {standard_task_runner.py:52} INFO - Started process 3635 to run task
+[2024-03-30 04:18:30,898] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '2101', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpe0e_1hte', '--error-file', '/tmp/tmpp1_gs63e']
+[2024-03-30 04:18:31,082] {standard_task_runner.py:77} INFO - Job 2101: Subtask bigquery_external_table_task
+[2024-03-30 04:18:31,783] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:18:31,987] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 04:18:32,107] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 04:18:32,109] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 04:18:32,160] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-30 04:18:32,165] {bigquery.py:700} INFO - Creating external table: test_dataset.yellowtaxi_trips
+[2024-03-30 04:18:32,742] {bigquery.py:704} INFO - External table created successfully: test_dataset.yellowtaxi_trips
+[2024-03-30 04:18:32,766] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T041830, end_date=20240330T041832
+[2024-03-30 04:18:32,882] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 04:18:32,980] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:24:59,784] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:24:59,919] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:24:59,926] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:24:59,927] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:24:59,934] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:25:00,057] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 04:25:00,109] {standard_task_runner.py:52} INFO - Started process 4245 to run task
+[2024-03-30 04:25:00,172] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '2177', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmppnh587zi', '--error-file', '/tmp/tmpsakbcoo2']
+[2024-03-30 04:25:00,275] {standard_task_runner.py:77} INFO - Job 2177: Subtask bigquery_external_table_task
+[2024-03-30 04:25:00,574] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:25:00,808] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 04:25:00,980] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 04:25:00,982] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 04:25:01,071] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-30 04:25:01,072] {bigquery.py:700} INFO - Creating external table: test_dataset.yellowtaxi_trips
+[2024-03-30 04:25:01,513] {bigquery.py:704} INFO - External table created successfully: test_dataset.yellowtaxi_trips
+[2024-03-30 04:25:01,542] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T042459, end_date=20240330T042501
+[2024-03-30 04:25:01,691] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 04:25:01,871] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:39:11,492] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:39:11,663] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:39:11,663] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:39:11,663] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:39:11,663] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:39:11,863] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 04:39:11,951] {standard_task_runner.py:52} INFO - Started process 5300 to run task
+[2024-03-30 04:39:12,018] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '2291', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpnme0l4br', '--error-file', '/tmp/tmp1e7cd0t1']
+[2024-03-30 04:39:12,139] {standard_task_runner.py:77} INFO - Job 2291: Subtask bigquery_external_table_task
+[2024-03-30 04:39:12,465] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:39:12,637] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 04:39:12,650] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 04:39:13,257] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: Error while reading table: yellowtaxi_trips, error message: Failed to expand table yellowtaxi_trips with file pattern gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet: matched no files. File: gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet
+[2024-03-30 04:39:13,296] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T043911, end_date=20240330T043913
+[2024-03-30 04:39:13,333] {standard_task_runner.py:92} ERROR - Failed to execute job 2291 for task bigquery_external_table_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 1196, in execute
+    table_resource=self.table_resource,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/common/hooks/base_google.py", line 430, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 408, in create_empty_table
+    table=table, exists_ok=exists_ok, retry=retry
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 755, in create_table
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 291, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/api_core/retry.py", line 189, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.6/site-packages/google/cloud/_http.py", line 484, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/ny-rides-peter-415106/datasets/test_dataset/tables?prettyPrint=false: Error while reading table: yellowtaxi_trips, error message: Failed to expand table yellowtaxi_trips with file pattern gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet: matched no files. File: gs://test_bucket_415106/yellowtaxi_tripdata/{ execution_date.strftime('%Y-%m') }.parquet
+[2024-03-30 04:39:13,388] {local_task_job.py:154} INFO - Task exited with return code 1
+[2024-03-30 04:39:13,798] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 04:59:47,042] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:59:47,219] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 04:59:47,219] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:59:47,220] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 04:59:47,220] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 04:59:47,451] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 04:59:47,526] {standard_task_runner.py:52} INFO - Started process 6719 to run task
+[2024-03-30 04:59:47,599] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '2432', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpkz5t9ezn', '--error-file', '/tmp/tmp95n5gsre']
+[2024-03-30 04:59:47,678] {standard_task_runner.py:77} INFO - Job 2432: Subtask bigquery_external_table_task
+[2024-03-30 04:59:48,381] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 04:59:48,777] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/context.py:152: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2024-03-30 04:59:48,882] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 04:59:48,884] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 04:59:48,961] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-30 04:59:48,962] {bigquery.py:700} INFO - Creating external table: test_dataset.yellowtaxi_trips
+[2024-03-30 04:59:49,404] {bigquery.py:704} INFO - External table created successfully: test_dataset.yellowtaxi_trips
+[2024-03-30 04:59:49,652] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T045947, end_date=20240330T045949
+[2024-03-30 04:59:50,043] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 04:59:50,631] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-03-30 09:01:50,742] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 09:01:50,859] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-03-30 09:01:50,859] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 09:01:50,859] {taskinstance.py:1239} INFO - Starting attempt 1 of 4
+[2024-03-30 09:01:50,859] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-03-30 09:01:50,974] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-03-30 09:01:51,016] {standard_task_runner.py:52} INFO - Started process 18225 to run task
+[2024-03-30 09:01:51,097] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '2545', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmp7c9kh4wa', '--error-file', '/tmp/tmprzr3io6d']
+[2024-03-30 09:01:51,153] {standard_task_runner.py:77} INFO - Job 2545: Subtask bigquery_external_table_task
+[2024-03-30 09:01:51,839] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 98c5b3fde4c4
+[2024-03-30 09:01:52,290] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-03-30 09:01:52,324] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-03-30 09:01:52,435] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-03-30 09:01:52,436] {bigquery.py:700} INFO - Creating external table: test_dataset.yellowtaxi_trips
+[2024-03-30 09:01:53,200] {bigquery.py:704} INFO - External table created successfully: test_dataset.yellowtaxi_trips
+[2024-03-30 09:01:53,329] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240330T090150, end_date=20240330T090153
+[2024-03-30 09:01:53,602] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-03-30 09:01:53,968] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30 03:01:26,128] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 03:01:26,197] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 03:01:26,199] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 03:01:26,200] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-04-30 03:01:26,201] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 03:01:26,290] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-04-30 03:01:26,346] {standard_task_runner.py:52} INFO - Started process 771 to run task
+[2024-04-30 03:01:26,349] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '3157', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpfc76_hqa', '--error-file', '/tmp/tmpxj8m_xis']
+[2024-04-30 03:01:26,430] {standard_task_runner.py:77} INFO - Job 3157: Subtask bigquery_external_table_task
+[2024-04-30 03:01:26,683] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 02dc49e0e362
+[2024-04-30 03:01:27,052] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-04-30 03:01:27,066] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-04-30 03:01:27,125] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibility than this method.
+  DeprecationWarning,
+
+[2024-04-30 03:01:27,126] {bigquery.py:700} INFO - Creating external table: test_dataset.yellowtaxi_trips
+[2024-04-30 03:01:27,559] {bigquery.py:704} INFO - External table created successfully: test_dataset.yellowtaxi_trips
+[2024-04-30 03:01:27,580] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=ingest_data_bigquery, task_id=bigquery_external_table_task, execution_date=20210402T060000, start_date=20240430T030126, end_date=20240430T030127
+[2024-04-30 03:01:27,634] {local_task_job.py:154} INFO - Task exited with return code 0
+[2024-04-30 03:01:27,709] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30 04:35:40,088] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 04:35:40,116] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [queued]>
+[2024-04-30 04:35:40,117] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 04:35:40,117] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2024-04-30 04:35:40,117] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2024-04-30 04:35:40,138] {taskinstance.py:1259} INFO - Executing <Task(BigQueryCreateExternalTableOperator): bigquery_external_table_task> on 2021-04-02 06:00:00+00:00
+[2024-04-30 04:35:40,148] {standard_task_runner.py:52} INFO - Started process 5929 to run task
+[2024-04-30 04:35:40,156] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'ingest_data_bigquery', 'bigquery_external_table_task', 'scheduled__2021-04-02T06:00:00+00:00', '--job-id', '3326', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag.py', '--cfg-path', '/tmp/tmpsx5nwnvf', '--error-file', '/tmp/tmp43j94bc2']
+[2024-04-30 04:35:40,164] {standard_task_runner.py:77} INFO - Job 3326: Subtask bigquery_external_table_task
+[2024-04-30 04:35:40,256] {logging_mixin.py:109} INFO - Running <TaskInstance: ingest_data_bigquery.bigquery_external_table_task scheduled__2021-04-02T06:00:00+00:00 [running]> on host 02dc49e0e362
+[2024-04-30 04:35:40,359] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=ingest_data_bigquery
+AIRFLOW_CTX_TASK_ID=bigquery_external_table_task
+AIRFLOW_CTX_EXECUTION_DATE=2021-04-02T06:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-04-02T06:00:00+00:00
+[2024-04-30 04:35:40,363] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-04-30 04:35:40,380] {warnings.py:99} WARNING - /home/***/.local/lib/python3.6/site-packages/***/providers/google/cloud/hooks/bigquery.py:637: DeprecationWarning: This method is deprecated. Please use `BigQueryHook.create_empty_table` method with passing the `table_resource` object. This gives more flexibilit
