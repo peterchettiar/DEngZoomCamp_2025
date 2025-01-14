@@ -19,4 +19,15 @@ SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_ex
 
 ## Question 2: What is the estimated amount of data that will be read when this query is executed on the External Table and the Table?
 
+> Code:
+```sql
+-- import an external table into BQ as a regular internal table
+CREATE OR REPLACE TABLE ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022 AS
+SELECT * FROM ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_external;
 
+-- Count of green taxi trips in 2022 internal table
+SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`;
+```
+
+> Answer:
+`0 MB for the External Table and 0MB for the Materialized Table`
