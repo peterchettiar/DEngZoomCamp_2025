@@ -4,12 +4,15 @@
 
 > Code:
 ```sql
-SELECT
-  COUNT(*)
-FROM
-  `ny-rides-peter-415106.nyc_tlc_data.green_taxi_2022`
-LIMIT
-  1000
+-- Create a table with only the 2022 data for simplicity
+CREATE OR REPLACE EXTERNAL TABLE `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`
+OPTIONS (
+  format = 'PARQUET',
+  uris = ['gs://nyc_tlc_415106/greentaxi_tripdata_2022/*.parquet']
+);
+
+-- Count of green taxi trips in 2022
+SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`;
 ```
 > Answer:
 `840,402`
