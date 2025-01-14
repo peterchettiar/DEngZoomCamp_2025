@@ -5,14 +5,14 @@
 > Code:
 ```sql
 -- Create a table with only the 2022 data for simplicity
-CREATE OR REPLACE EXTERNAL TABLE `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`
+CREATE OR REPLACE EXTERNAL TABLE `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_external`
 OPTIONS (
   format = 'PARQUET',
   uris = ['gs://nyc_tlc_415106/greentaxi_tripdata_2022/*.parquet']
 );
 
 -- Count of green taxi trips in 2022
-SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`;
+SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_external`;
 ```
 > Answer:
 `840,402`
