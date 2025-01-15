@@ -31,3 +31,20 @@ SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`;
 
 > Answer:
 `0 MB for the External Table and 0MB for the Materialized Table`
+
+
+## Question 3: How many records have a fare_amount of 0?
+
+> Code:
+```sql
+  -- Count of green taxi trips in 2022 with fare amount = 0
+SELECT
+  COUNT(*)
+FROM
+  `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_external`
+WHERE
+  fare_amount = 0;
+```
+
+> Answer:
+`1,622`
