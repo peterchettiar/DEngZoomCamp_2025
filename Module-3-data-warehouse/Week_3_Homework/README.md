@@ -48,3 +48,23 @@ WHERE
 
 > Answer:
 `1,622`
+
+## Question 4: What is the best strategy to make an optimized table in Big Query if your query will always order the results by PUlocationID and filter based on lpep_pickup_datetime? (Create a new table with this strategy)
+
+> Code:
+```sql
+  -- Create a partioned and clustered table
+CREATE OR REPLACE TABLE
+  ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_partioned_clustered
+PARTITION BY
+  DATE(lpep_pickup_datetime)
+CLUSTER BY
+  PUlocationID AS
+SELECT
+  *
+FROM
+  `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`
+```
+
+> Answer:
+`Partition by lpep_pickup_datetime Cluster on PUlocationID`
