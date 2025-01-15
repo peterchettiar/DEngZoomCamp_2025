@@ -98,4 +98,43 @@ WHERE
 
 ### Question 6: Where is the data stored in the External Table you created?
 
+Key Characteristics of External Tables
+Data is NOT Imported into BigQuery:
+
+Unlike standard or materialized tables, external tables don’t copy or store data in BigQuery’s internal columnar storage.
+Query Reads Data Directly from Source:
+
+Every query on the external table fetches the required data directly from the external source.
+Performance Considerations:
+
+Query performance depends on the external storage system's speed and location (e.g., querying data from GCS in the same region as your BigQuery instance is faster and more cost-effective).
+
 > Answer: `GCP Bucket`
+
+### Question 7: It is best practice in Big Query to always cluster your data
+
+
+The statement "It is best practice in BigQuery to always cluster your data" is not entirely accurate. While clustering can significantly improve query performance and reduce costs in specific scenarios, it is not universally beneficial. The decision to cluster depends on your data and query patterns.
+
+When is Clustering Beneficial?
+Frequent Filtering or Sorting on Specific Columns:
+
+If your queries often filter or sort by specific columns, clustering can reduce the amount of data scanned and improve query performance.
+Example: Queries like WHERE user_id = '123' or ORDER BY event_timestamp benefit from clustering on user_id or event_timestamp.
+High Cardinality Columns:
+
+Clustering works well when the clustering columns have high cardinality (many unique values), as this increases the likelihood of clustering effectiveness.
+Example: A column like user_id or transaction_id is ideal for clustering.
+Large Tables:
+
+For large tables with billions of rows, clustering can significantly reduce the number of blocks scanned, resulting in faster and cheaper queries.
+
+If it is the opposite of the scenarios above, then clustering may not be useful.
+
+> Answer: `False`
+
+### Question 8: Write a SELECT count(*) query FROM the materialized table you created. How many bytes does it estimate will be read? Why?
+
+> Answer: `0 Bytes`
+
+When you query a materialized table, BigQuery doesn't re-scan the underlying source data but reads the pre-computed results directly which significantly reduces the data read and query processing time. For simple aggregate queries like `COUNT(*)`, BigQuery uses pre-computed statistics stored alongside the materialized table.
