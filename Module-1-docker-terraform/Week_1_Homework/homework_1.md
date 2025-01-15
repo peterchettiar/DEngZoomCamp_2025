@@ -84,7 +84,7 @@ WHERE
 
 Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
 
-> Answer : 2019=09-26
+> Answer : 2019-09-26
 
 ```sql
 SELECT
