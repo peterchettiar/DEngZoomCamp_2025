@@ -95,3 +95,7 @@ WHERE
 
 > Answer:
 `12.82 MB for non-partitioned table and 1.12 MB for the partitioned table`
+
+### Question 6: Where is the data stored in the External Table you created?
+
+> Answer: `GCP Bucket`
