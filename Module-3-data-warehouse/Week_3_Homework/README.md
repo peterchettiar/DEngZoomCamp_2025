@@ -68,3 +68,28 @@ FROM
 
 > Answer:
 `Partition by lpep_pickup_datetime Cluster on PUlocationID`
+
+## Question 5: Write a query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
+
+> Code:
+```sql
+  -- Query distinct PULocationID between specific dates from internal table
+SELECT
+  DISTINCT PULocationID
+FROM
+  `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`
+WHERE
+  DATE(lpep_pickup_datetime) BETWEEN '2022-06-01'
+  AND '2022-06-30';
+  -- Query distinct PULocationID between specific dates from partioned table
+SELECT
+  DISTINCT PULocationID
+FROM
+  `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_partioned_clustered`
+WHERE
+  DATE(lpep_pickup_datetime) BETWEEN '2022-06-01'
+  AND '2022-06-30';
+```
+
+> Answer:
+`12.82 MB for non-partitioned table and 1.12 MB for the partitioned table`
