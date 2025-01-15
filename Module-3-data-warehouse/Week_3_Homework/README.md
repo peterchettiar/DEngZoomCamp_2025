@@ -1,6 +1,6 @@
 # Module 3 Homework Submission
 
-## Question 1: What is count of records for the 2022 Green Taxi Data?
+### Question 1: What is count of records for the 2022 Green Taxi Data?
 
 > Code:
 ```sql
@@ -17,7 +17,7 @@ SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022_ex
 > Answer:
 `840,402`
 
-## Question 2: What is the estimated amount of data that will be read when this query is executed on the External Table and the Table?
+### Question 2: What is the estimated amount of data that will be read when this query is executed on the External Table and the Table?
 
 > Code:
 ```sql
@@ -33,7 +33,7 @@ SELECT count(*) FROM `ny-rides-peter-415106.nyc_tlc_data.greentaxi_trips_2022`;
 `0 MB for the External Table and 0MB for the Materialized Table`
 
 
-## Question 3: How many records have a fare_amount of 0?
+### Question 3: How many records have a fare_amount of 0?
 
 > Code:
 ```sql
@@ -49,7 +49,7 @@ WHERE
 > Answer:
 `1,622`
 
-## Question 4: What is the best strategy to make an optimized table in Big Query if your query will always order the results by PUlocationID and filter based on lpep_pickup_datetime? (Create a new table with this strategy)
+### Question 4: What is the best strategy to make an optimized table in Big Query if your query will always order the results by PUlocationID and filter based on lpep_pickup_datetime? (Create a new table with this strategy)
 
 > Code:
 ```sql
@@ -69,7 +69,9 @@ FROM
 > Answer:
 `Partition by lpep_pickup_datetime Cluster on PUlocationID`
 
-## Question 5: Write a query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
+### Question 5: Write a query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
+
+Use the materialized table you created earlier in your from clause and note the estimated bytes. Now change the table in the from clause to the partitioned table you created for question 4 and note the estimated bytes processed. What are these values?
 
 > Code:
 ```sql
