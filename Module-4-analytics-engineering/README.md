@@ -72,7 +72,9 @@ This lesson focuses on the last 2 parts: Data Modeling and Data Presentation.
 
 ### ETL vs ELT
 
-In lesson 2 we covered the difference between ![ETL and ELT](https://github.com/user-attachments/assets/ba6ad322-b207-40a4-a2cd-18cb6fbe1ab9).
+In lesson 2 we covered the difference between [ELT and ETL](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/dbt_cloud/Module-2-workflow-orchestration#etl-vs-elt).
+
+![image](https://github.com/user-attachments/assets/ba6ad322-b207-40a4-a2cd-18cb6fbe1ab9).
 
 ![etl vs elt](images/04_01.png)
 
