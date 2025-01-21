@@ -1,3 +1,5 @@
+# Week 4 Notes
+
 ### Table of contents
 
 - [Introduction to Analytics Engineering](#introduction-to-analytics-engineering)
