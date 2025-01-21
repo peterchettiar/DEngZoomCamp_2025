@@ -76,7 +76,18 @@ In lesson 2 we covered the difference between [ELT and ETL](https://github.com/p
 
 ![image](https://github.com/user-attachments/assets/ba6ad322-b207-40a4-a2cd-18cb6fbe1ab9).
 
-![etl vs elt](images/04_01.png)
+Key difference are summarised in a table as follows:
+
+| **Aspect**             | **ETL (Extract, Transform, Load)**               | **ELT (Extract, Load, Transform)**              |
+|-------------------------|--------------------------------------------------|------------------------------------------------|
+| **Order of Operations** | Extract → Transform → Load                      | Extract → Load → Transform                     |
+| **Transformation**      | Performed in an intermediary tool               | Performed within the target system             |
+| **Data Handling**       | Suited for structured data                      | Handles structured, semi-structured, and unstructured data |
+| **Performance**         | Slower for large datasets due to pre-loading transformations | Faster, leveraging modern cloud platforms      |
+| **Tools**               | Legacy tools like Informatica, DataStage, SSIS  | Cloud-native tools like Snowflake, Databricks, dbt |
+| **Use Cases**           | Traditional data warehouses, strict pre-load transformations | Modern cloud data warehouses, big data processing |
+| **Advantages**          | Consistent transformations, good for smaller datasets | Scalability, speed, and simplified workflows   |
+| **Disadvantages**       | Slower and more resource-intensive for large data volumes | Requires powerful target systems for transformations |
 
 In this lesson we will cover the _transform_ step in the ELT process.
 
