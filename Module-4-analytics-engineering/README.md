@@ -36,22 +36,20 @@
 
 # Introduction to Analytics Engineering
 
-_[Video source](https://www.youtube.com/watch?v=uF76d5EmdtU&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=34)_
-
 ## What is Analytics Engineering?
 
 As the _data domain_ has developed over time, new tools have been introduced that have changed the dynamics of working with data:
 
 1. Massively parallel processing (MPP) databases
-    * Lower the cost of storage 
-    * BigQuery, Snowflake, Redshift...
+    * Lower the cost of storage in computing
+    * e.g. BigQuery, Snowflake, Redshift
 1. Data-pipelines-as-a-service
     * Simplify the ETL process
-    * Fivetran, Stitch...
+    * e.g. Fivetran, Stitch
 1. SQL-first / Version control systems
-    * Looker...
+    * e.g. Looker
 1. Self service analytics
-    * Mode...
+    * e.g. Mode
 1. Data governance
 
 The introduction of all of these tools changed the way the data teams work as well as the way that the stakeholders consume the data, creating a gap in the roles of the data team. Traditionally:
@@ -60,10 +58,10 @@ The introduction of all of these tools changed the way the data teams work as we
 * The ***data analyst*** uses data to answer questions and solve problems (they are in charge of _today_).
 * The ***data scientist*** predicts the future based on past patterns and covers the what-ifs rather than the day-to-day (they are in charge of _tomorrow_).
 
-However, with the introduction of these tools, both data scientists and analysts find themselves writing more code even though they're not software engineers and writing code isn't their top priority.  Data engineers are good software engineers but they don't have the training in how the data is going to be used  by the business users.
+However, with the introduction of these tools, both data scientists and analysts find themselves writing more code even though they're not software engineers and writing code isn't their top priority.  Data engineers are good software engineers but they don't have the training in how the data is going to be used by the business users.
 
 The ***analytics engineer*** is the role that tries to fill the gap: it introduces the good software engineering practices to the efforts of data analysts and data scientists. The analytics engineer may be exposed to the following tools:
-1. Data Loading (Stitch...)
+1. Data Loading (Fivetran, Stitch...)
 1. Data Storing (Data Warehouses)
 1. Data Modeling (dbt, Dataform...)
 1. Data Presentation (BI tools like Looker, Mode, Tableau...)
@@ -74,7 +72,7 @@ This lesson focuses on the last 2 parts: Data Modeling and Data Presentation.
 
 ### ETL vs ELT
 
-In lesson 2 we covered the difference between [ETL and ELT](2_data_ingestion.md#etl-vs-elt).
+In lesson 2 we covered the difference between ![ETL and ELT](https://github.com/user-attachments/assets/ba6ad322-b207-40a4-a2cd-18cb6fbe1ab9).
 
 ![etl vs elt](images/04_01.png)
 
