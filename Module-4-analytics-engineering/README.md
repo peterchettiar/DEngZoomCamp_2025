@@ -128,36 +128,38 @@ A good way to understand the _architecture_ of Dimensional Modeling is by drawin
     * Exposure to business stakeholder.
     * Similar to the dining room in a restaurant.
 
-_[Back to the top](#)_
-
 # Introduction to dbt
-
-_[Video source](https://www.youtube.com/watch?v=4eCouvVOJUw&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=35)_
 
 ## What is dbt?
 
 ***dbt*** stands for ***data build tool***. It's a _transformation_ tool: it allows us to transform process _raw_ data in our Data Warehouse to _transformed_ data which can be later used by Business Intelligence tools and any other data consumers.
+
+A more formal definition would be that dbt is a transformation workflow that allows anyone that knows SQL to deploy analytics code following software engineering best practices like modularity, portability, CI/CD, and documentation.
+
+![image](https://github.com/user-attachments/assets/f50d3375-0e01-4ec0-b80c-2ee5e916fad1)
 
 dbt also allows us to introduce good software engineering practices by defining a _deployment workflow_:
 1. Develop models
 1. Test and document models
 1. Deploy models with _version control_ and _CI/CD_.
 
+![image](https://github.com/user-attachments/assets/b965eabb-e972-4f98-a683-c39657e7acbb)
+
 ## How does dbt work?
 
 dbt works by defining a ***modeling layer*** that sits on top of our Data Warehouse. The modeling layer will turn _tables_ into ***models*** which we will then transform into _derived models_, which can be then stored into the Data Warehouse for persistence.
 
-A ***model*** is a .sql file with a `SELECT` statement; no DDL or DML is used. dbt will compile the file and run it in our Data Warehouse.
+A ***model*** is a .sql file with a `SELECT` statement; no DDL (Data Definition Language - e.g. `CREATE`, `ALTER`, `DROP`, etc.) or DML (Data Manipulation Language - e.g. `SELECT`, `INSERT`, `UPDATE`, etc.) is used. dbt removes all the complexities and generate the DDL and DML for us. And will `dbt compile` the file as well as `dbt run` it in our Data Warehouse. In simpler terms, in the case of the example model from the lecture, dbt will take two raw table from the staging area and transform them to create either a table or a view to the next layer in the data warehouse.
 
 ## How to use dbt?
 
-dbt has 2 main components: _dbt Core_ and _dbt Cloud_:
+dbt has 2 main ways of using dbt: _dbt Core_ and _dbt Cloud_:
 * ***dbt Core***: open-source project that allows the data transformation.
     * Builds and runs a dbt project (.sql and .yaml files).
     * Includes SQL compilation logic, macros and database adapters.
     * Includes a CLI interface to run dbt commands locally.
     * Open-source and free to use.
-* ***dbt Cloud***: SaaS application to develop and manage dbt projects.
+* ***dbt Cloud***: SaaS (Software as a service) application to develop and manage dbt projects.
     * Web-based IDE to develop, run and test a dbt project.
     * Jobs orchestration.
     * Logging and alerting.
@@ -166,4 +168,5 @@ dbt has 2 main components: _dbt Core_ and _dbt Cloud_:
 
 For integration with BigQuery we will use the dbt Cloud IDE, so a local installation of dbt core isn't required. For developing locally rather than using the Cloud IDE, dbt Core is required. Using dbt with a local Postgres database can be done with dbt Core, which can be installed locally and connected to Postgres and run models through the CLI.
 
-![dbt](images/04_02.png)
+![image](https://github.com/user-attachments/assets/97115ecb-b736-45c9-82a7-4eca83303915)
+
