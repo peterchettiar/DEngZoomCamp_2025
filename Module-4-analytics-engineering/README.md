@@ -175,6 +175,7 @@ For integration with BigQuery we will use the dbt Cloud IDE, so a local installa
 Before we begin, go to BigQuery and create 2 new empty datasets for your project: a _development_ dataset and a _production_ dataset. Name them any way you'd like.
 
 > Note: Since I'm using BigQuery, I need to use dbt cloud. Hence I will be following the Alternative A video with some minor changes (i.e. steps for setup that actually worked for me since the video did not really cover most of the setup process)
+> Check out [vidoe source](https://www.youtube.com/watch?v=J0XCDyKiU64&list=PLaNLNpjZpzwgneiI-Gl8df8GCsPYp_6Bs&index=4)
 
 ## dbt Cloud
 
@@ -189,10 +190,12 @@ Before we begin, go to BigQuery and create 2 new empty datasets for your project
 
 ￼![image](https://github.com/user-attachments/assets/7e374fb0-e1d4-440d-81b7-f869cd247903)
 
-Fill out the page as follows :
+- Fill out the page as follows :
 
-a. Service account name - dbt-service-account
+A. Service account name - dbt-service-account
+
 B. Service account ID - **This would be automatically generated based on the service account name - NO NEED TO FILL**
+
 C. Service account description (OPTIONAL) -  Service account for dbt cloud
 
 - After you click on create and continue, you need to add the roles for the service account
@@ -202,8 +205,11 @@ C. Service account description (OPTIONAL) -  Service account for dbt cloud
 Add the following roles:
 
 A. BigQuery Admin
+
 B. BigQuery Data Editor
+
 C. BigQuery Job User
+
 D. BigQuery User
 
 - Once you click on `Done`, you can now proceeds to generate the private key for the service account
