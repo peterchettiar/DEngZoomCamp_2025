@@ -178,7 +178,7 @@ Before we begin, go to BigQuery and create 2 new empty datasets for your project
 
 ## dbt Cloud
 
-1. Create a BigQuery Service account
+### 1. Create a BigQuery Service account
 
 - In order to connect BigQuery to our DBT project we need to generate a service account JSON file from  [BigQuery credential wizard](https://console.cloud.google.com/apis/credentials/wizard).
 - On the landing page you need to fill out the details as follows before clicking on the `NEXT` button:
@@ -216,7 +216,7 @@ D. BigQuery User
 
 ![image](https://github.com/user-attachments/assets/c805591d-55a5-47cc-a522-747b76d82025)
 
-2. Create a dbt cloud project
+### 2. Create a dbt cloud project
 
 - Now that we have created a service account for [dbt cloud](https://www.getdbt.com/pricing/), we can proceed to the dbt website to create a project (you can create a free account that entails one free project which suitable enough for our learning)
 - Your landing page once you’ve logged in should look something like this:
@@ -242,7 +242,7 @@ D. BigQuery User
 - Set up a repository, for this section click on `Git Clone` and add the git URL to our repo (e.g. git@github.com:peterchettiar/DEngZoomCamp_2025.git)
 - Once you’ve added, deploy keys will be generated. Dbt will use the deploy keys to clone the repository, hence in the next section we will discuss more on how to add the deploy keys in your Github account.
 
-3. Connect Github project repo to dbt cloud project
+### 3. Connect Github project repo to dbt cloud project
 
 - Go to your project repo and click on settings.
 
@@ -259,7 +259,7 @@ D. BigQuery User
 
 - Click on edit and add the project description as well as the project subdirectory. This will be useful when initialising the project on the cloud IDE first.
 
-4. Initialising dbt project
+### 4. Initialising dbt project
 
 - This process is essential as it creates the foundational file structure for the project.
 - To complete this step now that we have done the basic project setup (i.e. connection BigQuery and Github) we can now proceed to our cloud IDE.
@@ -273,7 +273,7 @@ D. BigQuery User
 
 - Now click on `Initialize dbt project` and this should create the folders that you need 
 
-5. Configure the dbt Cloud CLI
+### 5. Configure the dbt Cloud CLI
 
 - Now that we have initialised the dbt project, we can proceed to configure our Cloud CLI so that we can work on the dbt project locally.
 - Again on our left navigation panel, click on Develop >> Configure Cloud CLI
