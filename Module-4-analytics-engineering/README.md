@@ -323,3 +323,61 @@ _[Video source](https://www.youtube.com/watch?v=1HmL63e-vRs&list=PL3MmuxUbc_hJed
 Installing dbt Core locally can be done following the steps in [the official docs](https://docs.getdbt.com/dbt-cli/install/overview). More instructions are also available [in this link](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/week_4_analytics_engineering/docker_setup).
 
 Starting a dbt project with dbt Core involves creating a `profiles.yml` file manually before running `dbt init`. Check the Video source for more info.
+
+# Developing with dbt
+
+RECAP: dbt sits on top of our platform (BigQuery or Postgres depending on how you are proceding with the course).
+
+![image](https://github.com/user-attachments/assets/9022b57d-fa8c-4d11-a1e3-73214e092ae7)
+
+- `Raw Data` : Truth data coming from our source (green and orange data)
+- `Develop` as well as `test & documentation`, both layers will be done on a sandbox
+- `Deploy` will be pushing our transformed data into production from a development environment.
+
+## Anatomy of a dbt model
+
+We will be taking a modular data modelling approach, this simply means breaking down complex transformations into smaller, reusable, and logically organized models. This method helps to improve maintainability, scalability, and collaboration across teams.
+
+This method takes a layered approach where in each layer you have `.sql` scripts called `models` in dbt's lingo to perform the necessary transformations. For example, in a typical project you can have maybe three layers:
+- `staging`: Clean and standardise raw data
+- `intermediate`: Implement business logic and combina data sources
+- `mart`: Create final datasets ready for reporting
+
+> Note: its good practice to start off your model name with say `stg` for a staging .sql script
+
+bt models are mostly written in SQL (remember that a dbt model is essentially a `SELECT` query) but they also make use of the [Jinja templating language](https://jinja.palletsprojects.com/en/3.0.x/) for templates. We already covered the basics of Jinja templates in [lesson 2](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/main/Module-2-workflow-orchestration#airflow-and-dag-tips-and-tricks).
+
+Here's an example dbt model:
+
+```sql
+{{
+    config(materialized='table')
+}}
+
+SELECT *
+FROM staging.source_table
+WHERE record_state = 'ACTIVE'
+```
+
+* In the Jinja statement defined within the `{{ }}` block we call the [`config()` function](https://docs.getdbt.com/reference/dbt-jinja-functions/config).
+    * More info about Jinja macros for dbt [in this link](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros).
+* We commonly use the `config()` function at the beginning of a model to define a ***materialization strategy***: a strategy for persisting dbt models in a warehouse.
+    * The `table` strategy means that the model will be rebuilt as a table on each run.
+    * We could use a `view` strategy instead, which would rebuild the model on each run as a SQL view.
+    * The `incremental` strategy is essentially a `table` strategy but it allows us to add or update records incrementally rather than rebuilding the complete table on each run.
+    * The `ephemeral` strategy creates a _[Common Table Expression](https://www.essentialsql.com/introduction-common-table-expressions-ctes/)_ (CTE).
+    * You can learn more about materialization strategies with dbt [in this link](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/materializations). Besides the 4 common `table`, `view`, `incremental` and `ephemeral` strategies, custom strategies can be defined for advanced cases.
+
+dbt will compile this code into the following SQL query:
+
+```sql
+CREATE TABLE my_schema.my_model AS (
+    SELECT *
+    FROM staging.source_table
+    WHERE record_state = 'ACTIVE'
+)
+```
+
+After the code is compiled, dbt will run the compiled code in the Data Warehouse.
+
+Additional model properties are stored in YAML files. Traditionally, these files were named `schema.yml` but later versions of dbt do not enforce this as it could lead to confusion.
