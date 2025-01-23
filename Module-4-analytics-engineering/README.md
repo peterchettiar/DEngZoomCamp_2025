@@ -359,7 +359,7 @@ FROM staging.source_table
 WHERE record_state = 'ACTIVE'
 ```
 
-* In the Jinja statement defined within the `{{ }}` block we call the [`config()` function](https://docs.getdbt.com/reference/dbt-jinja-functions/config).
+* In the Jinja statement defined within the `{{ }}` block we call the [`config()` function](https://docs.getdbt.com/reference/dbt-jinja-functions/config). The `config` variable exists to handle end-user configuration for custom materialisation (i.e. The exact DDL language that dbt will use after compiling model that will create the model's equivalent in the data warehouse).
     * More info about Jinja macros for dbt [in this link](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros).
 * We commonly use the `config()` function at the beginning of a model to define a ***materialization strategy***: a strategy for persisting dbt models in a warehouse.
     * The `table` strategy means that the model will be rebuilt as a table on each run.
