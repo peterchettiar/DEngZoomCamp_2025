@@ -16,7 +16,7 @@
   - [dbt Core](#dbt-core)
 - [Developing with dbt](#developing-with-dbt)
   - [Anatomy of a dbt model](#anatomy-of-a-dbt-model)
-  - [The FROM clause](#the-from-clause)
+  - [The FROM clause: Sources and Seeds](#the-from-clause-sources-and-seeds)
   - [Defining a source and creating a model](#defining-a-source-and-creating-a-model)
   - [Macros](#macros)
   - [Packages](#packages)
@@ -381,3 +381,14 @@ CREATE TABLE my_schema.my_model AS (
 After the code is compiled, dbt will run the compiled code in the Data Warehouse.
 
 Additional model properties are stored in YAML files. Traditionally, these files were named `schema.yml` but later versions of dbt do not enforce this as it could lead to confusion.
+
+_Quick tip on recognising jinja templates_
+- Expressions `{{ ... }}`: Expressions are used when you want to output a string. You can use expressions to reference varaibles and call macros.
+- Statements `{% ... %}`: Statments don't output a string. They are used for control flow, for example, to set up `for` loops and `if` statements, to set or modify variables, or to define macros.
+- Comments `{# ... #}`: Jinja comments are used to prenvent the text within the comment from executing or outputing a string. Don't use `--` for comment.
+
+## The FROM clause: Sources and Seeds
+
+The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used. Sources can be seen as a map to guide dbt to the location of the data that was loaded to our data warehouse through a `{{ source() }} function` used in our models. These configurations are typically declared in a `source.yml` file usually found in the models folder.
+
+
