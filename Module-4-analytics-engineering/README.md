@@ -382,13 +382,46 @@ After the code is compiled, dbt will run the compiled code in the Data Warehouse
 
 Additional model properties are stored in YAML files. Traditionally, these files were named `schema.yml` but later versions of dbt do not enforce this as it could lead to confusion.
 
-_Quick tip on recognising jinja templates_
+### Quick tip on recognising jinja templates
 - Expressions `{{ ... }}`: Expressions are used when you want to output a string. You can use expressions to reference varaibles and call macros.
 - Statements `{% ... %}`: Statments don't output a string. They are used for control flow, for example, to set up `for` loops and `if` statements, to set or modify variables, or to define macros.
 - Comments `{# ... #}`: Jinja comments are used to prenvent the text within the comment from executing or outputing a string. Don't use `--` for comment.
 
 ## The FROM clause: Sources and Seeds
 
-The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used. Sources can be seen as a map to guide dbt to the location of the data that was loaded to our data warehouse through a `{{ source() }} function` used in our models. These configurations are typically declared in a `source.yml` file usually found in the models folder.
+### Sources
+
+- The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used
+- Sources can be seen as a map to guide dbt to the location of the data that was loaded to our data warehouse through a `{{ source() }} function` used in our models
+- These configurations are typically declared in a `source.yml` file usually found in the models folder
+- Used with the source macro that will resolve the name to the right schema plus build the dependencies automatically
+- Additionally, we can define "source freshness" to each source so that we can check whether a source is "fresh" or "stale", which can be useful to check whether our data pipelines are working properly
+- More info about sources in this [link](https://docs.getdbt.com/docs/building-a-dbt-project/using-sources)
+- An example of how a `source.yml` might look for our project:
+```yaml
+version: 2
+
+sources:
+  - name: nyc_tlc_data
+    database: ny-rides-peter-415106  
+    schema: nyc_tlc_data  
+    tables:
+      - name: greentaxi_trips
+      - name: yellowtaxi_trips
+        freshness:
+          error_after: {count: 6, period: hour}
+```
+> Note: By default, `schema` will be the same as `name`. Add `schema` only if you want to use a source name that differs from the existing schema.
+- And you might `select` from source using `{{ source() }} function` as follows:
+```sql
+select
+  ...
+
+from {{ source('nyc_tlc_data', 'greentaxi_trips') }}
+
+left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
+```
+
+### Seeds
 
 
