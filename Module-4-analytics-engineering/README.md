@@ -389,7 +389,7 @@ Additional model properties are stored in YAML files. Traditionally, these files
 
 ## The FROM clause: Sources and Seeds
 
-The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used. As such:
+The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used. As such the following two are what we can select from a `FROM` clause:
   
 ### 1. Sources
 
@@ -425,6 +425,6 @@ left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 
 > Note: `{{ source() }} function` and `source` macro are the same thing, it is a built in macro in itself and hence the terms function and macro in relation to `source` can and will be used interchangably in these notes.
 
-### Seeds
+### 2. Seeds
 
 
