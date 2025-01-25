@@ -389,12 +389,13 @@ Additional model properties are stored in YAML files. Traditionally, these files
 
 ## The FROM clause: Sources and Seeds
 
-### Sources
+The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used. As such:
+  
+### 1. Sources
 
-- The `FROM` clause within a `SELECT` statement defines the _sources_ of the data to be used
-- Sources can be seen as a map to guide dbt to the location of the data that was loaded to our data warehouse through a `{{ source() }} function` used in our models
+- Sources can be seen as a map to guide dbt to the location of the data that was loaded to our data warehouse through a `{{ source() }}` function used in our models
 - These configurations are typically declared in a `source.yml` file usually found in the models folder
-- Used with the source macro that will resolve the name to the right schema plus build the dependencies automatically
+- Used with the `source` macro that will resolve the name to the right schema plus build the dependencies automatically
 - Additionally, we can define "source freshness" to each source so that we can check whether a source is "fresh" or "stale", which can be useful to check whether our data pipelines are working properly
 - More info about sources in this [link](https://docs.getdbt.com/docs/building-a-dbt-project/using-sources)
 - An example of how a `source.yml` might look for our project:
@@ -421,6 +422,8 @@ from {{ source('nyc_tlc_data', 'greentaxi_trips') }}
 
 left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 ```
+
+> Note: `{{ source() }} function` and `source` macro are the same thing, it is a built in macro in itself and hence the terms function and macro in relation to `source` can and will be used interchangably in these notes.
 
 ### Seeds
 
