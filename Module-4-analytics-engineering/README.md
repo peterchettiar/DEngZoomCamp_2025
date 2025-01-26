@@ -430,7 +430,7 @@ left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 - Seeds are `CSV` files in the dbt project (typically in the `seeds` directory), that dbt can load into the data warehouse using the `dbt seed -s file_name` command.
 - Because these CSV files are located in our dbt repository, they are version controlled and code reviewable. Seeds are best suited to static data which changes infrequently.
 - Equivalent to a `cp` command
-- Refer to the seed in your model with the `ref()` function.
+- Refer to the seed in your model with the `ref()` function. The macro can be used in referencing a `model`, `seed` as well as `snapshot`.
 > Note: If you update the content of a seed, running `dbt seed` will append the updated values to the table rather than substituing them. Running `dbt seed --full-refresh` instead will drop the old table and create a new one.
 
 At this juncture, you might be wondering as to what the difference between `ref` and the `source` macros is, considering that they both servce very similar functions with respect to referencing datasets. Well they serve very distinct purposes as well as are used in different contexts. Here's a breakdown of the differences:
@@ -453,6 +453,7 @@ At this juncture, you might be wondering as to what the difference between `ref`
 |                         | from {{ ref('stg_orders') }}                         | from {{ source('ecommerce', 'orders') }}            |
 |                         | ```                                                  | ```                                                  |
 
+For more information on the `ref()` function,  check out this [link](https://docs.getdbt.com/reference/dbt-jinja-functions/ref).
 
 ## Defining a source and creating a model
 
