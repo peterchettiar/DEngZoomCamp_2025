@@ -427,4 +427,11 @@ left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 
 ### 2. Seeds
 
+- Seeds are `CSV` files in the dbt project (typically in the `seeds` directory), that dbt can load into the data warehouse using the `dbt seed -s file_name` command.
+- Because these CSV files are located in our dbt repository, they are version controlled and code reviewable. Seeds are best suited to static data which changes infrequently.
+- Equivalent to a `cp` command
+- Refer to the seed in your model with the `ref()` function.
+> Note: If you update the content of a seed, running `dbt seed` will append the updated values to the table rather than substituing them. Running `dbt seed --full-refresh` instead will drop the old table and create a new one.
+
+## Define a source and creating a model
 
