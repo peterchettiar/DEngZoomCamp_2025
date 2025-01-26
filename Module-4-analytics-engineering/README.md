@@ -433,5 +433,26 @@ left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 - Refer to the seed in your model with the `ref()` function.
 > Note: If you update the content of a seed, running `dbt seed` will append the updated values to the table rather than substituing them. Running `dbt seed --full-refresh` instead will drop the old table and create a new one.
 
-## Define a source and creating a model
+At this juncture, you might be wondering as to what the difference between `ref` and the `source` macros is, considering that they both servce very similar functions with respect to referencing datasets. Well they serve very distinct purposes as well as are used in different contexts. Here's a breakdown of the differences:
+
+## Difference Between `ref` and `source` Macros in dbt
+
+| **Aspect**             | **`ref` Macro**                                       | **`source` Macro**                                    |
+|-------------------------|------------------------------------------------------|------------------------------------------------------|
+| **Purpose**             | References **models** within the dbt project.        | References **raw source tables** outside the dbt project. |
+| **Use Case**            | Used to reference a **dbt model** by its name, enabling dependency management and dynamic schema resolution. | Used to reference tables from external **source systems** (e.g., raw data in a database). |
+| **Definition Location** | Models are created and maintained within the dbt project as `.sql` files. | Sources are defined in YAML files under the `sources` key. |
+| **Syntax**              | `{{ ref('model_name') }}`                            | `{{ source('source_name', 'table_name') }}`          |
+| **Dependency Management** | Automatically builds model dependencies and execution order. | Does not create dependencies but tracks the lineage of source data. |
+| **Schema Resolution**   | Resolves dynamically based on the project configuration and environments. | Resolves based on the schema and table defined in the `sources` YAML file. |
+| **Lineage Visibility**  | Shows relationships between dbt models in the DAG.   | Shows the raw data as an entry point in the DAG.      |
+| **Testing**             | Tests can be applied via YAML for the referenced model. | Tests like freshness, schema, and data integrity can be applied to the source. |
+| **Example Usage**       | Referencing a dbt model:                              | Referencing raw data:                                |
+|                         | ```sql                                               | ```sql                                               |
+|                         | select *                                             | select *                                             |
+|                         | from {{ ref('stg_orders') }}                         | from {{ source('ecommerce', 'orders') }}            |
+|                         | ```                                                  | ```                                                  |
+
+
+## Defining a source and creating a model
 
