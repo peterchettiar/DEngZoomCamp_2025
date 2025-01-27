@@ -474,3 +474,4 @@ As such, a typical layer structure might look like the following:
 | **Presentation**| Final models optimized for business users, dashboards, or reporting tools.                                | Fact and dimension tables            |
 | **Analytics**   | Advanced analytics, metrics, or KPIs built on top of the presentation layer.                              | Key metrics, trend analysis          |
 
+First thing we need to do after initialising our project is to change the default `name` and `models` fields in the `dbt_project.yml` file to the name of our project. This helps dbt distinguish from other projects as well as the existence of the `dbt_project.yml` file shows dbt that the directory is a dbt project. Next, in our `staging` folder we had just created, we create a `schema.yml` file (this is the same as `sources.yml` as mentioned in the previous section).
