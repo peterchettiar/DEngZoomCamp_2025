@@ -233,6 +233,7 @@ D. BigQuery User
 
 - Next click on `Upload a Service account json file` and load the JSON file from the downloads folder (remember this was the key file that we had generated for our service account from GCP)
 - It should automatically populate the fields and then click on save at the top right.
+- Please make sure to fill in the `Location` field. This is technically an optional field and hence it does not get populated with the `.json` file upload, but it is essestial especially if `BigQuery` default location does not match your source data location. For example, I left this field blank and the location for the dataset for dbt development (in my case was `dbt_pchettiar`) on bigquery was defaulted to `US` but my source data location was `asia-southeast1`. This naturally raised errors like `not found: Dataset`. Hence, it's recommended to create this schema manually to avoid multiregion errors.
 - Now that we have created our connection, this should be reflected on the project setup page as well. Simply click on it and test connection (this should be successful), after which you click on save.
 
 ![image](https://github.com/user-attachments/assets/c84cf112-9e6a-4274-9fec-6f5f3ef7ca8d)
