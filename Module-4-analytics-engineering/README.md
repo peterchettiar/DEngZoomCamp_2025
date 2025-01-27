@@ -513,10 +513,11 @@ select * from renamed
 ```
 
 * This query will create a ***view*** in the `staging` dataset/schema in our database.
-> Note : Unless specified otherwise in the model, the default output would be a view in bigquery
 * We make use of the `source()` function to access the green taxi data table, which is defined inside the `schema.yml` file.
 * If you would like to create a table instead, insert the following statement at the start of your `.sql` script - 
-`{{ config(materialized='table') }}`. 
+`{{ config(materialized='table') }}`.
+
+> Note : Unless specified otherwise in the model, the default output would be a view in bigquery
 
 The advantage of having the properties in a separate file is that we can easily modify the `schema.yml` file to change the database details and write to different databases without having to modify our `sgt_green_tripdata.sql` file.
 
