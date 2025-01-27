@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('staging', 'greentaxi_trips') }}
+    select * from {{ source('staging', 'yellowtaxi_trips') }}
 
 ),
 
@@ -14,20 +14,20 @@ renamed as (
         tpep_dropoff_datetime,
         passenger_count,
         trip_distance,
-        ratecodeid
+        ratecodeid,
         store_and_fwd_flag,
         pulocationid,
         dolocationid,
         payment_type,
-        {{ get_payment_type_description('payment_type') }} as payment_type_described,
         fare_amount,
         extra,
         mta_tax,
         tip_amount,
         tolls_amount,
-        ehail_fee,
+        improvement_surcharge,
         total_amount,
         congestion_surcharge
+
     from source
 
 )
