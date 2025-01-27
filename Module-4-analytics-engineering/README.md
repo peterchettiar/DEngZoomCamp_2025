@@ -458,3 +458,77 @@ For more information on the `ref()` function,  check out this [link](https://doc
 
 ## Defining a source and creating a model
 
+We will now create our first model.
+
+We will begin by creating a new folder called `staging` under our `models` folder. In the `staging` folder is where we would hold our models (`.sql` scripts) that clean and standardises raw data. This is usually the first layer of the transformation pipeline, example transformations to name a few in this step includes:
+1. Add uniform naming
+2. Type casting
+3. Deduplication
+
+As such, a typical layer structure might look like the following:
+| **Layer**       | **Description**                                                                                           | **Examples**                          |
+|------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------|
+| **Source**      | Represents the raw data ingested from external systems or databases.                                       | Raw tables from CRM, ERP, APIs, etc. |
+| **Staging**     | Prepares raw data by cleaning, standardizing, and transforming it for further use.                        | Removing duplicates, data type casts |
+| **Intermediate**| Models that handle business logic or calculations, serving as a foundation for analytics.                 | Aggregations, calculations, joins    |
+| **Presentation**| Final models optimized for business users, dashboards, or reporting tools.                                | Fact and dimension tables            |
+| **Analytics**   | Advanced analytics, metrics, or KPIs built on top of the presentation layer.                              | Key metrics, trend analysis          |
+
+First thing we need to do after initialising our project is to change the default `name` and `models` fields in the `dbt_project.yml` file to the name of our project. This helps dbt distinguish from other projects as well as the existence of the `dbt_project.yml` file shows dbt that the directory is a dbt project. Next, in our `staging` folder we had just created, we create a `schema.yml` file (this is the same as `sources.yml` as mentioned in the previous section).
+
+In the `schema.yml` file, we define our ***sources*** in the `schema.yml` model properties file. The stucture should be as follows:
+```yaml
+version: 2
+
+sources:
+  - name: staging
+  # For bigquery
+    database: ny-rides-peter-415106
+    schema: nyc_tlc_data
+
+    tables:
+      - name: greentaxi_trips
+      - name: yellowtaxi_trips
+```
+
+And if you're using the dbt cloud IDE, above the table name a prompt called `Generate model` should appear. If you click on that, it will create a model based off the name of the table as well as the layer in which the model is placed (in our case `staging`). The default `.sql` model should look like this:
+```sql
+with 
+
+source as (
+
+    select * from {{ source('staging', 'greentaxi_trips') }}
+
+),
+
+renamed as (
+
+    select
+        *
+    from source
+
+)
+
+select * from renamed
+```
+
+* This query will create a ***view*** in the `staging` dataset/schema in our database.
+* We make use of the `source()` function to access the green taxi data table, which is defined inside the `schema.yml` file.
+* If you would like to create a table instead, insert the following statement at the start of your `.sql` script - 
+`{{ config(materialized='table') }}`.
+
+> Note : Unless specified otherwise in the model, the default output would be a view in bigquery
+
+The advantage of having the properties in a separate file is that we can easily modify the `schema.yml` file to change the database details and write to different databases without having to modify our `sgt_green_tripdata.sql` file.
+
+You may know run the model with the `dbt run` or `dbt build` command, either locally or from dbt Cloud.
+
+Another point to note the difference between `dbt run` and `dbt build` which are quite similar but the following are the comparison of the two:
+| **Aspect**                  | **`dbt build`**                                                                 | **`dbt run`**                                         |
+|-----------------------------|----------------------------------------------------------------------------------|------------------------------------------------------|
+| **Purpose**                 | Executes a full workflow including building models, testing, and validation.    | Executes only the transformation models (SQL files). |
+| **Included Actions**        | - Runs models. <br> - Runs tests (generic and bespoke). <br> - Seeds and snapshots. | - Runs only the transformation models.               |
+| **Scope**                   | Covers the entire pipeline to ensure data is transformed, tested, and validated. | Focuses solely on building (transforming) models.    |
+| **Dependencies**            | Resolves dependencies and runs tests after building models.                     | Resolves dependencies but doesn’t test or validate.  |
+| **Command Example**         | `dbt build`                                                                      | `dbt run`                                            |
+| **When to Use**             | Before deploying a production pipeline or validating end-to-end workflows.      | For quick testing or debugging of transformation models. |
