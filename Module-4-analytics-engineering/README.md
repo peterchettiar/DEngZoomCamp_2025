@@ -458,3 +458,19 @@ For more information on the `ref()` function,  check out this [link](https://doc
 
 ## Defining a source and creating a model
 
+We will now create our first model.
+
+We will begin by creating a new folder called `staging` under our `models` folder. In the `staging` folder is where we would hold our models (`.sql` scripts) that clean and standardises raw data. This is usually the first layer of the transformation pipeline, example transformations to name a few in this step includes:
+1. Add uniform naming
+2. Type casting
+3. Deduplication
+
+As such, a typical layer structure might look like the following:
+| **Layer**       | **Description**                                                                                           | **Examples**                          |
+|------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------|
+| **Source**      | Represents the raw data ingested from external systems or databases.                                       | Raw tables from CRM, ERP, APIs, etc. |
+| **Staging**     | Prepares raw data by cleaning, standardizing, and transforming it for further use.                        | Removing duplicates, data type casts |
+| **Intermediate**| Models that handle business logic or calculations, serving as a foundation for analytics.                 | Aggregations, calculations, joins    |
+| **Presentation**| Final models optimized for business users, dashboards, or reporting tools.                                | Fact and dimension tables            |
+| **Analytics**   | Advanced analytics, metrics, or KPIs built on top of the presentation layer.                              | Key metrics, trend analysis          |
+
