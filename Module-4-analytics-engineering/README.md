@@ -532,3 +532,72 @@ Another point to note the difference between `dbt run` and `dbt build` which are
 | **Dependencies**            | Resolves dependencies and runs tests after building models.                     | Resolves dependencies but doesn’t test or validate.  |
 | **Command Example**         | `dbt build`                                                                      | `dbt run`                                            |
 | **When to Use**             | Before deploying a production pipeline or validating end-to-end workflows.      | For quick testing or debugging of transformation models. |
+
+## Macros
+
+***Macros*** are pieces of code in Jinja that can be reused, similar to functions in other languages.
+
+dbt already includes a series of macros like `config()`, `source()` and `ref()`, but custom macros can also be defined.
+
+Macros allow us to add features to SQL that aren't otherwise available, such as:
+* Use control structures such as `if` statements or `for` loops.
+* Use environment variables in our dbt project for production.
+* Operate on the results of one query to generate another query.
+* Abstract snippets of SQL into reusable macros.
+
+Macros are defined in separate `.sql` files which are typically stored in a `macros` directory.
+
+There are 3 kinds of Jinja _delimiters_:
+* `{% ... %}` for ***statements*** (control blocks, macro definitions)
+* `{{ ... }}` for ***expressions*** (literals, math, comparisons, logic, macro calls...)
+* `{# ... #}` for comments.
+
+Here's a macro definition example:
+
+```sql
+{# This macro returns the description of the payment_type #}
+
+{% macro get_payment_type_description(payment_type) %}
+
+    case {{ payment_type }}
+        when 1 then 'Credit card'
+        when 2 then 'Cash'
+        when 3 then 'No charge'
+        when 4 then 'Dispute'
+        when 5 then 'Unknown'
+        when 6 then 'Voided trip'
+    end
+
+{% endmacro %}
+```
+* The `macro` keyword states that the line is a macro definition. It includes the name of the macro as well as the parameters.
+* The code of the macro itself goes between 2 statement delimiters. The second statement delimiter contains an `endmacro` keyword.
+* In the code, we can access the macro parameters using expression delimiters.
+* The macro returns the ***code*** we've defined rather than a specific value.
+
+Here's how we use the macro:
+```sql
+select
+    {{ get_payment_type_description('payment-type') }} as payment_type_description,
+    congestion_surcharge::double precision
+from {{ source('staging','greentaxi_trips') }}
+where vendorid is not null
+```
+* We pass a `payment-type` variable which may be an integer from 1 to 6.
+
+And this is what it would compile to:
+```sql
+select
+    case payment_type
+        when 1 then 'Credit card'
+        when 2 then 'Cash'
+        when 3 then 'No charge'
+        when 4 then 'Dispute'
+        when 5 then 'Unknown'
+        when 6 then 'Voided trip'
+    end as payment_type_description,
+    congestion_surcharge::double precision
+from {{ source('staging','greentaxi_trips') }}
+where vendorid is not null
+```
+* The macro is replaced by the code contained within the macro definition as well as any variables that we may have passed to the macro parameters.
