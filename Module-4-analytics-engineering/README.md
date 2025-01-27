@@ -476,7 +476,7 @@ As such, a typical layer structure might look like the following:
 
 First thing we need to do after initialising our project is to change the default `name` and `models` fields in the `dbt_project.yml` file to the name of our project. This helps dbt distinguish from other projects as well as the existence of the `dbt_project.yml` file shows dbt that the directory is a dbt project. Next, in our `staging` folder we had just created, we create a `schema.yml` file (this is the same as `sources.yml` as mentioned in the previous section).
 
-In the `schema.yml` file, we mention the source tables. The stucture should be as follows:
+In the `schema.yml` file, we define our ***sources*** in the `schema.yml` model properties file. The stucture should be as follows:
 ```yaml
 version: 2
 
@@ -512,8 +512,15 @@ renamed as (
 select * from renamed
 ```
 
-Keep it as it is and run `dbt build`. This should create a view in your dbt dataset in bigquery. Please note that if unless specified otherwise in the model, the default output would be a view in bigquery. If you would like to create a table instead, insert the following statement at the start of your `.sql` script - 
+* This query will create a ***view*** in the `staging` dataset/schema in our database.
+> Note : Unless specified otherwise in the model, the default output would be a view in bigquery
+* We make use of the `source()` function to access the green taxi data table, which is defined inside the `schema.yml` file.
+* If you would like to create a table instead, insert the following statement at the start of your `.sql` script - 
 `{{ config(materialized='table') }}`. 
+
+The advantage of having the properties in a separate file is that we can easily modify the `schema.yml` file to change the database details and write to different databases without having to modify our `sgt_green_tripdata.sql` file.
+
+You may know run the model with the `dbt run` or `dbt build` command, either locally or from dbt Cloud.
 
 Another point to note the difference between `dbt run` and `dbt build` which are quite similar but the following are the comparison of the two:
 | **Aspect**                  | **`dbt build`**                                                                 | **`dbt run`**                                         |
