@@ -9,9 +9,10 @@ source as (
 renamed as (
 
     select
+        {{ dbt_utils.generate_surrogate_key(['vendorid', 'lpep_pickup_datetime']) }} as tripid,
         vendorid,
-        tpep_pickup_datetime,
-        tpep_dropoff_datetime,
+        lpep_pickup_datetime,
+        lpep_dropoff_datetime,
         passenger_count,
         trip_distance,
         ratecodeid
