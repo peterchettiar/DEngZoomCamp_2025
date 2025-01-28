@@ -624,3 +624,48 @@ select
     -- ...
 ```
 * The `surrogate_key()` macro generates a hashed [surrogate key](https://www.geeksforgeeks.org/surrogate-key-in-dbms/) with the specified fields in the arguments.
+
+Let's breakdown the compiled output of our `surrogate_key` in our model:
+```sql
+select
+    to_hex(md5(cast(coalesce(cast(vendorid as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(lpep_pickup_datetime as string), '_dbt_utils_surrogate_key_null_') as string))) as tripid,
+    vendorid
+    -- ...
+```
+
+- both our inputs, `vendorid` and `lpep_pickup_datetime` are casted as string - e.g. `cast(vendorid as string)`
+- then we use the `coalesce` statement to deal with the null values by replacing it with `_dbt_utils_surrogate_key_null_`, and cast the output as a string as well - e.g. `cast(coalesce(cast(vendorid as string), '_dbt_utils_surrogate_key_null_'))`
+- next we concatenate the ouputs of both keys and then cast it as a string again - e.g. `cast((...) || '-' || (...) as string)`
+- generate a 128-bit hash using the MD5 algorithm on the concatenated string - `md5(...)`
+- convert the MD5 hash into a human-readable hexadecimal string - `to_hex(...)`
+- assign the resulting value the alias `tripid`
+
+> Tip: A quick way of applying a macro in a jinja template form in your model would be to type `__` (two underscores) followed by the name of the macro, and when you press enter the template should appear. For example, if I type `__config` and press the `Enter` key, then `{{ config(materialised='view') }}` should appear.
+
+## Variables
+
+In dbt, `variables` are a way to parameterize your SQL queries and configurations, making your dbt projects more dynamic and reusable. Variables allow you to pass values into your models, macros, and other configurations without hardcoding them, which is especially useful for environments, configurations, or values that might change.
+
+`variables` can be scoped globally through `dbt_projects.yml` file or locally within a specific model or configuration, and they can be set via:
+1. `dbt_projects.yml`
+```yml
+vars:
+  payment_type_values: [1,2,3,4,5,6]
+```
+2. command line
+```bash
+dbt run --vars '{"my_variable": "custom_value"}'
+```
+For exmple, we can limit the number of records that is created on our dbt project dataset development table (i.e. `stg_greentaxi_trips` - which is actually a view and not a table) by setting the condition of our variable in our `stg_greentaxi_trips.sql` model as follows:
+```sql
+{% if var('is_test_run', default=true) %}
+
+    limit 100
+
+{% endif %}
+```
+
+What the SQL query above actually does is that the records created in our view when we run the model will be limited to the first 100 records (i.e. what you end up seeing in bigquery would be a view with just 100 records) unless specified as false. So if we change the `default` value, then all the records will be loaded to our table. The following build command would load all records:
+```bash
+dbt run --model stg_greentaxi_trips --vars '{"is_test_run": false}'
+```
