@@ -601,3 +601,26 @@ from {{ source('staging','greentaxi_trips') }}
 where vendorid is not null
 ```
 * The macro is replaced by the code contained within the macro definition as well as any variables that we may have passed to the macro parameters.
+
+## Packages
+
+Macros can be exported to ***packages***, similarly to how classes and functions can be exported to libraries in other languages. Packages contain standalone dbt projects with models and macros that tackle a specific problem area.
+
+When you add a package to your project, the package's models and macros become part of your own project. A list of useful packages can be found in the [dbt package hub](https://hub.getdbt.com/).
+
+To use a package, you must first create a `packages.yml` file in the root of your work directory. Here's an example:
+```yaml
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.3.0
+```
+After declaring your packages, and clicking on `save` on the dbt cloud IDE, the packages should appear as `dbt packages` in your project folder. But if this does not happen, you need to install them by running the `dbt deps` command either locally or on dbt Cloud.
+
+You may access macros inside a package in a similar way to how Python access class methods:
+```sql
+select
+    {{ dbt_utils.generate_surrogate_key(['vendorid', 'lpep_pickup_datetime']) }} as tripid,
+    cast(vendorid as integer) as vendorid,
+    -- ...
+```
+* The `surrogate_key()` macro generates a hashed [surrogate key](https://www.geeksforgeeks.org/surrogate-key-in-dbms/) with the specified fields in the arguments.
