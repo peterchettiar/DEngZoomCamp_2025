@@ -686,4 +686,103 @@ dbt run --model stg_greentaxi_trips --vars '{"is_test_run": false}'
 
 ## Referencing older models in new models
 
-Now that we have completed our staging layer, its time to move on to the next stage which is the 
+Below is an image of our workflow to be compared with where we are at in our lineage in dbt cloud.
+
+![image](https://github.com/user-attachments/assets/ac78f1b5-22ad-4c97-81c7-fc0b306a0579)
+
+Now that we have completed our staging layer, its time to move on to the next stage which is the core of the lesson which is data modelling - defining the `fact` table and `dim` table.
+
+![image](https://github.com/user-attachments/assets/e9917a75-15cc-46ed-b81e-70f075cac447)
+
+So the first thing we need to do is to create a subfolder called `core` in our `models` folder in our project folder, to hold our fact and dimendional model. In the `core` folder, we can proceed to create the `dim_zones.sql` model first. But before that, we need to do a couple of things  for the dimensional table before we tackle the fact table, as follows:
+
+1. Create our raw dimensional table in the `seeds` folder of our project. There are other ways of doing so but I'm just going to copy the raw data from the course repository [here](https://raw.githubusercontent.com/DataTalksClub/data-engineering-zoomcamp/refs/heads/main/04-analytics-engineering/taxi_rides_ny/seeds/taxi_zone_lookup.csv), and just `create new file` in our `seeds` folder as `taxi_zone_lookup.csv`. Final output should look something like this on dbt cloud. After which, you run the `dbt build --select taxi_zone_lookup` command to load the the referenc file as a table into bigquery.
+
+![image](https://github.com/user-attachments/assets/a0f9bf42-76c7-4315-8782-4c03840a0fae)
+
+2. Next we write the following query into our `dims_zone.sql` model.
+```sql
+{{
+    config(
+        materialized='view'
+    )
+}}
+
+select
+    locationid,
+    borough,
+    zone,
+    replace(service_zone, 'Boro', 'Green')
+from {{ ref("taxi_zone_lookup") }}
+```
+
+3. Now to create a `fact_trips.sql` model in our `core` folder. The queru of the model as follows:
+```sql
+{{
+    config(
+        materialized='table'
+    )
+}}
+
+with green_tripdata as (
+    select *, 
+        'Green' as service_type
+    from {{ ref('stg_greentaxi_trips') }}
+), 
+yellow_tripdata as (
+    select *, 
+        'Yellow' as service_type
+    from {{ ref('stg_yellowtaxi_trips') }}
+), 
+trips_unioned as (
+    select * from green_tripdata
+    union all 
+    select * from yellow_tripdata
+), 
+dim_zones as (
+    select * from {{ ref('dims_zones') }}
+    where borough != 'Unknown'
+)
+
+select trips_unioned.tripid, 
+    trips_unioned.vendorid, 
+    trips_unioned.service_type,
+    trips_unioned.ratecodeid, 
+    trips_unioned.pickup_locationid, 
+    pickup_zone.borough as pickup_borough, 
+    pickup_zone.zone as pickup_zone, 
+    trips_unioned.dropoff_locationid,
+    dropoff_zone.borough as dropoff_borough, 
+    dropoff_zone.zone as dropoff_zone,  
+    trips_unioned.pickup_datetime, 
+    trips_unioned.dropoff_datetime, 
+    trips_unioned.store_and_fwd_flag, 
+    trips_unioned.passenger_count, 
+    trips_unioned.trip_distance, 
+    trips_unioned.trip_type, 
+    trips_unioned.fare_amount, 
+    trips_unioned.extra, 
+    trips_unioned.mta_tax, 
+    trips_unioned.tip_amount, 
+    trips_unioned.tolls_amount, 
+    trips_unioned.ehail_fee, 
+    trips_unioned.improvement_surcharge, 
+    trips_unioned.total_amount, 
+    trips_unioned.payment_type, 
+    trips_unioned.payment_type_description
+from trips_unioned
+inner join dim_zones as pickup_zone
+on trips_unioned.pickup_locationid = pickup_zone.locationid
+inner join dim_zones as dropoff_zone
+on trips_unioned.dropoff_locationid = dropoff_zone.locationid
+```
+
+> [!NOTE]
+> It is worth pointing out that after you run the build command (or `dbt seed`) for your `.csv` files in the seed folder, the data should be loaded as a table in the dbt dataset in `bigquery`. Without this step, the data would not be loaded while running your dbt model for the dimensional data as the `ref()` macro only references to the corresponding table in `bigquery` and not directly from the `.csv` file in the `seeds` folder.
+
+4. Lastly, let's build our model by running the `dbt build --select +fact_trips+` - this command basically builds our entire DAG (i.e. basically our workflow based on the lineage that you see in dbt cloud). Pretty much most of the command must be familiar to you with the exception of the argument provided to the `--select` flag (i.e. `+fact_trips+`. Essentially, you are telling dbt to build all the nodes that are upstream and downstream of `fact_trips`, including itself. `upstream` or `Parent` nodes are dependancies that `fact_trips` depends on, like `stg_greentaxi_trips` or `staging.greentaxi_trips`. These models neeed to be built first before `fact_trips`. Naturally, you can tell by now that there aren't any `child` nodes because there are no models after `fact_trips` in the `downstream`. Nonetheless, the extra `+` was included by the course instructor.
+
+> [!TIP]
+> If you come across the `Access Denied: BigQuery BigQuery: Permission denied while globbing file pattern.` error when your run your dbt command for build `fact_trips`, chances are your service account does not have the right permissions to access your `Google Cloud Storage` bucket. To fix this, simply go to your bucket details page on your `Google Cloud Storage` via the console. Click on the `PERMISSIONS` tab, and should able to see a `GRANT ACCESS` button. Click on it and add your dbt service account as principle as well as selecting `Storage Object Viewer` under roles. This should fix the problem!
+
+5. It should be noted that the command we ran `dbt build --select +fact_trips+` includes the limit that we had set in our staging models. This is suitable for developement but if we want to build our workflow for production without the limitation, then we simply include the `--vars` flag - `dbt build --select +fact_trips+ --vars '{'is_test_run': false}'`
