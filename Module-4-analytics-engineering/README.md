@@ -649,6 +649,8 @@ select
 - convert the MD5 hash into a human-readable hexadecimal string - `to_hex(...)`
 - assign the resulting value the alias `tripid`
 
+In the end, after a few more adjustments to our model, it should look something like [this](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/dbt_cloud/Module-4-analytics-engineering/taxi_rides_ny/models/staging/stg_greentaxi_trips.sql). Also, with the similar steps done so far, our `stg_yellowtaxi_trips` model should the same as for `stg_greentaxi_trips`. Check out the `.sql` file [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/dbt_cloud/Module-4-analytics-engineering/taxi_rides_ny/models/staging/stg_yellowtaxi_trips.sql).
+
 > [!TIP]
 > A quick way of applying a macro in a jinja template form in your model would be to type `__` (two underscores) followed by the name of the macro, and when you press enter the template should appear. For example, if I type `__config` and press the `Enter` key, then `{{ config(materialised='view') }}` should appear.
 
@@ -679,3 +681,9 @@ What the SQL query above actually does is that the records created in our view w
 ```bash
 dbt run --model stg_greentaxi_trips --vars '{"is_test_run": false}'
 ```
+> [!TIP]
+> This is a particularyly useful variable as with the default value we will be able to develop with lesser records being loaded into bigquery, which makes it cheaper and faster. And when we are done with development we can simply change the default value to `false` and load all the records into production environment. The formal name for this is `dev limit`.
+
+## Referencing older models in new models
+
+Now that we have completed our staging layer, its time to move on to the next stage which is the 
