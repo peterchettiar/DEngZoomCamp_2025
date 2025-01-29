@@ -640,7 +640,8 @@ select
 - convert the MD5 hash into a human-readable hexadecimal string - `to_hex(...)`
 - assign the resulting value the alias `tripid`
 
-> Tip: A quick way of applying a macro in a jinja template form in your model would be to type `__` (two underscores) followed by the name of the macro, and when you press enter the template should appear. For example, if I type `__config` and press the `Enter` key, then `{{ config(materialised='view') }}` should appear.
+> [!TIP]
+> A quick way of applying a macro in a jinja template form in your model would be to type `__` (two underscores) followed by the name of the macro, and when you press enter the template should appear. For example, if I type `__config` and press the `Enter` key, then `{{ config(materialised='view') }}` should appear.
 
 ## Variables
 
