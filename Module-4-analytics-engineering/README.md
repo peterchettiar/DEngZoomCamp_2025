@@ -700,7 +700,7 @@ So the first thing we need to do is to create a subfolder called `core` in our `
 
 ![image](https://github.com/user-attachments/assets/a0f9bf42-76c7-4315-8782-4c03840a0fae)
 
-2. Next we write the following query into our `dims_zone.sql` model.
+2. Next we write the following query into our `dim_zones.sql` model.
 ```sql
 {{
     config(
@@ -716,7 +716,7 @@ select
 from {{ ref("taxi_zone_lookup") }}
 ```
 
-3. Now to create a `fact_trips.sql` model in our `core` folder. The queru of the model as follows:
+3. Now to create a `fact_trips.sql` model in our `core` folder. The query of the model is as follows:
 ```sql
 {{
     config(
@@ -740,7 +740,7 @@ trips_unioned as (
     select * from yellow_tripdata
 ), 
 dim_zones as (
-    select * from {{ ref('dims_zones') }}
+    select * from {{ ref('dim_zones') }}
     where borough != 'Unknown'
 )
 
