@@ -174,7 +174,8 @@ For integration with BigQuery we will use the dbt Cloud IDE, so a local installa
 
 Before we begin, go to BigQuery and create 2 new empty datasets for your project: a _development_ dataset and a _production_ dataset. Name them any way you'd like.
 
-> Note: Since I'm using BigQuery, I need to use dbt cloud. Hence I will be following the Alternative A video with some minor changes (i.e. steps for setup that actually worked for me since the video did not really cover most of the setup process). Check out [video source](https://www.youtube.com/watch?v=J0XCDyKiU64&list=PLaNLNpjZpzwgneiI-Gl8df8GCsPYp_6Bs&index=4).
+> [!NOTE]
+> Since I'm using BigQuery, I need to use dbt cloud. Hence I will be following the Alternative A video with some minor changes (i.e. steps for setup that actually worked for me since the video did not really cover most of the setup process). Check out [video source](https://www.youtube.com/watch?v=J0XCDyKiU64&list=PLaNLNpjZpzwgneiI-Gl8df8GCsPYp_6Bs&index=4).
 
 ## dbt Cloud
 
@@ -223,7 +224,8 @@ D. BigQuery User
 
 ![image](https://github.com/user-attachments/assets/c506038c-f84a-4b48-abe8-c00e9e23bc1e)
 
-> Note: if you have a default project already created, you can simply click on the project name and click on edit once the project details pop up and press delete in the subsequent landing page
+> [!NOTE]
+> If you have a default project already created, you can simply click on the project name and click on edit once the project details pop up and press delete in the subsequent landing page
 
 - Click on `New Project` on the top right and this should lead you to the `Set up a new project` page where you are to fill out three things: `Name your project`; `Configure your development environment`; `Setup your repository`
 - For the first field `Name your project` you can simply type `taxi_rides_ny` and click continue
@@ -238,7 +240,8 @@ D. BigQuery User
 
 ![image](https://github.com/user-attachments/assets/c84cf112-9e6a-4274-9fec-6f5f3ef7ca8d)
 
-> Note: There will be a few fields that would be automatically filled at the stage where you have to test connection (Dataset, Target Name and Threads), please note that when you make your first `dbt run` on your cloud IDE, the dataset name should appear in BigQuery which should be indicating that the connection to BigQuery from dbt was successful, and that the dataset is a sandbox dataset for development.
+> [!NOTE]
+> There will be a few fields that would be automatically filled at the stage where you have to test connection (Dataset, Target Name and Threads), please note that when you make your first `dbt run` on your cloud IDE, the dataset name should appear in BigQuery which should be indicating that the connection to BigQuery from dbt was successful, and that the dataset is a sandbox dataset for development.
 
 - Set up a repository, for this section click on `Git Clone` and add the git URL to our repo (e.g. git@github.com:peterchettiar/DEngZoomCamp_2025.git)
 - Once you’ve added, deploy keys will be generated. Dbt will use the deploy keys to clone the repository, hence in the next section we will discuss more on how to add the deploy keys in your Github account.
@@ -307,7 +310,8 @@ export PATH=$PATH:$DBT_HOME
 ```bash
 gcloud compute scp ~/Downloads/dbt_cloud.yml peter@de-zoomcamp:~/.dbt/
 ```
-> Note: I have used the command that I used to highlight the importance of mentioning the user@instance_name as there may be a possibility of having multiple users on the instance. So pick the one where your project repo is in.
+> [!NOTE]
+> I have used the command that I used to highlight the importance of mentioning the user@instance_name as there may be a possibility of having multiple users on the instance. So pick the one where your project repo is in.
 
 - So now for Step 3 : Link your local project to a dbt Cloud project, we need to add the project id provided on the page onto our dbt_projects.yml file as follows:
 
@@ -344,7 +348,8 @@ This method takes a layered approach where in each layer you have `.sql` scripts
 - `intermediate`: Implement business logic and combina data sources
 - `mart`: Create final datasets ready for reporting
 
-> Note: its good practice to start off your model name with say `stg` for a staging .sql script
+> [!NOTE]
+> Its good practice to start off your model name with say `stg` for a staging .sql script
 
 bt models are mostly written in SQL (remember that a dbt model is essentially a `SELECT` query) but they also make use of the [Jinja templating language](https://jinja.palletsprojects.com/en/3.0.x/) for templates. We already covered the basics of Jinja templates in [lesson 2](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/main/Module-2-workflow-orchestration#airflow-and-dag-tips-and-tricks).
 
@@ -413,7 +418,8 @@ sources:
         freshness:
           error_after: {count: 6, period: hour}
 ```
-> Note: By default, `schema` will be the same as `name`. Add `schema` only if you want to use a source name that differs from the existing schema.
+> [!NOTE]
+> By default, `schema` will be the same as `name`. Add `schema` only if you want to use a source name that differs from the existing schema.
 - And you might `select` from source using `{{ source() }} function` as follows:
 ```sql
 select
@@ -424,7 +430,8 @@ from {{ source('nyc_tlc_data', 'greentaxi_trips') }}
 left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 ```
 
-> Note: `{{ source() }} function` and `source` macro are the same thing, it is a built in macro in itself and hence the terms function and macro in relation to `source` can and will be used interchangably in these notes.
+> [!NOTE]
+> `{{ source() }} function` and `source` macro are the same thing, it is a built in macro in itself and hence the terms function and macro in relation to `source` can and will be used interchangably in these notes.
 
 ### 2. Seeds
 
@@ -432,7 +439,8 @@ left join {{ source('nyc_tlc_data', 'yellowtaxi_trips') }} using (VendorID)
 - Because these CSV files are located in our dbt repository, they are version controlled and code reviewable. Seeds are best suited to static data which changes infrequently.
 - Equivalent to a `cp` command
 - Refer to the seed in your model with the `ref()` function. The macro can be used in referencing a `model`, `seed` as well as `snapshot`.
-> Note: If you update the content of a seed, running `dbt seed` will append the updated values to the table rather than substituing them. Running `dbt seed --full-refresh` instead will drop the old table and create a new one.
+> [!NOTE]
+> If you update the content of a seed, running `dbt seed` will append the updated values to the table rather than substituing them. Running `dbt seed --full-refresh` instead will drop the old table and create a new one.
 
 At this juncture, you might be wondering as to what the difference between `ref` and the `source` macros is, considering that they both servce very similar functions with respect to referencing datasets. Well they serve very distinct purposes as well as are used in different contexts. Here's a breakdown of the differences:
 
@@ -517,7 +525,8 @@ select * from renamed
 * If you would like to create a table instead, insert the following statement at the start of your `.sql` script - 
 `{{ config(materialized='table') }}`.
 
-> Note : Unless specified otherwise in the model, the default output would be a view in bigquery
+> [!NOTE]
+> Unless specified otherwise in the model, the default output would be a view in bigquery
 
 The advantage of having the properties in a separate file is that we can easily modify the `schema.yml` file to change the database details and write to different databases without having to modify our `sgt_green_tripdata.sql` file.
 
@@ -640,7 +649,10 @@ select
 - convert the MD5 hash into a human-readable hexadecimal string - `to_hex(...)`
 - assign the resulting value the alias `tripid`
 
-> Tip: A quick way of applying a macro in a jinja template form in your model would be to type `__` (two underscores) followed by the name of the macro, and when you press enter the template should appear. For example, if I type `__config` and press the `Enter` key, then `{{ config(materialised='view') }}` should appear.
+In the end, after a few more adjustments to our model, it should look something like [this](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/dbt_cloud/Module-4-analytics-engineering/taxi_rides_ny/models/staging/stg_greentaxi_trips.sql). Also, with the similar steps done so far, our `stg_yellowtaxi_trips` model should the same as for `stg_greentaxi_trips`. Check out the `.sql` file [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/dbt_cloud/Module-4-analytics-engineering/taxi_rides_ny/models/staging/stg_yellowtaxi_trips.sql).
+
+> [!TIP]
+> A quick way of applying a macro in a jinja template form in your model would be to type `__` (two underscores) followed by the name of the macro, and when you press enter the template should appear. For example, if I type `__config` and press the `Enter` key, then `{{ config(materialised='view') }}` should appear.
 
 ## Variables
 
@@ -669,3 +681,9 @@ What the SQL query above actually does is that the records created in our view w
 ```bash
 dbt run --model stg_greentaxi_trips --vars '{"is_test_run": false}'
 ```
+> [!TIP]
+> This is a particularyly useful variable as with the default value we will be able to develop with lesser records being loaded into bigquery, which makes it cheaper and faster. And when we are done with development we can simply change the default value to `false` and load all the records into production environment. The formal name for this is `dev limit`.
+
+## Referencing older models in new models
+
+Now that we have completed our staging layer, its time to move on to the next stage which is the 
