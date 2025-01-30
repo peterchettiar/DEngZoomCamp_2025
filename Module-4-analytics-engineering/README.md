@@ -786,3 +786,13 @@ on trips_unioned.dropoff_locationid = dropoff_zone.locationid
 > If you come across the `Access Denied: BigQuery BigQuery: Permission denied while globbing file pattern.` error when your run your dbt command for build `fact_trips`, chances are your service account does not have the right permissions to access your `Google Cloud Storage` bucket. To fix this, simply go to your bucket details page on your `Google Cloud Storage` via the console. Click on the `PERMISSIONS` tab, and should able to see a `GRANT ACCESS` button. Click on it and add your dbt service account as principle as well as selecting `Storage Object Viewer` under roles. This should fix the problem!
 
 5. It should be noted that the command we ran `dbt build --select +fact_trips+` includes the limit that we had set in our staging models. This is suitable for developement but if we want to build our workflow for production without the limitation, then we simply include the `--vars` flag - `dbt build --select +fact_trips+ --vars '{'is_test_run': false}'`
+
+# Testing and documenting dbt models
+
+Testing and documenting are not required steps to successfully run models, but they are expected in any professional setting.
+
+## Testing
+
+
+
+## Documentation
