@@ -177,7 +177,7 @@ order by total_amount_agg
 desc limit 3;
 ```
 As such the result is:
-
+```sql
 +---------------------+--------------------+
 | Zone                | total_amount_agg   |
 |---------------------+--------------------|
@@ -185,6 +185,7 @@ As such the result is:
 | East Harlem South   | 16797.260000000053 |
 | Morningside Heights | 13029.79000000004  |
 +---------------------+--------------------+
+```
 
 > Answer: `East Harlem North, East Harlem South, Morningside Heights`
 
@@ -212,11 +213,13 @@ limit 1
 ```
 As such the result is:
 
+```sql
 +-------------------+---------------------+------------+
 | pickup_zone       | dropoff_zone        | tip_amount |
 |-------------------+---------------------+------------|
 | East Harlem North | JFK Airport         | 87.3       |
 +-------------------+---------------------+------------+
+```
 
 > Answer: `JFK Airport`
 
