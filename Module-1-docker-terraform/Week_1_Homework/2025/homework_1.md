@@ -78,7 +78,7 @@ To answer Question 3 to 6, we would need to load both the datasets into `postgre
 7. The dockerised ingestion script image is built, now we have to `docker run` as follows:
 ```bash
 docker run -it \
-    --network=week_1_homework_default \
+    --network=2025_default \
     taxi_ingest:hw1 \
     --user=root \
     --password=root \
@@ -87,11 +87,146 @@ docker run -it \
     --db=ny_taxi \
     --first_table_name=green_taxi_trips \
     --second_table_name=taxi_zones \
-    --green_taxi_url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz" \
-    --taxi_zones_url="https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv" 
+    --green_taxi_url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz" \
+    --taxi_zones_url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv" 
 ```
 > [!Note]
 > `network` name can be found by running `docker network ls` as mentioned in step 2 - usually default network names created by `docker-compose` would start with the name of the directory in which the `docker-compose.yml` file is located, unless otherwise mentioned path.
 
 > [!TIP]
 > Now that we have created the container after the `docker run` command, if we were to run the same container again wtih the same configs we can run `docker ps -a` to see all the containers and copy the container ID for the dockerised ingestion script to run the container again using the command `docker start <contained_id>`
+
+### Question 3: Trip Segmentation Count
+
+During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusive), how many trips, respectively, happened:
+
+1. Up to 1 mile
+2. In between 1 (exclusive) and 3 miles (inclusive),
+3. In between 3 (exclusive) and 7 miles (inclusive),
+4. In between 7 (exclusive) and 10 miles (inclusive),
+5. Over 10 miles
+
+A query that produces as the requirement above as follows:
+```sql
+select
+  case
+    when trip_distance <= 1 then 'Up to 1 mile'
+    when trip_distance > 1 and trip_distance <= 3 then '1~3 miles'
+    when trip_distance > 3 and trip_distance <= 7 then '3~7 miles'
+    when trip_distance > 7 and trip_distance <= 10 then '7~10 miles'
+    else '10+ miles'
+  end as segment,
+  to_char(COUNT(1), '999,999') as num_trips
+from green_taxi_trips
+group by segment
+order by segment desc;
+```
+As such the result is:
+```
++--------------+-----------+
+| segment      | num_trips |
+|--------------+-----------|
+| Up to 1 mile |  104,838  |
+| 7~10 miles   |   27,688  |
+| 3~7 miles    |  109,645  |
+| 1~3 miles    |  199,013  |
+| 10+ miles    |   35,202  |
++--------------+-----------+
+```
+
+> Answer: `104,838; 199,013; 109,645; 27,688; 35,202`
+
+### Question 4: Longest trip for each day
+
+Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
+
+A query that produces as the requirement above as follows:
+```sql
+select
+  date(lpep_pickup_datetime),
+  MAX(trip_distance) as "day_longest_trip"
+from green_taxi_trips
+group by date(lpep_pickup_datetime)
+order by "day_longest_trip" desc
+limit 1;
+```
+As such the result is:
+
++------------+------------------+
+| date       | day_longest_trip |
+|------------+------------------|
+| 2019-10-31 | 515.89           |
++------------+------------------+
+
+> Answer: `2019-10-31`
+
+### Question 5: Three biggest pickup zones
+
+Which were the top pickup locations with over 13,000 in total_amount (across all trips) for 2019-10-18?
+
+A query that produces as the requirement above as follows:
+```sql
+select
+  tz."Zone",
+  SUM(gt."total_amount") as total_amount_agg
+from green_taxi_trips gt join taxi_zones tz on gt."PULocationID" = tz."LocationID"
+where date(gt.lpep_pickup_datetime) = '2019-10-18'
+group by tz."Zone"
+having SUM(gt."total_amount") > 13000
+order by total_amount_agg
+desc limit 3;
+```
+As such the result is:
+
++---------------------+--------------------+
+| Zone                | total_amount_agg   |
+|---------------------+--------------------|
+| East Harlem North   | 18686.680000000037 |
+| East Harlem South   | 16797.260000000053 |
+| Morningside Heights | 13029.79000000004  |
++---------------------+--------------------+
+
+> Answer: `East Harlem North, East Harlem South, Morningside Heights`
+
+### Question 6: Largest tip
+
+For the passengers picked up in October 2019 in the zone named "East Harlem North" which was the drop off zone that had the largest tip?
+
+A query that produces as the requirement above as follows:
+```sql
+select
+    puz.zone as pickup_zone,
+    doz.zone as dropoff_zone,
+    g.tip_amount
+from
+    green_taxi_trips g
+inner join
+    zone_lookup puz on g.pu_location_id = puz.location_id
+inner join
+    zone_lookup doz on g.do_location_id = doz.location_id
+where
+    puz.zone = 'East Harlem North'
+order by
+    g.tip_amount desc
+limit 1
+```
+As such the result is:
+
++-------------------+---------------------+------------+
+| pickup_zone       | dropoff_zone        | tip_amount |
+|-------------------+---------------------+------------|
+| East Harlem North | JFK Airport         | 87.3       |
++-------------------+---------------------+------------+
+
+> Answer: `JFK Airport`
+
+### Question 7: Terraform Workflow
+
+> Downloading the provider plugins and setting up backend:
+- `terraform init`
+> Generating proposed changes and auto-executing the plan:
+- `terraform plan -auto-apply`
+> Remove all resources managed by terraform
+- `teraform destroy`
+
+> Answer: `terraform init, terraform apply -auto-approve, terraform destroy`
