@@ -122,7 +122,7 @@ group by segment
 order by segment desc;
 ```
 As such the result is:
-```
+```sql
 +--------------+-----------+
 | segment      | num_trips |
 |--------------+-----------|
