@@ -16,6 +16,56 @@ And in the `bash` shell, if we run `pip --version`, it would show us the install
 
 ![image](https://github.com/user-attachments/assets/b19025a9-30d3-4c61-ad29-5ca6b1e375c8)
 
+> Answer: `24.3.1`
+
+### Question 2: Understanding Docker networking and docker-compose
+
+For the given `docker-compose.yml` file:
+
+```yaml
+services:
+  db:
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'ny_taxi'
+    ports:
+      - '5433:5432'
+    volumes:
+      - vol-pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@pgadmin.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadmin"
+    ports:
+      - "8080:80"
+    volumes:
+      - vol-pgadmin_data:/var/lib/pgadmin  
+
+volumes:
+  vol-pgdata:
+    name: vol-pgdata
+  vol-pgadmin_data:
+    name: vol-pgadmin_data
+```
+
+`pgadmin` is a web-based tool that makes it more convenient to access and manage our databases. And in the docker compose setup, the pgAdmin service needs to connect to PostgreSQL database service, and since docker compose services can refer to each other by name, the hostname for `pgadmin` to connect to would be `db`, with the following details:
+- username = 'postgres'
+- password = 'postgres'
+- databse = 'ny_taxi'
+
+Next, the port that ` pgadmin` should connect to is `5432` because this is the port on the inside of our `db` postgres container.
+
+> [!NOTE]
+> We only use port=5433 if we want to connect to `db` from our local host machine - `pgcli -h localhost -p 5433 -u root -d ny_taxi`. You must connect to localhost:5433 because port 5433 on your machine is forwarded to 5432 inside the container.
+
+> Answer: `db:5432 `
+
 ## Prepare Postgres
 
 To answer Question 3 to 6, we would need to load both the datasets into `postgres` and do the queries directly on `pgadmin`. So the steps for uploading the datasets into `postgres` are as follows:
