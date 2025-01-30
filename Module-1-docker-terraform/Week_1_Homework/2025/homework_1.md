@@ -14,7 +14,7 @@ What actually happens is that docker runs the python image in its specfied versi
 
 And in the `bash` shell, if we run `pip --version`, it would show us the installed version of `pip` in the specified version of our python container. See command output below.
 
-
+![image](https://github.com/user-attachments/assets/b19025a9-30d3-4c61-ad29-5ca6b1e375c8)
 
 ## Prepare Postgres
 
