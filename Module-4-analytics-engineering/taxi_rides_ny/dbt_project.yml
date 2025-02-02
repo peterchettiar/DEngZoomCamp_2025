@@ -5,11 +5,8 @@
 name: 'taxi_rides_ny'
 version: '1.0.0'
 config-version: 2
-<<<<<<< HEAD
-=======
 dbt-cloud:
     project-id: 70471823418968
->>>>>>> 4f2af437f21f478664c35bdff087707d5b12394b
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
@@ -44,8 +41,5 @@ models:
   taxi_rides_ny:
     # # Applies to all files under models/example/
     # example:
-<<<<<<< HEAD
     #   +materialized: table
-=======
     #   +materialized: table
->>>>>>> 4f2af437f21f478664c35bdff087707d5b12394b
