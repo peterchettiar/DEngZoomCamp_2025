@@ -860,7 +860,7 @@ After defining the generic data tests in the `.yml` file, dbt will process the a
 
 After which, behnd the scenes, dbt constructs a `select` query for each data test, using the parametrized query from the generic test block. These queries return the rows where your assertion is not true; if the test returns zero rows, your assertion passes.
 
->![TIP]
+> ![TIP]
 > Sometimes we have multiple tests to be run on many fields, and this can be a cumbersome process especially when defining these generic tests in a `.yml` file. Hence, it would be advised to use the `codegen` package from dbt (steps for using this package is similar to [dbt_utils](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/dbt_cloud/Module-4-analytics-engineering#packages)), using the `generate_model_yaml` macro. Steps include:
 > 1. Create a new file and copy the helper function below to a new file in your project directory.
 ```sql
