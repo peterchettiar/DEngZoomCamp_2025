@@ -879,4 +879,18 @@ Steps for using `generate_model_yaml` macro:
 > [!NOTE]
 > When setting tests the default test inputs are considered strings. For example, if we apply an `accepted_values` test on an integer column, naturally the input values for the test should also be `int64`. In order to make sure that the compiled query is also reflecting the same datatype, we need to add an additional condition to our test, `quote=false`.
 
+Now to repeat the same steps for our `core` models. Another `core` model called [`dm_monthly_zone_revenue.sql`](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/04-analytics-engineering/taxi_rides_ny/models/core/dm_monthly_zone_revenue.sql) was added, code was taken from course repository. Now, we can run the same step with `core` as directory and no prefix argument given:
+```sql
+{% set models_to_generate = codegen.get_models(directory='marts', prefix='fct_') %}
+{{ codegen.generate_model_yaml(
+    model_names = models_to_generate
+) }}
+```
+
+Make sure to copy the compiled output into a seperate `schema.yml` for the `core` models. After which, you can run the `dbt build` command and dbt will compile the models as well as their respective validation tests as follows:
+
+![image](https://github.com/user-attachments/assets/a004e231-e13a-406f-8be4-b5553ad20e22)
+
+Based on the above, you can see the approach dbt takes to compile the models and run the test is in line with the lineage graph (as dbt moves from left to right layers in the DAG).
+
 ## Documentation
