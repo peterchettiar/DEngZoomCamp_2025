@@ -243,7 +243,7 @@ D. BigQuery User
 > [!NOTE]
 > There will be a few fields that would be automatically filled at the stage where you have to test connection (Dataset, Target Name and Threads), please note that when you make your first `dbt run` on your cloud IDE, the dataset name should appear in BigQuery which should be indicating that the connection to BigQuery from dbt was successful, and that the dataset is a sandbox dataset for development.
 
-- Set up a repository, for this section click on `Git Clone` and add the git URL to our repo (e.g. git@github.com:peterchettiar/DEngZoomCamp_2025.git)
+- Set up a repository, for this section click on `Git Clone` and add the git URL to our repo (e.g. `git@github.com:peterchettiar/DEngZoomCamp_2025.git`)
 - Once you’ve added, deploy keys will be generated. Dbt will use the deploy keys to clone the repository, hence in the next section we will discuss more on how to add the deploy keys in your Github account.
 
 ### 3. Connect Github project repo to dbt cloud project
