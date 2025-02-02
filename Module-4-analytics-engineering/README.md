@@ -24,6 +24,8 @@
   - [Referencing older models in new models](#referencing-older-models-in-new-models)
 - [Testing and documenting dbt models](#testing-and-documenting-dbt-models)
   - [Testing](#testing)
+    - [Singular data tests](#singular-data-tests)
+    - [Generic data tests](#generic-data-tests)
   - [Documentation](#documentation)
 - [Deployment of a dbt project](#deployment-of-a-dbt-project)
   - [Deployment basics](#deployment-basics)
@@ -243,7 +245,7 @@ D. BigQuery User
 > [!NOTE]
 > There will be a few fields that would be automatically filled at the stage where you have to test connection (Dataset, Target Name and Threads), please note that when you make your first `dbt run` on your cloud IDE, the dataset name should appear in BigQuery which should be indicating that the connection to BigQuery from dbt was successful, and that the dataset is a sandbox dataset for development.
 
-- Set up a repository, for this section click on `Git Clone` and add the git URL to our repo (e.g. git@github.com:peterchettiar/DEngZoomCamp_2025.git)
+- Set up a repository, for this section click on `Git Clone` and add the git URL to our repo (e.g. `git@github.com:peterchettiar/DEngZoomCamp_2025.git`)
 - Once you’ve added, deploy keys will be generated. Dbt will use the deploy keys to clone the repository, hence in the next section we will discuss more on how to add the deploy keys in your Github account.
 
 ### 3. Connect Github project repo to dbt cloud project
@@ -793,6 +795,85 @@ Testing and documenting are not required steps to successfully run models, but t
 
 ## Testing
 
+Data tests are assertions you make about your models and other resources in your dbt project (e.g. sources, seeds and snapshots). This allows you to test the integrity of the SQL in each model. Out of the box, you can test whether a specified column in a model contains only `non-null`, `unique`, `accepted_values` and `relationships` (i.e. values that have a corresponding value in another model). Data tests are essentially SQL quries, more specifcally they are `SELECT` statements that seek to grab "failing" records, ones that disprove your assertions (i.e. after you define your data test, dbt will compile the data test into SQL query where it will return records that do not meet your validation criteria).
+ 
+So this begs the question as to how we actually define the data tests in dbt. There are two approaches to achieve this:
+1. A `singular` data test
+2. A `generic` data test
 
+### Singular data tests
+
+These type of tests are called "singular" as they are one-off assertions usable for a single purpose. They are defined as a `,sql` file typically in the `tests` directory of your dbt project. They can be executed using the `dbt test` command. An example of such a test is as follows:
+```sql
+-- Refunds have a negative amount, so the total amount should always be >= 0.
+-- Therefore return records where total_amount < 0 to make the test fail.
+select
+    order_id,
+    sum(amount) as total_amount
+from {{ ref('fct_payments') }}
+group by 1
+having total_amount < 0
+```
+Essentially, we are testing to see if there are any refund records in the `fct_payments` table.
+
+> [!NOTE]
+> The `.sql` file should be in the tests folder and if you want to include a decsription to a singular test, then this should be defined in a `.yml` file in the same `tests` directory.
+> Also omit semi-colons at the end of the SQL statment in your singular test files as they may cause your test to fail.
+> You can use jinja (`ref` and `source`) in the test definition, just like you can when creating models.
+
+### Generic data tests
+
+Singular data tests are so easy that you may find yourself writing the same basic structure repeatedly, only changing the name of a column or model. By that point, the test isn't so singular! In that case, generic data tests are recommended.
+
+Generic tests are defined in a `tests` block as a property on any existing model (source, seed, or snapshot) `.yml` file. An example as follows:
+```yaml
+version: 2
+
+models:
+  - name: orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'returned']
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('customers')
+              field: id
+```
+
+After defining the generic data tests in the `.yml` file, dbt will process the arguments provided into a parametrized query. For example, if we take take the `not_null` test on the `order_id` column of the `order` model, dbt will template the model and column name into its built-in parameterized `not_null` query as follows:
+```sql
+{% test not_null(model, column_name) %}
+
+    select *
+    from {{ model }}
+    where {{ column_name }} is null
+
+{% endtest %}
+```
+
+After which, behnd the scenes, dbt constructs a `select` query for each data test, using the parametrized query from the generic test block. These queries return the rows where your assertion is not true; if the test returns zero rows, your assertion passes.
+
+> [!TIP]
+> Sometimes we have multiple tests to be run on many fields, and this can be a cumbersome process especially when defining these generic tests in a `.yml` file. Hence, it would be advised to use the `codegen` package from dbt (steps for using this package is similar to [dbt_utils](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/dbt_cloud/Module-4-analytics-engineering#packages)), using the `generate_model_yaml` macro.
+
+Steps for using `generate_model_yaml` macro:
+1. Create a new file and copy the helper function below to a new file in your project directory.
+```sql
+{% set models_to_generate = codegen.get_models(directory='marts', prefix='fct_') %}
+{{ codegen.generate_model_yaml(
+    model_names = models_to_generate
+) }}
+```
+2. Next, we want to change the directory as well as the prefix (optional). Let's say `staging` directory and `stg_` as prefix for this example.
+3. Select the entire query and click on `compile selection` in the `dbt cloud IDE`. This should generate the `name`, `data_type` and `description` of each column for each model in the specified model directory as well as prefix.
+4. Copy the output and paste it in the `schema.yml` file (can be placed after `sources`, starting with `model`).
+5. Amend the tests as you see fit.
 
 ## Documentation
