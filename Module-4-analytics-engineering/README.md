@@ -876,4 +876,7 @@ Steps for using `generate_model_yaml` macro:
 4. Copy the output and paste it in the `schema.yml` file (can be placed after `sources`, starting with `model`).
 5. Amend the tests as you see fit.
 
+> [!NOTE]
+> When setting tests the default test inputs are considered strings. For example, if we apply an `accepted_values` test on an integer column, naturally the input values for the test should also be `int64`. In order to make sure that the compiled query is also reflecting the same datatype, we need to add an additional condition to our test, `quote=false`.
+
 ## Documentation
