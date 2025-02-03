@@ -908,3 +908,11 @@ Generate documentation for your project by following these steps:
 1. Run `dbt docs generate` - this command tells dbt to compile relevant information about your project and warehouse into `manifest.json` and `catalog.json` files, respectively.
 2. Ensure you've created the models with `dbt run` to view the documentation for all documentation, not just those described in your project.
 3. Run `dbt doc serve` if you're deploying locally to use these `.json` files to populate a local website.
+
+Once you've filled in the description fields in your `schema.yml` files for `core` and `staging`, run the `dbt docs gnerate command` in dbt cloud. After dbt gathers the information it needs it will autogenerate the documentation for your project, click on the button shown below and this should take you to your documentation server as a website:
+
+![image](https://github.com/user-attachments/assets/a898dd6e-ff5d-4f6b-820f-717e7a435227)
+
+Once in your project documentation page, you would be able to see the descriptions you've added in your `.yml` on the html page as follows:
+
+![image](https://github.com/user-attachments/assets/975cea9c-0bf1-4d1b-a849-0196edeff127)
