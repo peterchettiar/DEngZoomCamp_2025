@@ -972,15 +972,23 @@ On the landing page, you will see that a default _Development_ environment is al
 
 We will create a new _Production_ environment of type _Deployment_ using the latest stable dbt version. By default, the environment will use the `main` branch of the repo but you may change it for more complex workflows. If you used the JSON credentials when setting up dbt Cloud then most of the deployment credentials should already be set up except for the dataset. For this example, we will use the `production` dataset (make sure that the `production` dataset/schema exists in your BigQuery project).
 
-![image](https://github.com/user-attachments/assets/4ead2993-e8bd-4fee-a548-84328beee36d)
+![image](https://github.com/user-attachments/assets/557cc1f4-b3d2-4343-90e0-ffe243e50dc8)
 
-The dbt Cloud scheduler is available in the _Jobs_ menu in the sidebar. We will create a new job with name `dbt build` using the _Production_ environment, we will check the _Generate docs?_ checkbox. Add the following commands:
+Next, once we've created the `Production` environment we can create a new job. Click on `Create job` in the production environment page and click on `Deploy job`. 
 
-1. `dbt seed`
-1. `dbt run`
-1. `dbt test`
+![image](https://github.com/user-attachments/assets/cef000b2-b6f9-4128-b5de-9bca326e3ac3)
 
-In the _Schedule_ tab at the bottom we will check the _Run on schedule?_ checkbox with a timing of _Every day_ and _every 6 hours_. Save the job. You will be shown the job's run history screen which contains a _Run now_ buttom that allows us to trigger the job manually; do so to check that the job runs successfully.
+Then fill out the details in the landing page as follows:
+
+![image](https://github.com/user-attachments/assets/422869af-d622-4f53-a44a-6180f398389c)
+
+The dbt Cloud scheduler is available in the _Jobs_ menu in the sidebar. We will create a new job with name `Nightly` using the _Production_ environment, we will check the _Generate docs?_ checkbox as well as the _Run source freshness_. Add the following commands:
+
+1. `dbt build`
+
+In the _Schedule_ tab at the bottom we will check the _Run on schedule?_ checkbox with a timing of _Specific hours_ and _12_ (we do not receive data on weekends, hence we can uncheck Saturday and Sunday under _Days of the week_. Save the job. You will be shown the job's run history screen which contains a _Run now_ buttom that allows us to trigger the job manually; do so to check that the job runs successfully.
+
+![image](https://github.com/user-attachments/assets/5987858d-6010-4386-af47-2a2556b31be8)
 
 You can access the run and check the current state of it as well as the logs. After the run is finished, you will see a _View Documentation_ button at the top; clicking on it will open a new browser window/tab with the generated docs.
 
