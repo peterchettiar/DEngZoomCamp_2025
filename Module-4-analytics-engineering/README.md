@@ -916,3 +916,78 @@ Once you've filled in the description fields in your `schema.yml` files for `cor
 Once in your project documentation page, you would be able to see the descriptions you've added in your `.yml` on the html page as follows:
 
 ![image](https://github.com/user-attachments/assets/975cea9c-0bf1-4d1b-a849-0196edeff127)
+
+# Deployment of a dbt project
+
+_Video sources: [1](https://www.youtube.com/watch?v=rjf6yZNGX8I&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=40)_, [2](https://www.youtube.com/watch?v=Cs9Od1pcrzM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=41)
+
+## Deployment basics
+
+If you remember from the [beginning of this lesson](#what-is-dbt), the goal of dbt is to introduce good software engineering practices by defining a ***deployment workflow***.
+
+![image](https://github.com/user-attachments/assets/da1d2bb5-fc03-4075-8dbc-9ab121a84739)
+
+So far we've seen the `Develop` and `Test And Document` stages of the workflow. We will now cover _deployment_.
+
+What is deployment?
+- _Deployment_ is the process of running the models we created in our development environment in a production environment
+- Development and later deployment allows us to continue building our models and testing them without without affecting our production environemnt
+- A deployment environment will normally have a different schema in our data warehouse and ideally a different user
+- A development - deployment workflow will be something like:
+  - Develop in a user branch
+  - Open a PR to merge into the main branch (ideally someone should review and approve, but this can be automated too)
+  - Merge the branch to the main branch
+  - Run the new models in production environment using the main branch
+  - Schedule the models
+ 
+Running a dbt project in production - dbt projects are usually deployed in the form of ***jobs***:
+* A ***job*** is a collection of _commands_ such as `build` or `test`. A job may contain one or more commands.
+* Jobs can be triggered manually or on schedule.
+    * dbt Cloud has a scheduler which can run jobs for us, but other tools such as Airflow or cron can be used as well.
+* Each job will keep a log of the runs over time, and each run will keep the logs for each command.
+* A job may also be used to generate documentation, which may be viewed under the run information.
+* If the `dbt source freshness` command was run, the results can also be viewed at the end of a job.
+
+## Continuous Integration
+
+Another good software engineering practice that dbt enables is ***Continuous Integration*** (CI): the practice of regularly merging development branches into a central repository, after which automated builds and tests are run. The goal of CI is to reduce adding bugs to the production code and maintain a more stable project.
+
+CI is built on jobs: a CI job will do things such as build, test, etc. We can define CI jobs which can then be triggered under certain circunstances to enable CI.
+
+dbt makes use of GitHub/GitLab's Pull Requests to enable CI via [webhooks](https://www.wikiwand.com/en/Webhook). When a PR is ready to be merged, a webhook is received in dbt Cloud that will enqueue a new run of a CI job. This run will usually be against a temporary schema that has been created explicitly for the PR. If the job finishes successfully, the PR can be merged into the main branch, but if it fails the merge will not happen.
+
+CI jobs can also be scheduled with the dbt Cloud scheduler, Airflow, cron and a number of additional tools.
+
+## Deployment using dbt Cloud
+
+In dbt Cloud, you might have noticed that after the first commit, the `main` branch becomes read-only and forces us to create a new branch if we want to keep developing. dbt Cloud does this to enforce us to open PRs for CI purposes rather than allowing merging to `main` straight away.
+
+In order to properly establish a deployment workflow, we must define ***environments*** within dbt Cloud. In the sidebar, click on _Deploy_ followed by _Environments_.
+
+![image](https://github.com/user-attachments/assets/97251401-696d-40cd-8c3f-b53b5ddc347f)
+
+On the landing page, you will see that a default _Development_ environment is already generated, which is the one we've been using so far. Next we click on `create environment` to create our production environment.
+
+![image](https://github.com/user-attachments/assets/e9db0f28-d127-4496-8821-f7b14b6b2e0c)
+
+We will create a new _Production_ environment of type _Deployment_ using the latest stable dbt version. By default, the environment will use the `main` branch of the repo but you may change it for more complex workflows. If you used the JSON credentials when setting up dbt Cloud then most of the deployment credentials should already be set up except for the dataset. For this example, we will use the `production` dataset (make sure that the `production` dataset/schema exists in your BigQuery project).
+
+![image](https://github.com/user-attachments/assets/4ead2993-e8bd-4fee-a548-84328beee36d)
+
+The dbt Cloud scheduler is available in the _Jobs_ menu in the sidebar. We will create a new job with name `dbt build` using the _Production_ environment, we will check the _Generate docs?_ checkbox. Add the following commands:
+
+1. `dbt seed`
+1. `dbt run`
+1. `dbt test`
+
+In the _Schedule_ tab at the bottom we will check the _Run on schedule?_ checkbox with a timing of _Every day_ and _every 6 hours_. Save the job. You will be shown the job's run history screen which contains a _Run now_ buttom that allows us to trigger the job manually; do so to check that the job runs successfully.
+
+You can access the run and check the current state of it as well as the logs. After the run is finished, you will see a _View Documentation_ button at the top; clicking on it will open a new browser window/tab with the generated docs.
+
+Under _Account settings_ > _Projects_, you may edit the project in order to modify the _Documentation_ field under _Artifacts_; you should see a drop down menu which should contain the job we created which generates the docs. After saving the changes and reloading the dbt Cloud website, you should now have a _Documentation_ section in the sidebar.
+
+## Deployment using dbt Core (local)
+
+In dbt Core, environments are defined in the `profiles.yml` file. Assuming you've defined a ***target*** (an environment) called `prod`, you may build your project agains it using the `dbt build -t prod` command.
+
+You may learn more about how to set up the `profiles.yml` file [in this link](https://docs.getdbt.com/dbt-cli/configure-your-profile).
