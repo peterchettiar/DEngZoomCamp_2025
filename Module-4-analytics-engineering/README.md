@@ -982,17 +982,21 @@ Then fill out the details in the landing page as follows:
 
 ![image](https://github.com/user-attachments/assets/422869af-d622-4f53-a44a-6180f398389c)
 
-The dbt Cloud scheduler is available in the _Jobs_ menu in the sidebar. We will create a new job with name `Nightly` using the _Production_ environment, we will check the _Generate docs?_ checkbox as well as the _Run source freshness_. Add the following commands:
+The dbt Cloud scheduler is available in the _Jobs_ menu in the sidebar. We will create a new job with name `Nightly` using the _Production_ environment, we will check the _Generate docs_ checkbox as well as the _Run source freshness_. Add the following commands:
 
 1. `dbt build`
 
-In the _Schedule_ tab at the bottom we will check the _Run on schedule?_ checkbox with a timing of _Specific hours_ and _12_ (we do not receive data on weekends, hence we can uncheck Saturday and Sunday under _Days of the week_. Save the job. You will be shown the job's run history screen which contains a _Run now_ buttom that allows us to trigger the job manually; do so to check that the job runs successfully.
+In the _Schedule_ tab at the bottom we will check the _Run on schedule_ checkbox, with a timing of _Specific hours_ and _12_ (we do not receive data on weekends, hence we can uncheck Saturday and Sunday under _Days of the week_. Save the job. You will be shown the job's run history screen which contains a _Run now_ buttom that allows us to trigger the job manually; do so to check that the job runs successfully.
 
 ![image](https://github.com/user-attachments/assets/5987858d-6010-4386-af47-2a2556b31be8)
 
 You can access the run and check the current state of it as well as the logs. After the run is finished, you will see a _View Documentation_ button at the top; clicking on it will open a new browser window/tab with the generated docs.
 
 Under _Account settings_ > _Projects_, you may edit the project in order to modify the _Documentation_ field under _Artifacts_; you should see a drop down menu which should contain the job we created which generates the docs. After saving the changes and reloading the dbt Cloud website, you should now have a _Documentation_ section in the sidebar.
+
+> [!IMPORTANT]
+> When running a job in the dbt production environment, the execution log will display the branch and commit hash of the code repository it is using. By default, jobs typically run code from the `main` branch. Therefore, it's essential to create a **pull request** to merge changes from a feature branch into the `main` branch, ensuring that the latest updates are included in production.
+> ![image](https://github.com/user-attachments/assets/42cf9270-b488-4adf-a813-d8df24d8e022)
 
 ## Deployment using dbt Core (local)
 
