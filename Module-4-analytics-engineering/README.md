@@ -995,8 +995,11 @@ You can access the run and check the current state of it as well as the logs. Af
 Under _Account settings_ > _Projects_, you may edit the project in order to modify the _Documentation_ field under _Artifacts_; you should see a drop down menu which should contain the job we created which generates the docs. After saving the changes and reloading the dbt Cloud website, you should now have a _Documentation_ section in the sidebar.
 
 > [!IMPORTANT]
-> When running a job in the dbt production environment, the execution log will display the branch and commit hash of the code repository it is using. By default, jobs typically run code from the `main` branch. Therefore, it's essential to create a **pull request** to merge changes from a feature branch into the `main` branch, ensuring that the latest updates are included in production.
+> When running a job in the dbt production environment, the execution log will display the branch and commit hash of the code repository it is using. By default, jobs typically run code from the `main` branch. Therefore, it's essential to create a **pull request** to merge changes from a feature branch into the `main` branch, ensuring that the latest updates are included in production. Make sure this is done so before running/scheduling job.
 > ![image](https://github.com/user-attachments/assets/42cf9270-b488-4adf-a813-d8df24d8e022)
+
+> [!NOTE]
+> Please be reminded that we used the `dbt build` command when defining the job's **execution settings**, and this only gives us part of the data due to our limit restriction implemented for development. So if we want the full data deployed for production, we should use the `dbt build --select +fact_trips+ --vars '{'is_test_run': false}` instead to remove the limitation.
 
 ## Deployment using dbt Core (local)
 
