@@ -999,7 +999,7 @@ Under _Account settings_ > _Projects_, you may edit the project in order to modi
 > ![image](https://github.com/user-attachments/assets/42cf9270-b488-4adf-a813-d8df24d8e022)
 
 > [!NOTE]
-> Please be reminded that we used the `dbt build` command when defining the job's **execution settings**, and this only gives us part of the data due to our limit restriction implemented for development. So if we want the full data deployed for production, we should use the `dbt build --select +fact_trips+ --vars '{'is_test_run': false}` instead to remove the limitation.
+> Please be reminded that we used the `dbt build` command when defining the job's **execution settings**, and this only gives us part of the data due to our limit restriction implemented for development. So if we want the full data deployed for production, we should use the `dbt build --select +fact_trips+ --vars '{'is_test_run': false}` instead to remove the limitation on our entire workflow.
 
 ## Deployment using dbt Core (local)
 
