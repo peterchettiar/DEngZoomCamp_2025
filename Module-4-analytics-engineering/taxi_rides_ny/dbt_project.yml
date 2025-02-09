@@ -42,7 +42,7 @@ vars:
 
 models:
   taxi_rides_ny:
-    # Applies to all files under models/example/
+  #   # Applies to all files under models/example/
     staging:
       materialized: view
     core:
