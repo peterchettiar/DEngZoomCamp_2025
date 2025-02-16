@@ -38,7 +38,7 @@ WHERE
 > Answer: `22998722`
 
 > [!NOTE]
-> The link to the model that created the table is [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-4-analytics-engineering/taxi_rides_ny/models/core/fact_fhvtaxi.sql)
+> The link to the model that created the `fact_fhvtaxi` table is [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-4-analytics-engineering/taxi_rides_ny/models/core/fact_fhvtaxi.sql)
 
 ### Question 4: What is the service that had the most rides during the month of July 2019 month with the biggest amount of rides after building a tile for the fact_fhv_trips table and the fact_trips tile as seen in the videos?
 
