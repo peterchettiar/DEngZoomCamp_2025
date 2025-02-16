@@ -2,8 +2,9 @@
 
 WITH
 fhv_data as (
-    select *,
-           "Fhv" as service_type 
+    select 
+        *,
+        "Fhv" as service_type 
     from {{ ref('stg_fhvtaxi_trips') }}
 ),
 
