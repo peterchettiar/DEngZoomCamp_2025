@@ -9,8 +9,14 @@ sources:
     tables:
       - name: greentaxi_trips
       - name: yellowtaxi_trips
+      - name: fhvtaxi_trips
 
 models:
+  - name: stg_fhvtaxi_trips
+    description: >
+      Trips made by For Hire Vehicles. The records were collected and provided to the NYC Taxi and
+      Limousine Commission (TLC) by technology service providers.
+
   - name: stg_yellowtaxi_trips
     description: >
       Trips made by New York City's iconic yellow taxis. 
