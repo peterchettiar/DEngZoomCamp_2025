@@ -2,7 +2,10 @@
 
 WITH
 fhv_data as (
-    select * from {{ ref('stg_fhvtaxi_trips') }}
+    select 
+        *,
+        "Fhv" as service_type 
+    from {{ ref('stg_fhvtaxi_trips') }}
 ),
 
 dim_zones as (
