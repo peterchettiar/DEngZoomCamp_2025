@@ -42,3 +42,42 @@ WHERE
 
 ### Question 4: What is the service that had the most rides during the month of July 2019 month with the biggest amount of rides after building a tile for the fact_fhv_trips table and the fact_trips tile as seen in the videos?
 
+![image](https://github.com/user-attachments/assets/8eb366c2-4780-4cc2-9658-d08a1afed466)
+
+I was unable to make a join between `fact_trips` and `fact_fhv` tables to be able to generate this chart. What I did was more of a brute force method where I connected to a data souce using `custom query`. Query is as follows:
+
+```sql
+WITH
+  green_yellow AS (
+  SELECT
+    service_type,
+    COUNT(*) AS total_records
+  FROM
+    `ny-rides-peter-415106.dbt_production.fact_trips`
+  WHERE
+    DATE_TRUNC(pickup_datetime, month) = '2019-07-01'
+  GROUP BY
+    1 ),
+  fhv AS (
+  SELECT
+    service_type,
+    COUNT(*) AS total_records
+  FROM
+    `ny-rides-peter-415106.dbt_production.fact_fhvtaxi`
+  WHERE
+    DATE_TRUNC(pickup_datetime, month) = '2019-07-01'
+  GROUP BY
+    1 )
+SELECT
+  *
+FROM
+  green_yellow
+UNION ALL
+SELECT
+  *
+FROM
+  fhv
+ORDER BY
+  total_records desc;
+```
+> Answer: `Yellow`
