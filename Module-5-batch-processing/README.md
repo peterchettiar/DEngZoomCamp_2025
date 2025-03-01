@@ -12,6 +12,10 @@
 
 # Introduction to Batch Processing
 
+**Batch processing** is a computational technique in which a collection of data is amassed and then processed in a single operation, often without the need for real-time interaction. This approach is a particularly effective method for handling large volumes of data, where tasks can be executed as a group during off-peak hours to optimmize system resources and throughput. End-of-day bank reconcilliation and payroll processing is an example of batch processing.
+
+</u>Basic principles</u>
+
 ## Batch versus Streaming
 
 
