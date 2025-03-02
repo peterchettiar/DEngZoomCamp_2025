@@ -35,7 +35,7 @@ The choice between batch and stream processing reflects a trade-off between time
 
   - Example: processing taxi trips each day
 
-![image](https://github.com/user-attachments/assets/e7d0d812-c4f6-405e-86a4-a86857cf76f4)
+![image](https://github.com/user-attachments/assets/efd17a0d-7043-4783-8643-7cad36d1daed)
 
 - **Stream processing tackles data as it arrives in real-time**, with no inherent delays. Stream processing excels when immediate insights are required, as seen in fraud detection systems or live dashboards.
 
