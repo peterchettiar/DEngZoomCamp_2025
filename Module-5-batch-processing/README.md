@@ -18,9 +18,6 @@ Basic principles - Here are some basic principles of the batch processing method
 
 ![image](https://github.com/user-attachments/assets/70f0e8f2-a753-4aed-88eb-a31835fca5e4)
 
-![image](https://github.com/user-attachments/assets/858dd908-ad29-4894-a89e-5e9b57957305)
-
-
 Here is an example flow of batch processing:
 1. **Data collection:** Raw data is gathered from various sources such as databases, files, sensors or APIs. This data can be various types including text, numerical, or multimedia.
 2. **Data preprocessing:** Raw data often requires cleaning, normalization, and transformation to make it suitable for analysis. This step involves removing duplicates, handling missing values, scaling numerical data, and encoding categorical variables.
@@ -38,7 +35,7 @@ The choice between batch and stream processing reflects a trade-off between time
 
   - Example: processing taxi trips each day
 
-![image](https://github.com/user-attachments/assets/efd17a0d-7043-4783-8643-7cad36d1daed)
+![image](https://github.com/user-attachments/assets/739fee80-368f-4a28-b214-d3c321baa0ec)
 
 - **Stream processing tackles data as it arrives in real-time**, with no inherent delays. Stream processing excels when immediate insights are required, as seen in fraud detection systems or live dashboards.
 
