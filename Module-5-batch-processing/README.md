@@ -12,7 +12,7 @@
 
 # Introduction to Batch Processing
 
-**Batch processing** is a computational technique in which a collection of data is amassed and then processed in a single operation, often without the need for real-time interaction. This approach is a particularly effective method for handling large volumes of data, where tasks can be executed as a group during off-peak hours to optimmize system resources and throughput. End-of-day bank reconcilliation and payroll processing is an example of batch processing.
+**Batch processing** is a computational technique in which a collection of data is amassed and then processed in a single operation, often without the need for real-time interaction (i.e. stream processing). This approach is a particularly effective method for handling large volumes of data, where tasks can be executed as a group during off-peak hours to optimmize system resources and throughput. End-of-day bank reconcilliation and payroll processing is an example of batch processing.
 
 Basic principles - Here are some basic principles of the batch processing method:
 
@@ -28,6 +28,20 @@ Here is an example flow of batch processing:
 7. **Monitoring and iteration:** Batch processing systems are often monitored for performance, errors, or anomalies.
 
 ## Batch versus Streaming
+
+The choice between batch and stream processing reflects a trade-off between timeliness and comprehensiveness. 
+
+- **Batch processing handles data in large, discrete chunks**, known as batches, within scheduled windows. Batch processing is best suited for scenarios where the completeness of data is essential, like end-of-day reporting or inventory management.
+
+  - Example: processing taxi trips each day
+
+![image](https://github.com/user-attachments/assets/a1167130-58ca-4334-896a-ea6503db5e4f)
+
+- **Stream processing tackles data as it arrives in real-time**, with no inherent delays. Stream processing excels when immediate insights are required, as seen in fraud detection systems or live dashboards.
+
+> [!NOTE]
+> While batch operations provide in-depth analysis of historical data, stream system react to immediate data inputs and events.
+
 
 
 ## Types of batch jobs
