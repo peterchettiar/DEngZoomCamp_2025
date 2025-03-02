@@ -46,10 +46,19 @@ The choice between batch and stream processing reflects a trade-off between time
 > [!NOTE]
 > While batch operations provide in-depth analysis of historical data, stream system react to immediate data inputs and events.
 
-
-
 ## Types of batch jobs
 
+A ***batch job*** is a job (a unit of work) that will process data in batches. Batch jobs may be scheduled in many ways:
+- Weekly
+- Daily (very common)
+- Hourly (very common)
+- 3 times per hour
+- Every 5 minutes
+
+Batch jobs can be expressed in larger or even smaller granularities, so small that it can be seen as a form of micro-batch processing which is similar to stream processing. Batch jobs may also be carried out using different technologies:
+- `Python Scripts`  - which can be run anywhere such as `kubernetes`, `AWS batch`, etc. ([data pipelines from week 1](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/main/Module-1-docker-terraform#creating-a-custom-pipeline-with-docker))
+- `SQL` - [dbt models from week 4](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/main/Module-4-analytics-engineering#developing-with-dbt)
+- Spark (Covered this week)
 
 ## Orchestrating batch jobs
 
