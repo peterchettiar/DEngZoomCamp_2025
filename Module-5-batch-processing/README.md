@@ -73,9 +73,9 @@ All of the following are batch jobs and are orchestrated using `airlfow`:
 
 | Advantages | Disadvantages |
 |------------|---------------|
-| Easy to manage | Delay |
-| Retry | |
-| Scale | |
+| Easy to manage - workflow tools to help us define all the steps | Delay - running jobs in regular intervals makes data unavailable until job is complete |
+| Retry - able to parameterize the scripts to enable retries | |
+| Scale - easy to add more cluster or get a bigger machine as needed by the workflow | |
 
 # Introduction to Spark
 
