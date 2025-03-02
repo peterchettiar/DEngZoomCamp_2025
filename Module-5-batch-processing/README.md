@@ -18,6 +18,9 @@ Basic principles - Here are some basic principles of the batch processing method
 
 ![image](https://github.com/user-attachments/assets/70f0e8f2-a753-4aed-88eb-a31835fca5e4)
 
+![image](https://github.com/user-attachments/assets/858dd908-ad29-4894-a89e-5e9b57957305)
+
+
 Here is an example flow of batch processing:
 1. **Data collection:** Raw data is gathered from various sources such as databases, files, sensors or APIs. This data can be various types including text, numerical, or multimedia.
 2. **Data preprocessing:** Raw data often requires cleaning, normalization, and transformation to make it suitable for analysis. This step involves removing duplicates, handling missing values, scaling numerical data, and encoding categorical variables.
