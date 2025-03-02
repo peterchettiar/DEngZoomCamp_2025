@@ -62,9 +62,20 @@ Batch jobs can be expressed in larger or even smaller granularities, so small th
 
 ## Orchestrating batch jobs
 
+> [!NOTE]
+> Typically we use for orchestrating all the batch jobs is `Airflow`.
+
+All of the following are batch jobs and are orchestrated using `airlfow`:
+
+![image](https://github.com/user-attachments/assets/e66277a4-d2d8-4622-8dc1-73539d030829)
 
 ## Advantages and disadvantages of batch jobs
 
+| Advantages | Disadvantages |
+|------------|---------------|
+| Easy to manage | Delay |
+| Retry | |
+| Scale | |
 
 # Introduction to Spark
 
