@@ -6,7 +6,7 @@
   - [Batch versus Streaming](#batch-versus-streaming)
   - [Types of batch jobs](#types-of-batch-jobs)
   - [Orchestrating batch jobs](#orchestrating-batch-jobs)
-  - [Advantages and disadvantages of batch jobs](#advantages-and-disadvantages-of-batch-processing)
+  - [Advantages and disadvantages of batch jobs](#advantages-and-disadvantages-of-batch-jobs)
 - [Introduction to Spark](#introduction-to-spark)
   - [What is Spark?](#what-is-spark)
 
