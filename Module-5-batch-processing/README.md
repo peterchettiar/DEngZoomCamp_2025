@@ -67,7 +67,7 @@ Batch jobs can be expressed in larger or even smaller granularities, so small th
 
 All of the following are batch jobs and are orchestrated using `airlfow`:
 
-![image](https://github.com/user-attachments/assets/e66277a4-d2d8-4622-8dc1-73539d030829)
+![image](https://github.com/user-attachments/assets/c21186c7-9fb2-4599-8f3a-9620ffa000e6)
 
 ## Advantages and disadvantages of batch jobs
 
