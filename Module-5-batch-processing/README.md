@@ -8,7 +8,8 @@
   - [Orchestrating batch jobs](#orchestrating-batch-jobs)
   - [Advantages and disadvantages of batch jobs](#advantages-and-disadvantages-of-batch-jobs)
 - [Introduction to Spark](#introduction-to-spark)
-  - [What is Spark?](#what-is-spark)
+  - [How does Spark work?](#how-does-spark-work)
+  - [Why and when do we use Spark?](#why-and-when-do-we-use-spark)
 
 # Introduction to Batch Processing
 
@@ -83,6 +84,9 @@ All of the following are batch jobs and are orchestrated using `airlfow`:
 
 As a unified analytics engine for large-scale data processing. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs.
 
+> [!NOTE]
+> Spark is actually written in Scala making it the native language that communicates with Spark. But there are wrappers available around Spark, one example is `PySpark` which is Spark wrapped in Python. Spark can be used for streaming as well as batch jobs but we will only cover the latter for now.
+
 ## How does Spark work?
 
 Apache Spark processeses large-scale data across multiple machines using a cluster-based approach. It works by dividing tasks into smaller chunks and distributing them across multiple nodes for parallel execution. This makes Spark much faster than traditional batch processing frameworks like Hadoop MapReduce.
@@ -100,5 +104,13 @@ Apache Spark processeses large-scale data across multiple machines using a clust
 > [!IMPORTANT]
 > Apache Spark workflow: the Spark driver program works as a master and as an entry point for all the Spark jobs. The master submits jobs to the worker nodes. The cluster manager keeps the track of the nodes and the jobs distributed to them, several cluster managers are Yet Another Resource Negotiator (YARN), Kubernettes, mesos and standalone (in our case). The worker/slave nodes are the actual machines where the tasks are executed and they report back to the cluster manager
 
-## Why do we need Spark?
+## Why and when do we need Spark?
+
+If data is in data warehouse, it would be simpler to run jobs using `SQL` but more often than not, data will be in data lakes such as S3 or Google Cloud Storage and using SQL in those instance would not be feasible. Spark jobs using python make more sense, although these days making running SQL queries on data lakes are possible with the likes of `Hive`, `Presto/Athena` or even Spark as well. Preference would to always express your batch job as SQL.
+
+![image](https://github.com/user-attachments/assets/717b6cc0-3c01-4c70-92cb-5497bb73c1d3)
+
+Now, instead if our batch job included machine learning, the workflow would look like as follows:
+
+![image](https://github.com/user-attachments/assets/37a7b1b2-9d21-4eec-b99d-64b8d868be94)
 
