@@ -95,20 +95,7 @@ Apache Spark processeses large-scale data across multiple machines using a clust
   
    **Diagram of Spark Workflow**
 
-               +----------------------+
-               |  Driver Program       |
-               +----------------------+
-                          |
-        ---------------------------------------
-        |                  |                 |
-   +---------+        +---------+        +---------+
-   | Worker 1 |        | Worker 2 |        | Worker 3 |
-   +---------+        +---------+        +---------+
-        |                  |                 |
-  +-------------+   +-------------+   +-------------+
-  | Executor 1  |   | Executor 2  |   | Executor 3  |
-  +-------------+   +-------------+   +-------------+
-
+![Spark Workflow](https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_workflow.svg)
 
 ## Why do we need Spark?
 
