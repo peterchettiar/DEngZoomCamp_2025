@@ -87,13 +87,13 @@ As a unified analytics engine for large-scale data processing. It provides high-
 
 Apache Spark processeses large-scale data across multiple machines using a cluster-based approach. It works by dividing tasks into smaller chunks and distributing them across multiple nodes for parallel execution. This makes Spark much faster than traditional batch processing frameworks like Hadoop MapReduce.
 
-1. Spark Architecture overview - Main components of Spark:
-   - `Driver Program` - Controls the Spark application and coordinates the task
-   - `Cluster Manager` - Allocates resources for execution (e.g. YARN, kubernetes, Mesos, or Standalone mode).
-   - `Executors` - Workers that run tasks on different nodes in cluster.
-   - `RDDs` (Resilient Distributed Datasets) - The fundamental data structure in Spark for distributed computing.
-  
-   **Diagram of Spark Workflow**
+**Spark Architecture overview - Main components of Spark data processing engine**:
+  - `Driver Program` - Controls the Spark application and coordinates the task
+  - `Cluster Manager` - Allocates resources for execution (e.g. YARN, kubernetes, Mesos, or Standalone mode).
+  - `Executors` - Workers that run tasks on different nodes in cluster.
+  - `RDDs` (Resilient Distributed Datasets) - The fundamental data structure in Spark for distributed computing.
+
+**Diagram of Spark Workflow**
 
 ![image](https://github.com/user-attachments/assets/d1e67396-9ee7-4317-a3f0-4b67fe3062e1)
 
