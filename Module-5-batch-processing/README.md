@@ -95,7 +95,10 @@ Apache Spark processeses large-scale data across multiple machines using a clust
   
    **Diagram of Spark Workflow**
 
-![Spark Workflow](https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_workflow.svg)
+![image](https://github.com/user-attachments/assets/d1e67396-9ee7-4317-a3f0-4b67fe3062e1)
+
+> [!IMPORTANT]
+> Apache Spark workflow: the Spark driver program works as a master and as an entry point for all the Spark jobs. The master submits jobs to the worker nodes. The cluster manager keeps the track of the nodes and the jobs distributed to them, several cluster managers are Yet Another Resource Negotiator (YARN), Kubernettes, mesos and standalone (in our case). The worker/slave nodes are the actual machines where the tasks are executed and they report back to the cluster manager
 
 ## Why do we need Spark?
 
