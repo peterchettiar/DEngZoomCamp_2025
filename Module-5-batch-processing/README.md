@@ -104,7 +104,7 @@ Apache Spark processeses large-scale data across multiple machines using a clust
 > [!IMPORTANT]
 > Apache Spark workflow: the Spark driver program works as a master and as an entry point for all the Spark jobs. The master submits jobs to the worker nodes. The cluster manager keeps the track of the nodes and the jobs distributed to them, several cluster managers are Yet Another Resource Negotiator (YARN), Kubernettes, mesos and standalone (in our case). The worker/slave nodes are the actual machines where the tasks are executed and they report back to the cluster manager
 
-## Why and when do we need Spark?
+## Why and when do we use Spark?
 
 If data is in data warehouse, it would be simpler to run jobs using `SQL` but more often than not, data will be in data lakes such as S3 or Google Cloud Storage and using SQL in those instance would not be feasible. Spark jobs using python make more sense, although these days making running SQL queries on data lakes are possible with the likes of `Hive`, `Presto/Athena` or even Spark as well. Preference would to always express your batch job as SQL.
 
