@@ -10,6 +10,7 @@
 - [Introduction to Spark](#introduction-to-spark)
   - [How does Spark work?](#how-does-spark-work)
   - [Why and when do we use Spark?](#why-and-when-do-we-use-spark)
+- [Installing Spark on Linux](#installing-spark-on-linux)
 
 # Introduction to Batch Processing
 
@@ -114,3 +115,4 @@ Now, instead if our batch job included machine learning, the workflow would look
 
 ![image](https://github.com/user-attachments/assets/37a7b1b2-9d21-4eec-b99d-64b8d868be94)
 
+# Installing Spark on Linux
