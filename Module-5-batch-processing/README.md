@@ -79,7 +79,35 @@ All of the following are batch jobs and are orchestrated using `airlfow`:
 
 # Introduction to Spark
 
-## What is Spark?
+[Apache Spark](https://spark.apache.org/) is an open-source, distributed computing framework designed for fast data processing. It is widely used for big data analytics, machine learning, and real-time data processing. Spark is known for its speed, scalability, and ease of use, making it a preferred choice for handling large-scale datasets.
+
+As a unified analytics engine for large-scale data processing. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs.
+
+## How does Spark work?
+
+Apache Spark processeses large-scale data across multiple machines using a cluster-based approach. It works by dividing tasks into smaller chunks and distributing them across multiple nodes for parallel execution. This makes Spark much faster than traditional batch processing frameworks like Hadoop MapReduce.
+
+1. Spark Architecture overview - Main components of Spark:
+   - `Driver Program` - Controls the Spark application and coordinates the task
+   - `Cluster Manager` - Allocates resources for execution (e.g. YARN, kubernetes, Mesos, or Standalone mode).
+   - `Executors` - Workers that run tasks on different nodes in cluster.
+   - `RDDs` (Resilient Distributed Datasets) - The fundamental data structure in Spark for distributed computing.
+  
+   **Diagram of Spark Workflow**
+
+               +----------------------+
+               |  Driver Program       |
+               +----------------------+
+                          |
+        ---------------------------------------
+        |                  |                 |
+   +---------+        +---------+        +---------+
+   | Worker 1 |        | Worker 2 |        | Worker 3 |
+   +---------+        +---------+        +---------+
+        |                  |                 |
+  +-------------+   +-------------+   +-------------+
+  | Executor 1  |   | Executor 2  |   | Executor 3  |
+  +-------------+   +-------------+   +-------------+
 
 
 ## Why do we need Spark?
