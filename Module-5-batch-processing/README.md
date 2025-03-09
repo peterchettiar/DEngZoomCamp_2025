@@ -135,7 +135,7 @@ Now, instead if our batch job included machine learning, the workflow would look
     * After which you run `source ~/.bashrc`
     * Run `java —version` to verify installation
 
-*2. Install spark*
+2. Install spark
     * So same steps for spark, go to the official download page - https://spark.apache.org/downloads.html 
     * Select as follows:
 
