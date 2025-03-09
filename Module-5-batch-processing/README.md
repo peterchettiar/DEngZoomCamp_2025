@@ -137,7 +137,7 @@ export PATH="${JAVA_HOME}/bin:${PATH}”
 2. Install spark
     * So same steps for spark, go to the official download page - https://spark.apache.org/downloads.html 
     * Select as follows:
-    * ￼
+![Pasted Graphic](https://github.com/user-attachments/assets/8141c165-f690-4c05-a9d0-559d8848f8b1)
     * Make sure to click on the link in step 3 and copy the full link of the installer - https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz 	
     * Run command `wget https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz`
     * Now unpack the file - `tar xzfv spark-3.5.5-bin-hadoop3.tgz`
@@ -171,4 +171,4 @@ export PYTHONPATH=“${SPARK_HOME}/python/lib/py4j-0.10.9.7-src.zip:$PYTHONPATH�
 > Make sure that the port is forwarded locally if you’re using a virtual machine
 > Also make sure that you are forwarding the correct port, default port for Jupyter is 8888 but sometimes it may already be in use and another port maybe assigned, so it is important to check the port number which is given at the end after running the `jupyter notebook` command. 
 
-Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark-demo.ipynb]() for an introduction to a spark session.
+Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark-demo.ipynb](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/notebooks/pyspark-demo.ipynb) for an introduction to a spark session.
