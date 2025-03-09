@@ -117,7 +117,8 @@ Now, instead if our batch job included machine learning, the workflow would look
 
 # Installing Spark on Linux
 
-Installation steps:
+**Installation steps:**
+
 1. Install java
     * Need specific version of JDK, either 8 or 11
     * Find the version you need on jdk.java.net/archive/ - use 11.02
@@ -134,7 +135,7 @@ Installation steps:
     * After which you run `source ~/.bashrc`
     * Run `java —version` to verify installation
 
-**2. Install spark**
+2. Install spark
     * So same steps for spark, go to the official download page - https://spark.apache.org/downloads.html 
     * Select as follows:
 
@@ -154,7 +155,7 @@ Installation steps:
         * `val distData = sc.parallelize(data)` - basically converting our sequential collection into a resilient distributed dataset (`disData`) through  the process of partitioning across Spark’s cluster nodes which enables distributed processing.
         * `distData.filter(_<10).collect()` - Filters out elements less that 10 and brings back the filtered data back to the driver as an array.
 
-**3. Run Pyspark**
+3. Run Pyspark
     * Before running `pyspark`, we need to set `PYTHONPATH` environment variable to ensure that Python can locate the necessary spark libraries and communicate with Spark’s JVM (`Java Virtual Machine`) backend.
     * Spark includes a Python API (`pyspark`) that allows python users to interact with Spark’s core engines. However, python does not automatically know where Spark’s python modules are, hence we need to set `PYTHONPATH`:
     ```bash
