@@ -118,7 +118,7 @@ Now, instead if our batch job included machine learning, the workflow would look
 # Installing Spark on Linux
 
 Installation steps:
-1. Install java
+**1. Install java**
     * Need specific version of JDK, either 8 or 11
     * Find the version you need on jdk.java.net/archive/ - use 11.02
     * Next create a folder on GCP vm called spark and run command `wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz` to download the installation file
@@ -127,46 +127,43 @@ Installation steps:
     * Next we need to set an environment variable for java home (important step as spark will look for this variable so name has to be exactly JAVA_HOME as the path to java is used in its backend scripts of spark) - `JAVA_HOME="~/spark/jdk-11.0.2"` , you can verify this by running `echo $JAVA_HOME`
     * Now to set location of java executables to `PATH` so that it is available globally to all processes in the current shell session. We prepend the PATH  with our JAVA_HOME variable - `export PATH="${JAVA_HOME}/bin:${PATH}”`
     * Please be reminded that we you run this via the terminal its only available in the current bash session. If you want to add it permanently you need to run `nano ~/.bashrc` and insert the following commands at the end:
-```bash
-export JAVA_HOME="${HOME}/spark/jdk-11.0.2"
-export PATH="${JAVA_HOME}/bin:${PATH}”
-```
+    ```bash
+    export JAVA_HOME="${HOME}/spark/jdk-11.0.2"
+    export PATH="${JAVA_HOME}/bin:${PATH}”
+    ```
+    * After which you run `source ~/.bashrc`
+    * Run `java —version` to verify installation
 
-  * After which you run `source ~/.bashrc`
-  * Run `java —version` to verify installation
-
-2. Install spark
+**2. Install spark**
     * So same steps for spark, go to the official download page - https://spark.apache.org/downloads.html 
     * Select as follows:
+
 ![Pasted Graphic](https://github.com/user-attachments/assets/8141c165-f690-4c05-a9d0-559d8848f8b1)
     * Make sure to click on the link in step 3 and copy the full link of the installer - https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz 	
     * Run command `wget https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz`
     * Now unpack the file - `tar xzfv spark-3.5.5-bin-hadoop3.tgz`
     * Remove the archive  - `rm  spark-3.5.5-bin-hadoop3.tgz`
     * Once done we can create `SPARK_HOME` environment variable which is the path to the spark archives, followed by setting a PATH variable to the executables while prepending the `SPARK_HOME` variable:
-
-export SPARK_HOME="${HOME}/spark/spark-3.5.5-bin-hadoop3"
-export PATH="${SPARK_HOME}/bin:${PATH}"
-
+    ```bash
+    export SPARK_HOME="${HOME}/spark/spark-3.5.5-bin-hadoop3"
+    export PATH="${SPARK_HOME}/bin:${PATH}"
+    ```
     * Now we have to test if spark works - run `spark-shell` and this should open a spark shell for us to test and run spark commands (press `CTRL + D` to close the session
     * Test commands are as follows:
         * `val data = 1 to 10000` - creating a range of numbers from 1 to 10,000. `data` is sequential collection (not yet distributed)
         * `val distData = sc.parallelize(data)` - basically converting our sequential collection into a resilient distributed dataset (`disData`) through  the process of partitioning across Spark’s cluster nodes which enables distributed processing.
         * `distData.filter(_<10).collect()` - Filters out elements less that 10 and brings back the filtered data back to the driver as an array.
 
-3. Run Pyspark
-
+**3. Run Pyspark**
     * Before running `pyspark`, we need to set `PYTHONPATH` environment variable to ensure that Python can locate the necessary spark libraries and communicate with Spark’s JVM (`Java Virtual Machine`) backend.
     * Spark includes a Python API (`pyspark`) that allows python users to interact with Spark’s core engines. However, python does not automatically know where Spark’s python modules are, hence we need to set `PYTHONPATH`:
-      
-```bash
-export PYTHONPATH="${SPARK_HOME}/python/:$PYTHONPATH”
-```
-    * Spark’s native language is Scala (JVM-based), while PySpark runs in python. To bridge this gap, Spark uses `Py4J`, a library that allows Python to communicate with JVM processes. By setting:
-    
-```bash
-export PYTHONPATH=“${SPARK_HOME}/python/lib/py4j-0.10.9.7-src.zip:$PYTHONPATH”
-```
+    ```bash
+    export PYTHONPATH="${SPARK_HOME}/python/:$PYTHONPATH”
+    ```
+    * Spark’s native language is Scala (JVM-based), while PySpark runs in python. To bridge this gap, Spark uses `Py4J`, a library that allows Python to communicate with JVM processes. By setting:    
+    ```bash
+    export PYTHONPATH=“${SPARK_HOME}/python/lib/py4j-0.10.9.7-src.zip:$PYTHONPATH”
+    ```
     * Without this, Python wouldn't be able to send commands to Spark’s Java engine, causing errors when running PySpark.
     * After setting the `PYTHONPATH` in the `.bashrc` file, we can either restart the terminal session or `source ~/.bashrc` for the settings to take effect
     * Now we can create a folder in home called `notebooks` and change directory into the folder and run the `jupyter notebook` command
