@@ -118,7 +118,7 @@ Now, instead if our batch job included machine learning, the workflow would look
 # Installing Spark on Linux
 
 Installation steps:
-**1. Install java**
+1. Install java
     * Need specific version of JDK, either 8 or 11
     * Find the version you need on jdk.java.net/archive/ - use 11.02
     * Next create a folder on GCP vm called spark and run command `wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz` to download the installation file
