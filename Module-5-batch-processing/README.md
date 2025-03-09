@@ -135,11 +135,12 @@ Now, instead if our batch job included machine learning, the workflow would look
     * After which you run `source ~/.bashrc`
     * Run `java —version` to verify installation
 
-2. Install spark
+*2. Install spark*
     * So same steps for spark, go to the official download page - https://spark.apache.org/downloads.html 
     * Select as follows:
 
-![Pasted Graphic](https://github.com/user-attachments/assets/8141c165-f690-4c05-a9d0-559d8848f8b1)
+   ![Pasted Graphic](https://github.com/user-attachments/assets/8141c165-f690-4c05-a9d0-559d8848f8b1)
+
     * Make sure to click on the link in step 3 and copy the full link of the installer - https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz 	
     * Run command `wget https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz`
     * Now unpack the file - `tar xzfv spark-3.5.5-bin-hadoop3.tgz`
