@@ -14,7 +14,7 @@
 - [First Look at Spark/PySpark](#first-look-at-sparkpyspark)
   - [Create a Spark Session](#create-a-spark-session)
   - [Reading CSV files](#reading-csv-files)
-  - [Internals of Spark](#internals-of-spark)
+  - [Partitions](#partitions)
 
 # Introduction to Batch Processing
 
@@ -317,5 +317,6 @@ In the previous example we read a single large parquet file. A file can only be 
 
 In order to solve this issue, we can *split a file into multiple parts* so that each executor can take care of a part and have all executors working simultaneously. These splits are called **partitions**.
 
-![image](https://github.com/user-attachments/assets/5aabcd9b-951e-4555-9018-6de7ee4e9222)
+![image](https://github.com/user-attachments/assets/33c71efe-c4f6-496a-a8ad-b5023c026082)
+
 
