@@ -315,8 +315,26 @@ A *Spark cluster* is composed of multiple *executors*. Each executor can process
 
 In the previous example we read a single large parquet file. A file can only be read by a single executor, which means that the code we've written so far isn't parallelized and thus will only be run by a single executor rather than many at the same time.
 
-In order to solve this issue, we can *split a file into multiple parts* so that each executor can take care of a part and have all executors working simultaneously. These splits are called **partitions**.
+In order to solve this issue, we can *split a file into multiple parts* so that each executor can take care of a part and have all executors working simultaneously. These splits are called **partitions**. Once the the executor finishes processing one partition it will move onto the next available partition until all partitions are complete.
 
 ![image](https://github.com/user-attachments/assets/33c71efe-c4f6-496a-a8ad-b5023c026082)
 
+We will now partition the dataframe. This will create multiple files in parquet format.
+```python
+# create 24 partitions in our dataframe
+df = df.repartition(24)
+# parquetize and write to fhvhv/2021/01/ folder
+df.write.parquet('fhvhv/2021/01/')
+```
 
+You may check the Spark UI at any time and see the progress of the current job, which is divided into stages which contain tasks. The tasks in a stage will not start until all tasks on the previous stage are finished.
+
+When creating a dataframe, Spark creates as many partitions as CPU cores available by default, and each partition creates a task. Thus, assuming that the dataframe was initially partitioned into 6 partitions, the write.parquet() method will have 2 stages: the first with 6 tasks and the second one with 24 tasks.
+
+Besides the 24 parquet files, you should also see a _SUCCESS file which should be empty. This file is created when the job finishes successfully.
+
+Trying to write the files again will output an error because Spark will not write to a non-empty folder. You can force an overwrite with the mode argument:
+```python
+df.write.parquet('fhvhv/2021/01/', mode='overwrite')
+```
+The opposite of partitioning (joining multiple partitions into a single partition) is called *coalescing*.
