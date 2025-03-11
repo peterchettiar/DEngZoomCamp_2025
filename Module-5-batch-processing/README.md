@@ -180,6 +180,7 @@ Now, instead if our batch job included machine learning, the workflow would look
 Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark demo](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/3.1_test.ipynb) for an introduction to a spark session.
 
 # First Look at Spark/PySpark
+> **Reminder**: if you're running Spark and Jupyter Notebook on a remote machine, you will need to redirect ports 8888 for Jupyter Notebook and 4040 for the Spark UI.
 
 ## Create a Spark Session
 
@@ -308,4 +309,13 @@ df.head(5)
 
 This code block should give us the desired output. Please take a look at the [notebook](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/3.2_pyspark.ipynb) for a better picture of what we have done so far!
 
-## Internals of Spark
+## Partitions
+
+A *Spark cluster* is composed of multiple *executors*. Each executor can process data independently in order to parallelize and speed up work.
+
+In the previous example we read a single large parquet file. A file can only be read by a single executor, which means that the code we've written so far isn't parallelized and thus will only be run by a single executor rather than many at the same time.
+
+In order to solve this issue, we can *split a file into multiple parts* so that each executor can take care of a part and have all executors working simultaneously. These splits are called **partitions**.
+
+![image](https://github.com/user-attachments/assets/5aabcd9b-951e-4555-9018-6de7ee4e9222)
+
