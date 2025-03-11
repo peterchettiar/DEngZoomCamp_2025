@@ -11,6 +11,10 @@
   - [How does Spark work?](#how-does-spark-work)
   - [Why and when do we use Spark?](#why-and-when-do-we-use-spark)
 - [Installing Spark on Linux](#installing-spark-on-linux)
+- [First Look at Spark/PySpark](#first-look-at-spark-pyspark)
+  - [Create a Spark Session](#create-a-spark-session)
+  - [Reading CSV files](#reading-csv-files)
+  - [Internals of Spark](#internals-of-spark)
 
 # Introduction to Batch Processing
 
@@ -173,4 +177,135 @@ Now, instead if our batch job included machine learning, the workflow would look
 > Make sure that the port is forwarded locally if you’re using a virtual machine
 > Also make sure that you are forwarding the correct port, default port for Jupyter is 8888 but sometimes it may already be in use and another port maybe assigned, so it is important to check the port number which is given at the end after running the `jupyter notebook` command. 
 
-Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark-demo.ipynb](https://github.com/peterchettiar/DEngZoomCamp_2025/Module-5-batch-processing/code/3.1_test.ipynb) for an introduction to a spark session.
+Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark demo](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/3.1_test.ipynb) for an introduction to a spark session.
+
+# First Look at Spark/PySpark
+
+## Create a Spark Session
+
+We can use Spark with Python code by means of PySpark. We will be using Jupyter Notebooks for this lesson. We first need to import PySpark to our code:
+
+```python
+import pyspark
+from pyspark.sql import SparkSession
+```
+
+We now need to instantiate a Spark session, an object that we use to interact with Spark which is our main entry point to spark.
+
+```python
+
+spark = SparkSession.builder \
+    .master("local[*]") \
+    .appName('test') \
+    .getOrCreate()
+
+```
+
+* `SparkSession` : is the class of the object that we instantiate. builder is the builder method.
+* `master()`: sets the Spark master URL to connect to. The local string means that Spark will run on a local cluster. [*] means that Spark will run with as many CPU cores as possible.
+* `appName()`: defines the name of our application/session. This will show in the Spark UI.
+* `getOrCreate()`: will create the session or recover the object if it was previously created.
+
+Once we've instantiated a session, we can access the Spark UI by browsing to `localhost:4040`. The UI will display all current jobs. Since we've just created the instance, there should be no jobs currently running.
+
+## Reading CSV files
+
+Similarlly to Pandas, Spark can read CSV files into dataframes, a tabular data structure. Unlike Pandas, Spark can handle much bigger datasets but it's unable to infer the datatypes of each column.
+
+> **Note:** Spark dataframes use custom data types; we cannot use regular Python types.
+
+For this example we will use the [High Volume For-Hire Vehicle Trip Records for January 2021](https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2021-01.parquet) available from the [NYC TLC Trip Record Data webiste](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). The file should be about 295MB in size.
+
+Let's read the file and create a dataframe:
+```python
+df = spark.read \
+    .option("header", "true") \
+    .parquet(‘fhvhv_tripdata_2021-01.parquet')
+```
+* `read()` reads the file.
+* `option()` contains options for the read method. In this case, we're specifying that the first line of the parquet file contains the column names.
+* `parquet()` is for reading parquet files.
+
+
+>[!IMPORTANT]
+> It is worth point out that every time a cell in the spark session is executed, this would be reflected as a job visible on the Spark UI on `localhost:4040`. Do it give it a try, run a cell on your notebook and then refresh the page to see a new job included as a new line item.
+
+You can see the contents of the dataframe with `df.show()` (only a few rows will be shown) or `df.head()`. You can also check the current schema with `df.schema`; you will notice that all values are strings. This is because unlike pandas, Spark does not infer the data types.
+
+>[!NOTE]
+> So far we had initialised our SparkSession and loaded the data based on the `.parquet` file we had downloaded from the Trip Record data website. But for the purpose of this exercise, it would be best to demonstrate using a `.csv` file, hence given the lack of `.csv` counterpart for January 2021 parquet file, I had basically queried this data from `bigquery` and downloaded the result as a `.csv` and had uploaded it into current directory as `output.csv`. Given the time constraint this seemed to be the best approach. I had use the following query to recreate the same data from the website:
+```sql
+SELECT
+  *
+FROM
+  `ny-rides-peter-415106.nyc_tlc_data.fhvhvtaxi_trips`
+WHERE
+  EXTRACT(year
+  FROM
+    pickup_datetime) = 2021
+  AND EXTRACT(month
+  FROM
+    pickup_datetime) = 1;
+
+```
+
+The need for this is to be able to create a schema using pandas so that this can be used to declare the datatypes of the fields when Spark is reading the `.parquet` file.
+
+So after reading the `.csv` file using pandas library, we can proceed to convert the pandas dataframe into a spark dataframe and call the schema attribute to access the schema of the pandas dataframe that we saw previously but using Spark. Result should give you a schema that is different from what you saw previously using `.dtypes`.
+
+```python
+spark.createDataFrame(df_pandas).schema
+```
+
+The result should look something like this:
+```txt
+StructType([StructField('hvfhs_license_num', StringType(), True), StructField('dispatching_base_num', StringType(), True), StructField('originating_base_num', StringType(), True), StructField('request_datetime', StringType(), True), StructField('on_scene_datetime', StringType(), True), StructField('pickup_datetime', StringType(), True), StructField('dropoff_datetime', StringType(), True), StructField('PULocationID', LongType(), True), StructField('DOLocationID', LongType(), True), StructField('trip_miles', DoubleType(), True), StructField('trip_time', LongType(), True), StructField('base_passenger_fare', DoubleType(), True), StructField('tolls', DoubleType(), True), StructField('bcf', DoubleType(), True), StructField('sales_tax', DoubleType(), True), StructField('congestion_surcharge', DoubleType(), True), StructField('tips', DoubleType(), True), StructField('driver_pay', DoubleType(), True), StructField('shared_request_flag', StringType(), True), StructField('shared_match_flag', StringType(), True), StructField('access_a_ride_flag', StringType(), True), StructField('wav_request_flag', StringType(), True), StructField('wav_match_flag', StringType(), True)])
+```
+
+`StructType` comes from `scala` and we need to turn this into python code for declaring schema for our dataframe. Let's take this opportunity to also change the data types to more optimised data types than what was prescribed above.
+
+> Note: Parquet stores INT64 as LongType in Spark, not IntegerType.
+
+Now to amend the schema of our spark data frame that is loading the `.parquet` file.
+```python
+from pyspark.sql import types
+
+# Lets amend the schema so that its more efficient than what was prescribed
+
+schema = types.StructType(
+    [
+        types.StructField('hvfhs_license_num', types.StringType(), True),
+        types.StructField('dispatching_base_num', types.StringType(), True), 
+        types.StructField('originating_base_num', types.StringType(), True), 
+        types.StructField('request_datetime', types.TimestampType(), True), 
+        types.StructField('on_scene_datetime', types.TimestampType(), True), 
+        types.StructField('pickup_datetime', types.TimestampType(), True), 
+        types.StructField('dropoff_datetime', types.TimestampType(), True), 
+        types.StructField('PULocationID', types.LongType(), True), 
+        types.StructField('DOLocationID', types.LongType(), True), 
+        types.StructField('trip_miles', types.DoubleType(), True), 
+        types.StructField('trip_time', types.LongType(), True), 
+        types.StructField('base_passenger_fare', types.DoubleType(), True), 
+        types.StructField('tolls', types.DoubleType(), True), 
+        types.StructField('bcf', types.DoubleType(), True), 
+        types.StructField('sales_tax', types.DoubleType(), True), 
+        types.StructField('congestion_surcharge', types.DoubleType(), True), 
+        types.StructField('tips', types.DoubleType(), True), 
+        types.StructField('driver_pay', types.DoubleType(), True), 
+        types.StructField('shared_request_flag', types.StringType(), True), 
+        types.StructField('shared_match_flag', types.StringType(), True), 
+        types.StructField('access_a_ride_flag', types.StringType(), True), 
+        types.StructField('wav_request_flag', types.StringType(), True), 
+        types.StructField('wav_match_flag', types.StringType(), True)
+    ]
+)
+
+# now to read our parquet file into a spark dataframe again, but this time with a schema
+
+df = spark.read.schema(schema).parquet("fhvhv_tripdata_2021-01.parquet")
+df.head(5)
+```
+
+This code block should give us the desired output. Please take a look at the [notebook](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/3.2_pyspark.ipynb) for a better picture of what we have done so far!
+
+## Internals of Spark
