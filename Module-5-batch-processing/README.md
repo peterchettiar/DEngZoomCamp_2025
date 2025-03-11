@@ -11,7 +11,7 @@
   - [How does Spark work?](#how-does-spark-work)
   - [Why and when do we use Spark?](#why-and-when-do-we-use-spark)
 - [Installing Spark on Linux](#installing-spark-on-linux)
-- [First Look at Spark/PySpark](#first-look-at-spark/pyspark)
+- [First Look at Spark/PySpark](#first-look-at-sparkpyspark)
   - [Create a Spark Session](#create-a-spark-session)
   - [Reading CSV files](#reading-csv-files)
   - [Internals of Spark](#internals-of-spark)
