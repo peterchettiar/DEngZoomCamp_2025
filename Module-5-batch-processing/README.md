@@ -405,7 +405,7 @@ Characteristics of Actions:
     * `foreach(func)` – Applies a function to each row of the DataFrame (useful for side effects).
     * `write.save(path, format)` – Saves the DataFrame to a specified path in a given format (e.g., Parquet, CSV).
 
-Actions vs Transformations in Apache Spark:
+Actions vs Transformations in Apache Spark key difference summary:
 
 | **Aspect**            | **Transformations**                          | **Actions**                              |
 |------------------------|----------------------------------------------|------------------------------------------|
