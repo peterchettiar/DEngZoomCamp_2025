@@ -15,6 +15,9 @@
   - [Create a Spark Session](#create-a-spark-session)
   - [Reading CSV files](#reading-csv-files)
   - [Partitions](#partitions)
+- [Spark DataFrames](#spark-dataframes)
+  - [Actions vs transformations](#actions-vs-transformation)
+  - [Functions and UDFs](#functions-and-udfs)
 
 # Introduction to Batch Processing
 
@@ -338,3 +341,82 @@ Trying to write the files again will output an error because Spark will not writ
 df.write.parquet('fhvhv/2021/01/', mode='overwrite')
 ```
 The opposite of partitioning (joining multiple partitions into a single partition) is called *coalescing*.
+
+# Spark DataFrames
+
+As mentioned previously, Spark works with *DataFrames*.
+
+We can create a dataframe from the parquet file directory we created in the previous section:
+```python
+df = spark.read.parquet('fhvhv/2021/01/')
+```
+
+Unlike CSV files, parquet files contain the schema of the dataset, so there is no need to specify a schema like we previously did when reading the CSV file. You can check the schema like this:
+```python
+df.printSchema()
+```
+>[!TIP]
+> One of the reasons why parquet files are smaller than CSV files is because they store the data according to the datatypes, so integer values will take less space than long or string values.
+
+There are many Pandas-like operations that we can do on Spark dataframes, such as:
+* Column selection - returns a dataframe with only the specified columns.
+```python
+df.select('pickup_datetime', 'dropoff_datetime', 'PULocationID', 'DOLocationID') ```
+* Filtering by value - returns a dataframe whose records match the condition stated in the filter.
+```python
+df.select('pickup_datetime', 'dropoff_datetime', 'PULocationID', 'DOLocationID').filter(df.hvfhs_license_num == 'HV0003')
+```
+* And many more. The official Spark documentation website contains a [quick guide for dataframes.](https://spark.apache.org/docs/latest/api/python/getting_started/quickstart_df.html)
+
+## Actions vs transformations
+
+In Apache Spark, operations on DataFrames are categorised into *transformations* and *actions*. Understanding the difference between these two is crucial for writing efficient Spark applications.
+
+**Transformations**
+
+Transformations are operations that create a new DataFrame from an existing one. They are lazy, meaning they are not executed immediately. Instead, Spark builds a logical plan (DAG, or Directed Acyclic Graph) of transformations, which is only executed when an action is called.
+
+Characteristics of Transformations:
+1. Lazy Evaluation: No computation happens until an action is triggered
+2. Immutable: Transformations produce  a new DataFrame without modifying the original one
+3. Examples:
+    * `select(*cols)` - Selects specific columns from a DataFrame
+    * `filter(condition)` – Filters rows based on a condition
+    * `groupBy(*cols)` - Groups data by specified columns for aggregation
+    * `orderBy(*cols, ascending=True) - Sorts the DataFrame based on one or more columns 
+    * `join(other, on, how=‘inner’` - Merges two DataFrames based on a common column using a specified join type
+    * `withColumn(colName, colExpr)` - Adds or replaces a column using an expression
+    * `drop(*cols)` - Removes specified columns from DataFrame
+    * `union(otherDF)` - Combine two DataFrames with the same schema into one
+
+**Actions**
+
+Actions are operations that trigger the execution of the transformations and return a result to the driver program or write data to an external storage system. Actions are eager, meaning they force the computation of the logical plan.
+
+Characteristics of Actions:
+1. Eager Evaluation: 	Triggers the execution of the transformations.
+2. Return Results: Actions return values (e.g. to driver) or write data to storage
+3. Examples:
+    * `count()` – Returns the number of rows in the DataFrame.
+    * `collect()` – Retrieves all rows of the DataFrame as a list.
+    * `show(n=20)` – Displays the first n rows of the DataFrame in a readable format.
+    * `take(n)` – Returns the first n rows as a list (like collect() but limited).
+    * `first()` – Returns the first row of the DataFrame.
+    * `foreach(func)` – Applies a function to each row of the DataFrame (useful for side effects).
+    * `write.save(path, format)` – Saves the DataFrame to a specified path in a given format (e.g., Parquet, CSV).
+
+Actions vs Transformations in Apache Spark:
+
+| **Aspect**            | **Transformations**                          | **Actions**                              |
+|------------------------|----------------------------------------------|------------------------------------------|
+| **Execution**          | Lazy (no immediate execution)                | Eager (triggers execution)               |
+| **Result**             | Returns a new DataFrame or RDD               | Returns a value or writes data           |
+| **Examples**           | `select()`, `filter()`, `groupBy()`, `join()`| `count()`, `collect()`, `show()`, `save()`|
+| **Purpose**            | Define the logical plan (DAG)                | Execute the logical plan and produce output |
+| **Performance Impact** | No computation happens                       | Triggers computation and data processing |
+| **Fault Tolerance**    | Part of the lineage (logical plan)           | Triggers execution of the lineage        |
+| **Common Methods**     | `map()`, `flatMap()`, `filter()`, `union()`  | `collect()`, `take()`, `first()`, `foreach()` |
+
+---
+
+## Functions and UDFs
