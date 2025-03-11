@@ -173,4 +173,4 @@ Now, instead if our batch job included machine learning, the workflow would look
 > Make sure that the port is forwarded locally if you’re using a virtual machine
 > Also make sure that you are forwarding the correct port, default port for Jupyter is 8888 but sometimes it may already be in use and another port maybe assigned, so it is important to check the port number which is given at the end after running the `jupyter notebook` command. 
 
-Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark-demo.ipynb](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/3.1_test.ipynb) for an introduction to a spark session.
+Now that we have setup `PySpark`, let’s test it out. Please take a look at [pyspark-demo.ipynb](https://github.com/peterchettiar/DEngZoomCamp_2025/Module-5-batch-processing/code/3.1_test.ipynb) for an introduction to a spark session.
