@@ -419,11 +419,58 @@ Actions vs Transformations in Apache Spark key difference summary:
 
 ---
 
-graph LR;
-    a(df)-->b["select()"]
-    b-->c["filter()"]
-    c-->d{{"show()"}}
-    style a stroke-dasharray: 5
-    style d fill:#900, stroke-width:3px
-
 ## Functions and UDFs
+
+**Functions**
+
+Besides the SQL and Pandas-like commands we've seen so far, Spark provides additional built-in functions that allow for more complex data manipulation. By convention, these functions are imported as follows:
+```python
+from pyspark.sql import functions as F
+```
+Here's an example of built-in function usage:
+```python
+df \
+    .withColumn('pickup_date', F.to_date(df.pickup_datetime)) \
+    .withColumn('dropoff_date', F.to_date(df.dropoff_datetime)) \
+    .select('pickup_date', 'dropoff_date', 'PULocationID', 'DOLocationID') \
+    .show()
+```
+- `withColumn()` is a transformation that adds a new column to the dataframe.
+  - NOTE: adding a new column with the same name as a previously existing column will overwrite the existing column!
+- `select()` is another transformation that selects the stated columns.
+- `F.to_date()` is a built-in Spark function that converts a timestamp to date format (year, month and day only, no hour and minute).
+  
+A list of built-in functions is available in the [official Spark documentation](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) page.
+
+Besides these built-in functions, Spark allows us to create User Defined Functions (UDFs) with custom behavior for those instances where creating SQL queries for that behaviour becomes difficult both to manage and test.
+
+**User-defined functions (UDFs)**
+
+UDFs are regular functions which are then passed as parameters to a special builder. Let's create one:
+```python
+# A crazy function that changes values when they're divisible by 7 or 3
+def crazy_stuff(base_num):
+    num = int(base_num[1:])
+    if num % 7 == 0:
+        return f's/{num:03x}'
+    elif num % 3 == 0:
+        return f'a/{num:03x}'
+    else:
+        return f'e/{num:03x}'
+
+# Creating the actual UDF
+crazy_stuff_udf = F.udf(crazy_stuff, returnType=types.StringType())
+```
+
+- `F.udf()` takes a function (`crazy_stuff()` in this example) as parameter as well as a `return_type` for the function (a string in our example).
+- While `crazy_stuff()` is obviously non-sensical, UDFs are handy for things such as ML and other complex operations for which SQL isn't suitable or desirable. Python code is also easier to test than SQL.
+
+We can then use our UDF in transformations just like built-in functions:
+```python
+df \
+    .withColumn('pickup_date', F.to_date(df.pickup_datetime)) \
+    .withColumn('dropoff_date', F.to_date(df.dropoff_datetime)) \
+    .withColumn('base_id', crazy_stuff_udf(df.dispatching_base_num)) \
+    .select('base_id', 'pickup_date', 'dropoff_date', 'PULocationID', 'DOLocationID') \
+    .show()
+```
