@@ -419,4 +419,11 @@ Actions vs Transformations in Apache Spark key difference summary:
 
 ---
 
+graph LR;
+    a(df)-->b["select()"]
+    b-->c["filter()"]
+    c-->d{{"show()"}}
+    style a stroke-dasharray: 5
+    style d fill:#900, stroke-width:3px
+
 ## Functions and UDFs
