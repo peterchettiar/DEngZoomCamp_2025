@@ -18,7 +18,7 @@
 - [Spark DataFrames](#spark-dataframes)
   - [Actions vs transformations](#actions-vs-transformation)
   - [Functions and UDFs](#functions-and-udfs)
-- [Preparing Yellow and Green Taxi Data [OPTIONAL]](#preparing-yellow-and-green-taxi-data-optional)
+  - [Preparing Yellow and Green Taxi Data [OPTIONAL]](#preparing-yellow-and-green-taxi-data-optional)
 
 # Introduction to Batch Processing
 
