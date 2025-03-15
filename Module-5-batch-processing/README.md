@@ -579,5 +579,8 @@ done
 > Also, we need to make the bash script an executable if we want it to run via command line. Hence we need to run `chmod +x download_data.sh` before running the script.
 > When running the script, run it like `./download_data.sh yellow 2020` with `./` at the start as without it terminal will interpret as a command rather that the location to the executable.
 
+>[!TIP]
+> There are a lot of files being downloaded into many different folder layers by the script and an easy way of seeing them all in a clear way to see if the script is operating as it should is via the command line tool called `tree`. If its not installed, do so by running the command `sude apt-get install tree`. After which you get the tree structure of the root folder (e.g. `tree data/`), you should see all the files in their respective folder.
+
 >[!NOTE]
 >  The approach taken in this section downloads the raw files from the NY taxi website in `.parquet` format. The advantage to this approach is that we do not have to define the schema or reformat it just as we would have done for a `.csv` file. But if you had followed the instructor in the course and had downloaded the `.csv` file instead, please find the link to the notebook for defining the schema [here](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/05-batch/code/05_taxi_schema.ipynb).
