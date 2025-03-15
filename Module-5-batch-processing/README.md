@@ -18,6 +18,7 @@
 - [Spark DataFrames](#spark-dataframes)
   - [Actions vs transformations](#actions-vs-transformation)
   - [Functions and UDFs](#functions-and-udfs)
+- [Preparing Yellow and Green Taxi Data [OPTIONAL]](#preparing-yellow-and-green-taxi-data-optional)
 
 # Introduction to Batch Processing
 
@@ -310,7 +311,7 @@ df = spark.read.schema(schema).parquet("fhvhv_tripdata_2021-01.parquet")
 df.head(5)
 ```
 
-This code block should give us the desired output. Please take a look at the [notebook](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/3.2_pyspark.ipynb) for a better picture of what we have done so far!
+This code block should give us the desired output. Please take a look at the [notebook](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/04_pyspark.ipynb) for a better picture of what we have done so far!
 
 ## Partitions
 
@@ -361,7 +362,7 @@ df.printSchema()
 There are many Pandas-like operations that we can do on Spark dataframes, such as:
 * Column selection - returns a dataframe with only the specified columns.
 ```python
-df.select('pickup_datetime', 'dropoff_datetime', 'PULocationID', 'DOLocationID') ```
+df.select('pickup_datetime', 'dropoff_datetime', 'PULocationID', 'DOLocationID')```
 * Filtering by value - returns a dataframe whose records match the condition stated in the filter.
 ```python
 df.select('pickup_datetime', 'dropoff_datetime', 'PULocationID', 'DOLocationID').filter(df.hvfhs_license_num == 'HV0003')
@@ -474,3 +475,109 @@ df \
     .select('base_id', 'pickup_date', 'dropoff_date', 'PULocationID', 'DOLocationID') \
     .show()
 ```
+## Preparing Yellow and Green Taxi Data [OPTIONAL]
+
+This is an optional section and you don’t have to go through it. The content covers the development of a `bash script` so as to be able to download the data that we need for subsequent sections into our local directory. Also, by taking this approach, we don’t have to run command line commands on our notebooks as well as being able to avoid certain schema inferring issues that we had seen how to tackle in the previous section. Again these issues don’t lie with `.parquet()` files and only occur in `.csv()` files, and since the data format from the NY Taxi page only has the `.parquet()` format, our version of the bash script will be more simplified than the one covered in the [video](https://www.youtube.com/watch?v=CI3P4tAtru4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=49). It would be recommended for beginners to go through the section, and if you decide to go with the `.csv` raw taxi files then execute the script that was prepared by the course instructor [here](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/05-batch/code/download_data.sh).
+
+Since we are trying to eventually compute some metrics similar to [week 4 dbt staging scripts](https://github.com/peterchettiar/DEngZoomCamp_2025/tree/main/Module-4-analytics-engineering/taxi_rides_ny/models), we are going to download the full year data on a monthly basis for yellow and green trip taxi records for the year 2020 and 2021.
+
+So let’s start out with a sample link for each taxi type from the [website](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page):
+```url
+https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet
+https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2021-01.parquet
+```
+Right off the bat you can probably tell that the structure of both URLs are fairly similar with the exception of the taxi type and the year-month. We that being said, we can generalise the structure of the download URL by parameterising the variable as such:
+```url
+https://d37ci6vzurychx.cloudfront.net/trip-data/{TAXI_TYPE}_tripdata_{YEAR}-{MONTH}.parquet
+``` 
+
+With all that in mind we can proceed to construct our **download_data.sh** bash script:
+
+1. First things first, we had identified the variables in the URL so it would be essential to start off with defining the parameters. These would be used as arguments when we run the script via command line, as such `$1` and `$2` represent the position of the input argument
+```bash
+TAXI_TYPE=$1
+YEAR=$2
+```
+
+2. Next we create a variable called `URL_PREFIX` that contains the consistent part of the URL as follows:
+```bash
+URL_PREFIX="https://d37ci6vzurychx.cloudfront.net/trip-data"
+```
+
+3. Since taxi type and year are given as input to the script, the only parameter that is left is the `MONTH` which we can be added to the URL through a for loop. Keep in mind that the months need to be zero-padded.  Also, `for` loops in bash operate in a code block that starts with a `do` command and ends with `done`.
+```bash
+for MONTH in {1..12}; do
+# FMONTH is formatted month	
+    FMONTH=`printf "%02d" ${MONTH}`
+.
+.
+.
+done
+```
+
+> [!NOTE]
+> `printf` is a command in bash scripting to format and print output, similar to `echo` but with the formatting option.
+> `"%02d" ` this format is ensuring that `MONTH` is zero-padded (0), is integer (%d) and has minimum width of 2 digits (2)
+
+4. Now we continue to build inside the for loop - we need to define the URL of each month file for each taxi type, the local path in which the file is downloaded into, and finally the actual execution.
+```bash
+ # Construct the download URL
+ URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.parquet"
+
+# Define local paths
+LOCAL_PREFIX="data/raw/${TAXI_TYPE}/${YEAR}/${FMONTH}"
+LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}_${FMONTH}.parquet"
+LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
+
+# print statement to show which file is being currently downloaded
+echo "donwloading ${URL} to ${LOCAL_PATH}"
+
+# Create destination directory if it does not exist - p flag parent directory
+mkdir -p ${LOCAL_PREFIX}
+
+# Download file into specified path using -O flag - actual execution 
+wget ${URL} -O ${LOCAL_PATH}
+```
+
+As such the full script will be as follows:
+```bash
+# bash script for downloading NYC taxi trip data 
+
+# Ensure the script exits immediately if any command fails
+set -e
+
+# setting some variables - script expects 2 arguments
+TAXI_TYPE=$1
+YEAR=$2
+
+URL_PREFIX="https://d37ci6vzurychx.cloudfront.net/trip-data"
+
+# Loop through each month (1..12) - "%02d" ensure that month number is zero-padded
+for MONTH in {1..12}; do
+    FMONTH=`printf "%02d" ${MONTH}`
+
+    # Construct the download URL
+    URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.parquet"
+
+    # Define local paths
+    LOCAL_PREFIX="data/raw/${TAXI_TYPE}/${YEAR}/${FMONTH}"
+    LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}_${FMONTH}.parquet"
+    LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
+
+    echo "donwloading ${URL} to ${LOCAL_PATH}"
+
+    # Create destination directory if it does not exist - p flag parent directory
+    mkdir -p ${LOCAL_PREFIX}
+    # Download file into specified path using -O flag
+    wget ${URL} -O ${LOCAL_PATH}
+
+done
+```
+
+> [!IMPORTANT]
+> `set -e` ensure that the script exits immediately at the first non-zero code if a command fails (e.g.. if there is a 404 error)
+> Also, we need to make the bash script an executable if we want it to run via command line. Hence we need to run `chmod +x download_data.sh` before running the script.
+> When running the script, run it like `./download_data.sh yellow 2020` with `./` at the start as without it terminal will interpret as a command rather that the location to the executable.
+
+>[!NOTE]
+>  The approach taken in this section downloads the raw files from the NY taxi website in `.parquet` format. The advantage to this approach is that we do not have to define the schema or reformat it just as we would have done for a `.csv` file. But if you had followed the instructor in the course and had downloaded the `.csv` file instead, please find the link to the notebook for defining the schema [here](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/05-batch/code/05_taxi_schema.ipynb).
