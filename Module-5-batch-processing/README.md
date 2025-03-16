@@ -19,6 +19,7 @@
   - [Actions vs transformations](#actions-vs-transformation)
   - [Functions and UDFs](#functions-and-udfs)
   - [Preparing Yellow and Green Taxi Data [OPTIONAL]](#preparing-yellow-and-green-taxi-data-optional)
+  - [Spark SQL](#spark-sql)
 
 # Introduction to Batch Processing
 
@@ -584,3 +585,139 @@ done
 
 >[!NOTE]
 >  The approach taken in this section downloads the raw files from the NY taxi website in `.parquet` format. The advantage to this approach is that we do not have to define the schema or reformat it just as we would have done for a `.csv` file. But if you had followed the instructor in the course and had downloaded the `.csv` file instead, please find the link to the notebook for defining the schema [here](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/05-batch/code/05_taxi_schema.ipynb).
+
+## Spark SQL
+
+We already mentioned at the beginning that there are other tools for expressing batch jobs as SQL queries. As such, Spark can also run SQL queries, which can come in handy if you already have a Spark cluster and setting up an additional tool for sporadic use isn't desirable.
+
+Therefore, this section would be focusing on running batch jobs using `spark sql` by replicating dm_monthyl_zone_revenue.sql model from lesson 4 which is as follows:
+```sql
+{{
+    config(
+        materialized='table'
+    )
+}}
+
+with fact_trips as (
+    select
+        *
+    from {{ ref('fact_trips') }}
+)
+
+select
+    -- Revenue grouping
+    pickup_zone as revenue_zone,
+    {{dbt.date_trunc("month", "pickup_datetime")}} as revenue_month,
+
+    service_type,
+
+    -- Revenue calculation
+    sum(fare_amount) as revenue_monthly_fare,
+    sum(extra) as revenue_monthly_extra,
+    sum(mta_tax) as revenue_monthly_mta_tax,
+    sum(tip_amount) as revenue_monthly_tip_amount,
+    sum(tolls_amount) as revenue_monthly_tolls_amount,
+    sum(ehail_fee) as revenue_monthly_ehail_fee,
+    sum(improvement_surcharge) as revenue_monthly_improvement_surcharge,
+    sum(total_amount) as revenue_monthly_total_amount,
+
+    -- Additional calculations
+    count(tripid) as total_monthly_trips,
+    avg(passenger_count) as avg_monthly_passenger_count,
+    avg(trip_distance) as avg_monthly_trip_distance
+
+    from fact_trips
+    group by 1,2,3
+```
+
+1. `fact_trips` table is a combination of yellow and green taxi data, hence our first step is to load the downloaded yellow and green taxi data into a spark session and combine them. But before combining we need to rename columns as well as identifying similar fields between both datasets.
+```python
+df_green = spark.read.parquet("data/raw/green/*/*")
+
+# Change field name before combining
+df_green = df_green.withColumnsRenamed({'lpep_pickup_datetime':'pickup_datetime',
+                                        'lpep_dropoff_datetime':'dropoff_datetime'})
+
+# First let us identify the similar column fields between both datasets
+same_fields = [col for col in df_yellow.columns if col in df_green.columns]
+
+```
+> **NOTE** :  We are only going through the changes made for green taxi spark data frame, the same steps should be applied to yellow taxi spark dataframe. Please take a look at the full code block in the notebook [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/06_spark_sql.ipynb).
+
+2. Next we need to filter each spark dataframe by selecting the common columns, followed by creating a new column called `service_type` to help differentiate.
+```python
+# We need to filter each dataframe as well as create new column `service_type`
+from pyspark.sql import functions as F
+
+df_green_filtered = df_green.select(same_fields).withColumn('service_type', F.lit('green'))
+df_yellow_filtered = df_yellow.select(same_fields).withColumn('service_type', F.lit('yellow'))
+
+# Now to combine both datasets
+df_trips_data = df_green_filtered.unionAll(df_yellow_filtered)
+```
+> **REMINDER** : We select common fields so as to output a combined dataframe that is appended on top of each other without any empty records. Hope that makes sense.
+
+3. Now to write a spark sql query.  We would not be able to query directly from the spark dataframe and hence we need to convert it into a temporary table first using the `registerTempTable()` method (this method is deprecated).
+```python
+# Convert spark dataframe into a temporary table
+df_trips_data.createOrReplaceTempView("fact_trips")
+```
+
+4. Let’s do a sample query to see if all works as expected.
+```python
+# Test query #1
+spark.sql(
+    """
+SELECT
+    *
+FROM fact_trips
+LIMIT 10;
+"""
+).show()
+
+# Test query #2
+spark.sql("""
+SELECT
+    service_type,
+    count(1)
+FROM fact_trips
+GROUP BY service_type;
+"""
+).show()
+```
+
+5. Finally, now that we know spark sql is operating as per expected, we can recreate the dbt script into a spark sql query as follows:
+```sql
+# SQL query for dm_monthly_zone_revenue.sql
+
+df_result = spark.sql(
+    """
+    SELECT
+        PULocationID AS revenue_zone,
+        date_trunc('month', pickup_datetime) AS revenue_month,
+        service_type,
+
+        -- Revenue calculation
+        SUM(fare_amount) AS revenue_monthly_fare,
+        SUM(extra) AS revenue_monthly_extra,
+        SUM(mta_tax) AS revenue_monthly_mta_tax,
+        SUM(tip_amount) AS revenue_monthly_tip_amount,
+        SUM(tolls_amount) AS revenue_monthly_tolls_amount,
+        SUM(improvement_surcharge) AS revenue_monthly_improvement_surcharge,
+        SUM(total_amount) AS revenue_monthly_total_amount,
+        SUM(congestion_surcharge) AS revenue_monthly_congestion_surcharge,
+
+         -- Additional calculations
+        AVG(passenger_count) AS avg_monthly_passenger_count,
+        AVG(trip_distance) AS avg_monthly_trip_distance
+    FROM
+        fact_trips
+    GROUP BY PULocationID, date_trunc('month', pickup_datetime), service_type
+    """
+)
+```
+
+However, with our current dataset, this will create more than 200 parquet files of very small size, which isn't very desirable. In order to reduce the amount of files, we need to reduce the amount of partitions of the dataset, which is done with the `coalesce()` methodl,  this reduces the amount of partitions to just 1.:
+```python
+df_result.coalesce(1).write.parquet('data/report/revenue/', mode='overwrite')
+```
