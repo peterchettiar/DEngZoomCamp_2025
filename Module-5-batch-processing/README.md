@@ -384,7 +384,7 @@ Characteristics of Transformations:
     * `select(*cols)` - Selects specific columns from a DataFrame
     * `filter(condition)` – Filters rows based on a condition
     * `groupBy(*cols)` - Groups data by specified columns for aggregation
-    * `orderBy(*cols, ascending=True) - Sorts the DataFrame based on one or more columns 
+    * `orderBy(*cols, ascending=True)` - Sorts the DataFrame based on one or more columns 
     * `join(other, on, how=‘inner’` - Merges two DataFrames based on a common column using a specified join type
     * `withColumn(colName, colExpr)` - Adds or replaces a column using an expression
     * `drop(*cols)` - Removes specified columns from DataFrame
