@@ -755,6 +755,7 @@ Previously – it is not so popular these days – Hadoop and HDFS were pretty p
 
 However, these days because we have S3, Google Cloud Storage and other cloud providers the cluster and dataframe usually live in the same data center – the spark cluster and the storage are in the same data center. Downloading 100MB for an executor is very fast. It’s a little bit slower than (eg. Hadoop/HDFS model) but it’s not significantly slower. Executors now instead of keeping all this data locally they can just pull data from S3/GCS, process this and then save the results back to our Data Lake. This is why Hadoop and HDFS are becoming less popular. There is overhead with Hadoop and HDFS. Now you just have a Spark Cluster and then you keep data in your Cloud storage.
 
+>[!SUMMARY]
 To summarise you have a driver that submits a job and the driver submits a job to a Spark Master. The driver can be an operator in Airflow (a task in Airflow that does ‘spark submit’) or something else taht submits a job. Master is the thing that coordinates everything and executors are machines that are doing the actual computations. Spark keeps track of which machines are healthy and if some machine becomes unhealthy it reassigns the work and we keep the data in cloud storage [these days]. We read from the cloud storage and write results back to the cloud storage.
 
 ## GroupBy in Spark
