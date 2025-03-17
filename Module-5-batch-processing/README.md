@@ -20,6 +20,10 @@
   - [Functions and UDFs](#functions-and-udfs)
   - [Preparing Yellow and Green Taxi Data [OPTIONAL]](#preparing-yellow-and-green-taxi-data-optional)
   - [Spark SQL](#spark-sql)
+- [Spark Internals](#spark-internals)
+  - [Anatomy of a Spark Cluster](#anatomy-of-a-spark-cluster)
+  - [GroupBy in Spark](#groupby-in-spark)
+  - [Joins in Spark](#joins-in-spark)
 
 # Introduction to Batch Processing
 
@@ -721,3 +725,39 @@ However, with our current dataset, this will create more than 200 parquet files 
 ```python
 df_result.coalesce(1).write.parquet('data/report/revenue/', mode='overwrite')
 ```
+# Spark Internals
+
+So far, we have been running Spark in **local mode** using `master("local[*]”)`, meaning that all computations are executed on our local machine, whether it be a laptop or a virtual machine. In this setup, Spark utilizes the available CPU cores to process batch jobs. Unlike a distributed cluster setup where multiple executors run on different nodes, **local mode runs a single executor within a single JVM**, leveraging multiple threads to parallelize tasks. This allows us to experiment with Spark locally without requiring a full cluster environment This is essentially a local cluster and in the subsequent section, we would expand this concept by discussing an actual real distributed cluster and how it operates.
+
+Conceptually this is what our Spark components look like:
+![image](https://github.com/user-attachments/assets/1818c19d-d3b6-4b3b-ab59-0be80e2806d3)
+
+## Anatomy of a Spark Cluster
+
+Usually, the way it works is you create a script in Python or in Scala or Java or whatever with some Spark code. You usually do this from your laptop or if you use Airflow for scheduling Spark jobs then Airflow executor does that. We will talk about a case when you do it from your laptop.
+
+Here on your laptop you will have a package with some spark code that you wrote in Python. You also have a Spark Cluster. In this cluster we have a computer that we call Spark Master – it’s role is a coordinating role. So when we are on our laptop with our Spark code we submit it to Spark Master and this is actually the url that we have. Remember we opened this locally – it was localhost:4040. It usually has a Web UI on a port 4040 that we can use to connect to this master and see what is being executed on a cluster. So this you can think about as an entry point to a Spark Cluster. We use a special command called ‘spark submit’ to send our package with our code to the master, we also specify some information like what kind of resources we need for this job and so on.
+
+![image](https://github.com/user-attachments/assets/7cdebb16-9a8c-4082-92be-9cc50bef7442)
+
+Then on the cluster we have computers that actually execute these jobs – they are called executors. These are the machines that actually do the computation. When we submit a job to Spark Master then the master coordinates between executors. So for example with our job it might send it to five executors with instructions on what to do. Then of course master should be up and running all the time. Let’s say one of the executors goes away for whatever reason then master knows about this and then it assigns a task that this executor had to some other executor.
+
+Then what executors need to do is they need to pull some data and they process the data. For example, imagine we have a dataframe (image above) and this dataframe consists of partitions (a bunch of parquet files) . When we submit a job to a spark master, spark sends some information to executors and each executor pulls a partition. Each executor works through it’s allocated partition and they then mark their task as completed. Then they will move on to another task once they are done.
+
+How a spark cluster works – farming out to executors who pull their data and do some work
+One by one they process the dataframe – these partitions in the data, and save their results somewhere. These dataframes usually live in S3 or Google Cloud Storage. 
+
+**Hadoop/HDFS**
+
+Previously – it is not so popular these days – Hadoop and HDFS were pretty popular. The idea with these technologies was you have this data lake with files and these files are actually stored on executors. So you have the partition which is stored on each of these executors. Of course there is some redundancy, so you will have multiple partitions on the same executors in case one of them fails. The idea behind Hadoop and HDFS was that instead of having to download the partition to an executor like we do [with the S3/GCS model] is you download code on the machine that already has the data. There is this concept of data locality. It made a lot of sense because typically these files are quite large (eg. a partition is 100MB) – the dataframe or dataset can be quite large. However, the code we have (the package on our computer) is relatively small eg. 10 MB. It makes a lot of sense – instead of pulling a lot of data, downloading a lot of data, let’s send the source code to executors that already have the data.
+
+**S3/GCS**
+
+However, these days because we have S3, Google Cloud Storage and other cloud providers the cluster and dataframe usually live in the same data center – the spark cluster and the storage are in the same data center. Downloading 100MB for an executor is very fast. It’s a little bit slower than (eg. Hadoop/HDFS model) but it’s not significantly slower. Executors now instead of keeping all this data locally they can just pull data from S3/GCS, process this and then save the results back to our Data Lake. This is why Hadoop and HDFS are becoming less popular. There is overhead with Hadoop and HDFS. Now you just have a Spark Cluster and then you keep data in your Cloud storage.
+
+To summarise you have a driver that submits a job and the driver submits a job to a Spark Master. The driver can be an operator in Airflow (a task in Airflow that does ‘spark submit’) or something else taht submits a job. Master is the thing that coordinates everything and executors are machines that are doing the actual computations. Spark keeps track of which machines are healthy and if some machine becomes unhealthy it reassigns the work and we keep the data in cloud storage [these days]. We read from the cloud storage and write results back to the cloud storage.
+
+## GroupBy in Spark
+
+
+## Joins in Spark
