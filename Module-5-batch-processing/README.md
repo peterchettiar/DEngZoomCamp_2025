@@ -744,12 +744,11 @@ Then on the cluster we have computers that actually execute these jobs – they 
 
 Then what executors need to do is they need to pull some data and they process the data. For example, imagine we have a dataframe (image above) and this dataframe consists of partitions (a bunch of parquet files) . When we submit a job to a spark master, spark sends some information to executors and each executor pulls a partition. Each executor works through it’s allocated partition and they then mark their task as completed. Then they will move on to another task once they are done.
 
-How a spark cluster works – farming out to executors who pull their data and do some work
-One by one they process the dataframe – these partitions in the data, and save their results somewhere. These dataframes usually live in S3 or Google Cloud Storage. 
+Each executor will fetch a dataframe partition stored in a Data Lake (usually S3, GCS or a similar cloud provider), do something with it and then store it somewhere, which could be the same Data Lake or somewhere else. If there are more partitions than executors, executors will keep fetching partitions until every single one has been processed.
 
 **Hadoop/HDFS**
 
-Previously – it is not so popular these days – `Hadoop` and `HDFS` were pretty popular. The idea with these technologies was that you have a data lake with files, and these files are actually stored on executors. So you have the partition which is stored on each of these executors. Of course there is some redundancy, so you will have multiples of the same partitions across the executors just in case one of them fails and the other with the same partition can process in its stead. The idea behind Hadoop and HDFS was that instead of having to download the partition to an executor like we do [with the S3/GCS model], you only have to download code on the machine that already has the data. This concept is called `data locality`. It made a lot of sense because typically these files are quite large (eg. a partition is 100MB) – the dataframe or dataset can be quite large. However, the code we have (the package on our computer) is relatively small eg. 10 MB. It makes a lot of sense – instead of pulling a lot of data, downloading a lot of data, let’s send the source code to executors that already have the data.
+This is in contrast to [Hadoop](https://hadoop.apache.org/), another data analytics engine, whose executors locally store the data they process. Partitions in Hadoop are duplicated across several executors for redundancy, in case an executor fails for whatever reason (Hadoop is meant for clusters made of commodity hardware computers). However, data locality has become less important as storage and data transfer costs have dramatically decreased and nowadays it's feasible to separate storage from computation, so Hadoop has fallen out of fashion.
 
 **S3/GCS**
 
