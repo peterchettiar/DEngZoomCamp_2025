@@ -761,5 +761,67 @@ To summarise you have a driver that submits a job and the driver submits a job t
 
 ## GroupBy in Spark
 
+So we had executed a spark query in the previous section, let’s execute another one to enable the understanding of what exactly happens behind the scenes as we execute the query. As always we start by:
+
+1. Creating a session
+```python
+spark = SparkSession.builder.master("local[*]").appName("spark_sql_groupby_join").getOrCreate()
+```
+2. Next, we load the data. For this example, we will load green taxi data that we had downloaded in the previous section.
+```python
+df_green = spark.read.parquet("data/raw/green/*/*")
+```
+3. Now that we have loaded our sample data (i.e. green taxi data for 2020 and 2021) for this exercise, let's proceed with another `sql` query, but similar to the previous exercise, that involves a `groupby` statement.
+```python
+# Firstly, we need to always create a temp table to be queried on - sql queries cannot be queried on a spark dataframe
+df_green.registerTempTable("green")
+```
+4. Next, we write a query that breaks down the revenue as well as the number of trips by hour by zone
+```python
+df_green_revenue = spark.sql(
+    """
+SELECT
+    EXTRACT(HOUR FROM lpep_pickup_datetime) AS hour,
+    PULocationID AS zone,
+
+    SUM(total_amount) as revenue,
+    COUNT(1) as number_records
+FROM green
+WHERE lpep_pickup_datetime >= '2020-01-01 00:00:00'
+GROUP BY 1,2
+ORDER BY 1,2
+"""
+)
+```
+5. Lastly, lets write the output of our query into a parquet file
+```python
+df_green_revenue.write.parquet('data/report/revenue_green', mode='overwrite')
+```
+
+Since the data is split along partitions, it's likely that we will need to group data which is in separate partitions, but executors only deal with individual partitions. Spark solves this issue by separating the grouping in 2 stages:
+
+* In the first stage, each executor groups the results in the partition they're working on and outputs the results to a temporary partition. These temporary partitions are the **_intermediate results_**.
+
+![partition 1](https://github.com/user-attachments/assets/00819def-273c-4b4f-93e7-5cfe5a2cd714)
+
+* The second stage **_reshuffles_ ** the data: Spark will put all records with the **_same keys_** (in this case, the `GROUP BY` keys which are hour and zone) in the **_same partition_**. The algorithm to do this is called `external merge sort`. Once the reshuffling has finished, we can once again apply the `GROUP BY` to these new partitions and reduce the records to the **_final output_**.
+
+>NOTE : The shuffled partitions may contain more than one key, but all records belonging to a key should end up in the same partition.
+
+![Pasted Graphic 1](https://github.com/user-attachments/assets/6f6e14e8-6d74-4c3e-92e5-3bf2dafc49a5)
+
+Running the query should display the following DAG in the Spark UI:
+
+![Pasted Graphic 2](https://github.com/user-attachments/assets/ff6583b3-180d-442b-b330-e05b378f5de6)
+
+> [!NOTE]
+>  The `Exchange` tasks refer to the reshuffling process.
+
+If we were to add sorting to the query (adding a `ORDER BY 1,2` at the end), Spark would perform a very similar operation to `GROUP BY` after grouping the data. The resulting DAG would look liked this:
+
+![Pasted Graphic 3](https://github.com/user-attachments/assets/506929ae-91b3-4850-8825-e947d7d0ef85)
+
+> [!IMPORTANT]
+> By default, Spark will repartition the dataframe to 200 partitions after shuffling data. For the kind of data we're dealing with in this example this could be counterproductive because of the small size of each partition/file, but for larger datasets this is fine. Shuffling is an **_expensive operation_**, so it's in our best interest to reduce the amount of data to shuffle when querying.Keep in mind that repartitioning also involves shuffling data.
 
 ## Joins in Spark
