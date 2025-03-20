@@ -804,7 +804,7 @@ Since the data is split along partitions, it's likely that we will need to group
 
 ![partition 1](https://github.com/user-attachments/assets/00819def-273c-4b4f-93e7-5cfe5a2cd714)
 
-* The second stage **_reshuffles_ ** the data: Spark will put all records with the **_same keys_** (in this case, the `GROUP BY` keys which are hour and zone) in the **_same partition_**. The algorithm to do this is called `external merge sort`. Once the reshuffling has finished, we can once again apply the `GROUP BY` to these new partitions and reduce the records to the **_final output_**.
+* The second stage **_reshuffles_** the data: Spark will put all records with the **_same keys_** (in this case, the `GROUP BY` keys which are hour and zone) in the **_same partition_**. The algorithm to do this is called `external merge sort`. Once the reshuffling has finished, we can once again apply the `GROUP BY` to these new partitions and reduce the records to the **_final output_**.
 
 >NOTE : The shuffled partitions may contain more than one key, but all records belonging to a key should end up in the same partition.
 
