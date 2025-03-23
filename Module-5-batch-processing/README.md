@@ -825,3 +825,96 @@ If we were to add sorting to the query (adding a `ORDER BY 1,2` at the end), S
 > By default, Spark will repartition the dataframe to 200 partitions after shuffling data. For the kind of data we're dealing with in this example this could be counterproductive because of the small size of each partition/file, but for larger datasets this is fine. Shuffling is an **_expensive operation_**, so it's in our best interest to reduce the amount of data to shuffle when querying.Keep in mind that repartitioning also involves shuffling data.
 
 ## Joins in Spark
+
+Joining tables in Spark is implemented in a similar way to `GROUP BY` and `ORDER BY`, but there are two distinct cases: joining two large tables as well as joining a large table and a small table.
+
+1. **Joining two large tables**
+
+Let's assume that we've created a `df_yellow_revenue` Spark DataFrame in the same manner as the `df_green_revenue` we created in the previous section. We want to join both tables into one table, and the concept for doing so visually is as follows:
+
+![Pasted Graphic](https://github.com/user-attachments/assets/a8d050cc-820f-46a7-ae35-e2b63e718834)
+
+The above is ultimately what we want to achieve but before doing so, we will need to create temporary Spark DataFrames with changed column names for each so that we can tell apart data from their respective original tables:
+
+```python
+# Changing column names before joining with yellow table
+df_green_revenue_tmp = df_green_revenue.withColumnsRenamed(
+    {"revenue":"green_revenue", "number_records": "green_number_records"})
+
+# Repeating same steps for yellow revenue table
+df_yellow_revenue_tmp = df_yellow_revenue.withColumnsRenamed(
+    {"revenue":"yellow_revenue", "number_records": "yellow_number_records"}
+```
+
+Now to merge both tables on common keys, in our case it’s our group by keys `hour` and `zone`. And we have to specify an `OUTER` join as we want all records from both tables. Hence, in an event where there is no record of `revenue` and `number_records` for green data but it’s available in yellow data, then the calculated fields will show `NULL`.
+
+```python
+df_merged = df_green_revenue_tmp.join(df_yellow_revenue_tmp, on=["hour","zone"], how='outer')
+```
+
+Now let’s consider what actually happens behind the scenes. The first thing that Spark does after the query is executed, it evaluates the size of the datasets and the available resources to decide the best join strategies which include:
+- **Sort-merge join** : Used for large datasets
+- **Broadcast join** : Used when one of the datasets is small enough to be broadcast to all nodes
+- **Shuffle hash join** : Used for medium-sized datasets
+
+Given the size of our dataset, Spark uses Sort-Merge Join (SMJ) by default since Spark 2.3, not just because of large datasets but also because it is efficient for joins on sorted and partitioned data. But if the data is already sorted and partitioned (e.g., stored as bucketed tables in Hive), Spark can skip sorting, making the join faster. Or If one of the tables is small, Spark might use Broadcast Join instead, avoiding sorting and shuffling altogether.
+
+Step 1: Shuffling and partitioning using `sort-merge` algorithm
+- Spark shuffles the data so that records with the same `(hour, zone)` end up in the same partition.
+- So taking our example image from above, each partition **contains a subset of data** from both tables (`yellow_taxi` and `green_taxi`), grouped by key.
+
+Step 2: Sorting
+- After which Spark then sorts the records within each partition by (hour, zone), ensuring that matching records from both tables are adjacent for efficient merging.
+
+> [!IMPORTANT]
+> The goal is parallelism and memory optimization—each executor processes only a subset of the data.
+>  Sorting is a required step for the sort-merge join to work efficiently. Without sorting, Spark would need nested loops, which would be far slower.
+
+![Partition 1](https://github.com/user-attachments/assets/0daac352-c95c-47f3-bca7-f65d1beb3d8d)
+
+Step 3: Merged
+- Now that each partition is sorted:
+    - Spark **does not explicitly** split the data into two separate lists. - one for `yellow_taxi` and one for `green_taxi`.
+    - Instead, sorting ensures that **yellow and green records with the same join key are adjacent.**
+    - Spark then performs a **two-pointer merge**, efficiently joining records row by row.
+
+For example, our 3 partitions above may look something like this:
+```python
+# implicit list
+[
+	[(23,256), 47793.06, 2202],  # Yellow
+	[(23,256), 11064.3, 542],	# Green
+	[(23,257), 1768.64, 54],
+	[(23,257), 387.83, 17],
+]
+```
+
+The merge process scans through the sorted partition and combines matching records. In the case of `outer` join, if a key only exists in one list then the merge will introduce `NULL` values.
+
+>[!NOTE]
+> `on=`receives a list of columns by which we will join the tables. This will result in a primary composite key for the resulting table.
+> `how=` specifies the type of JOIN to execute.
+
+2. **Joining a large table and a small table**
+
+In such a scenario where you are trying to merge one small and one large table, Spark uses the `broadcast hash` join. It got its name because the smaller dataset can fit in memory, it is broadcasted to all of  the executors in the cluster. 
+
+![Pasted Graphic 1](https://github.com/user-attachments/assets/ea1cf3e4-c4e8-4717-8248-34625f364b4b)
+
+As you can tell, after the significantly smaller (`zones` table) is broadcasted, a copy of it lives inside each executor after which a standard hash join is performed to be joined with the larger `revenue` table.
+
+Let's now use the `zones lookup` table to match each zone ID to its corresponding name.
+```python
+# Joining both tables
+df_result = df_merged.join(
+    df_zones, df_merged.zone == df_zones.LocationID
+    ).drop("LocationID","zone").withColumnsRenamed(
+    {"Borough":"pickup_Borough", "service_zone": "pickup_service_zone"}
+```
+> [!NOTE]
+> We merge tables on their respective IDs (i.e. `zone` for left larger table and `LocationID` for the smaller right table).
+> After which, we perform a `drop` and change column names using `withColumnsRenamed` .
+> We also `write` out the data into a parquet file called `revenue-zones`
+> Please find full notebook [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/07_groupby_join.ipynb).
+> Shuffling isn't needed because each executor already has all of the necessary info to perform the join on each partition, thus speeding up the join operation by orders of magnitude.
+
