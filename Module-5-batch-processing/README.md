@@ -24,6 +24,7 @@
   - [Anatomy of a Spark Cluster](#anatomy-of-a-spark-cluster)
   - [GroupBy in Spark](#groupby-in-spark)
   - [Joins in Spark](#joins-in-spark)
+- [Resilient Distributed Datasets](#resilient-distributed-datasets)
 
 # Introduction to Batch Processing
 
@@ -923,3 +924,40 @@ df_result = df_merged.join(
 > Please find full notebook [here](https://github.com/peterchettiar/DEngZoomCamp_2025/blob/main/Module-5-batch-processing/code/07_groupby_join.ipynb).
 > Shuffling isn't needed because each executor already has all of the necessary info to perform the join on each partition, thus speeding up the join operation by orders of magnitude.
 
+# Resilient Distributed Datasets
+
+RDDs (Resilient Distributed Datasets) were introduced in Apache Spark as a more efficient and flexible alternative to the **Map Reduce** model used in Hadoop, which was revolutionary for its time. To understand the need for RDDs would be to understand MapReduce and its limitations.
+
+MapReduce is a programming model for processing large datasets in parallel and across a distributed cluster. It consists two main phases:
+1. Map Phases : Processes input data and produces key-value pairs
+2. Reduce Phase: Aggregate the intermediate key-value pairs to produce the final output
+
+A simple illustration of how it works is as follows:
+* The input data is first split into smaller blocks. Each block is then assigned to a mapper for processing.
+* For example, if a file has 100 records to be processed, 100 mappers can run together to process one record each. Or maybe 50 mappers can run together to process two records each. The Hadoop framework decides how many mappers to use, based on the size of the data to be processed and the memory block available on each mapper server.
+* After all the mappers complete processing, the framework shuffles and sorts the results before passing them on to the reducers. A reducer cannot start while a mapper is still in progress. All the map output values that have the same key are assigned to a single reducer, which then aggregates the values for that key.
+
+Example: Word Count
+* Input: A large text file containing multiple sentences.
+* Mapper:
+    * Reads a sentence from the input split.
+    * Splits the sentence into words.
+    * Emits key-value pairs: `(word, 1)` for each word.
+* Reducer:
+    * Receives all key-value pairs with the same word.
+    * Sums the values for each word.
+    * Emits the final output: `(word, total_count).`
+
+# Comparison: MapReduce vs. Resilient Distributed Datasets (RDDs)
+
+| **Limitations of MapReduce** | **Advantages of RDDs** |
+|------------------------------|------------------------|
+| **Disk-based processing** slows down performance as intermediate results are written to disk. | **In-memory computation** enables faster processing by reducing disk I/O. |
+| **Complex programming model** with rigid `map` and `reduce` steps. | **Flexible APIs** (Transformations & Actions) make data processing more intuitive. |
+| **High latency** due to multiple disk reads and writes in each job stage. | **Low latency** as computations are optimized and performed in-memory where possible. |
+| **No built-in fault tolerance** beyond task re-execution. | **Automatic fault recovery** using lineage (recomputing lost partitions instead of replicating data). |
+| **No caching mechanism**, requiring re-execution of steps when needed again. | **RDD persistence** (caching) allows reusing datasets across multiple computations. |
+| **Limited optimization opportunities**, as each job runs independently. | **Lazy evaluation** enables Spark to optimize execution plans dynamically. |
+| **Not suitable for iterative or interactive queries** due to repeated disk writes. | **Optimized for iterative & interactive workloads**, making it ideal for machine learning and analytics. |
+
+💡 **RDDs power Apache Spark by enabling efficient distributed computing, overcoming the inefficiencies of Hadoop MapReduce.**
