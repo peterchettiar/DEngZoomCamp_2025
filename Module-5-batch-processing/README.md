@@ -863,6 +863,8 @@ Given the size of our dataset, Spark uses Sort-Merge Join (SMJ) by default since
 Step 1: Shuffling and partitioning using `sort-merge` algorithm
 - Spark shuffles the data so that records with the same `(hour, zone)` end up in the same partition.
 - So taking our example image from above, each partition **contains a subset of data** from both tables (`yellow_taxi` and `green_taxi`), grouped by key.
+- To simplify, when we load the spark dataframes from `.parquet()` files from our `data/raw` folders, you would notice that there are two files for each yellow and green folder, this means that there are two partitions. So when we are performing the `join`, the each executor will receive one partition of the yellow dataframe and one partition of the green dataframe. So for this example, lets just assume there are two executors in total.
+- So the next step would be to shuffle the records in each partition (similar to map and reduce stage in the Hadoop framework). The final outcome would be that each partition in the executor (yellow and green partition, so two) should contain records with the same key.
 
 > [!TIP]
 > Please note that shuffling is an expensive operation, hence always look at the query's logical plan to see if it can be optimised (e.g. if you need to make multiple joins and some joins are made on the same key, then order them one after the other so that it does not need to be repartitioned again). This is important because the `shuffle write` can be so large to the point there may not be enough memory and `disk write` may be needed to perform the task (i.e. `disk spillage`).
@@ -871,6 +873,7 @@ Step 1: Shuffling and partitioning using `sort-merge` algorithm
 
 Step 2: Sorting
 - After which Spark then sorts the records within each partition by (hour, zone), ensuring that matching records from both tables are adjacent for efficient merging.
+- So the idea is that we have two executors with two partitions each (yellow and green) that is shuffled. And there are many `(hour, zone)` keys in one partition, hence they need to be sorted for the merge to work.
 
 > [!IMPORTANT]
 > The goal is parallelism and memory optimization—each executor processes only a subset of the data.
@@ -880,20 +883,8 @@ Step 2: Sorting
 
 Step 3: Merged
 - Now that each partition is sorted:
-    - Spark **does not explicitly** split the data into two separate lists. - one for `yellow_taxi` and one for `green_taxi`.
-    - Instead, sorting ensures that **yellow and green records with the same join key are adjacent.**
+    - Sorting ensures that **yellow and green records with the same join key are adjacent.**
     - Spark then performs a **two-pointer merge**, efficiently joining records row by row.
-
-For example, our 3 partitions above may look something like this:
-```python
-# implicit list
-[
-	[(23,256), 47793.06, 2202],  # Yellow
-	[(23,256), 11064.3, 542],	# Green
-	[(23,257), 1768.64, 54],
-	[(23,257), 387.83, 17],
-]
-```
 
 The merge process scans through the sorted partition and combines matching records. In the case of `outer` join, if a key only exists in one list then the merge will introduce `NULL` values.
 
