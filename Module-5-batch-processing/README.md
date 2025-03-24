@@ -865,7 +865,9 @@ Step 1: Shuffling and partitioning using `sort-merge` algorithm
 
 > [!TIP]
 > Please note that shuffling is an expensive operation, hence always look at the query's logical plan to see if it can be optimised (e.g. if you need to make multiple joins and some joins are made on the same key, then order them one after the other so that it does not need to be repartitioned again). This is important because the `shuffle write` can be so large to the point there may not be enough memory and `disk write` may be needed to perform the task (i.e. `disk spillage`)
+
 > Shuffling is expensive because potentially very large amounts of data need to be transferred over the network. Moreover, the actual reorganisation of records can be computationally expensive given the in-memory data structures used by Spark. Hence, it is important to optimise query involving `join()`, `groupBy()`, `repartition()`, `distinct()` etc.
+
 > e.g. of a shuffle process:
 
 ![image](https://github.com/user-attachments/assets/fb772c07-ffd8-4756-a4f4-0b85b3135cc7)
