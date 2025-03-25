@@ -25,8 +25,8 @@
   - [GroupBy in Spark](#groupby-in-spark)
   - [Joins in Spark](#joins-in-spark)
 - [Resilient Distributed Datasets](#resilient-distributed-datasets)
-  - [Resilient Distributed Datasets: map and reduce](resilient-distributed-datasets-map-and-reduce)
-  - [Comparison: MapReduce vs. Resilient Distributed Datasets (RDDs)](#comparison-mapreduce-vs-resilient-distributed-datasets-rdds)
+  - [Resilient Distributed Datasets: map and reduce](#resilient-distributed-datasets-map-and-reduce)
+  - [Spark and RDD mapPartition](#spark-and-rdd-mappartition)
 
 # Introduction to Batch Processing
 
