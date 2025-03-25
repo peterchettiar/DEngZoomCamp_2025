@@ -25,6 +25,7 @@
   - [GroupBy in Spark](#groupby-in-spark)
   - [Joins in Spark](#joins-in-spark)
 - [Resilient Distributed Datasets](#resilient-distributed-datasets)
+  - [Comparison: MapReduce vs. Resilient Distributed Datasets (RDDs)](#comparison-mapreduce-vs-resilient-distributed-datasets-rdds)
 
 # Introduction to Batch Processing
 
@@ -939,7 +940,7 @@ Example: Word Count
     * Sums the values for each word.
     * Emits the final output: `(word, total_count).`
 
-# Comparison: MapReduce vs. Resilient Distributed Datasets (RDDs)
+## Comparison: MapReduce vs. Resilient Distributed Datasets (RDDs)
 
 | **Limitations of MapReduce** | **Advantages of RDDs** |
 |------------------------------|------------------------|
