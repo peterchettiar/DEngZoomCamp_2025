@@ -25,6 +25,7 @@
   - [GroupBy in Spark](#groupby-in-spark)
   - [Joins in Spark](#joins-in-spark)
 - [Resilient Distributed Datasets](#resilient-distributed-datasets)
+  - [Resilient Distributed Datasets: map and reduce](resilient-distributed-datasets-map-and-reduce)
   - [Comparison: MapReduce vs. Resilient Distributed Datasets (RDDs)](#comparison-mapreduce-vs-resilient-distributed-datasets-rdds)
 
 # Introduction to Batch Processing
@@ -918,7 +919,18 @@ df_result = df_merged.join(
 
 # Resilient Distributed Datasets
 
-RDDs (Resilient Distributed Datasets) were introduced in Apache Spark as a more efficient and flexible alternative to the **Map Reduce** model used in Hadoop, which was revolutionary for its time. To understand the need for RDDs would be to understand MapReduce and its limitations.
+RDDs (Resilient Distributed Datasets) are the fundamental data structure in Apache Spark. They are the backbone of Spark's distributed processing capabilities and provide the foundation for higher-level abstractions like DataFrames and Datasets.
+
+Key characteristics of RDDs:
+1. **Resilient (Fault-Tolerant)** – If a node fails, Spark can recompute lost data using lineage (tracking transformations).
+2. **Distributed** – RDDs are split across multiple nodes in a cluster for parallel processing.
+3. **Immutable** – Once created, an RDD cannot be changed, but you can create new RDDs through transformations.
+4. **Lazy Evaluation** – Transformations on RDDs are not executed immediately, but only when an action (like .collect()) is triggered.
+5. **Partitioned** – Data is divided into partitions, which Spark distributes across the cluster.
+
+RDDs were introduced in Apache Spark as a more efficient and flexible alternative to the **Map Reduce** model used in Hadoop, which was revolutionary for its time. To understand the need for RDDs would be to understand MapReduce and its limitations.
+
+## Resilient Distributed Datasets: map and reduce
 
 MapReduce is a programming model for processing large datasets in parallel and across a distributed cluster. It consists two main phases:
 1. Map Phases : Processes input data and produces key-value pairs
