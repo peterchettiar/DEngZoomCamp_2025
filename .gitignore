@@ -3,3 +3,5 @@ Module-2-orchestration-airflow/airflow/logs/
 Module-5-batch-processing/code/fhvhv_tripdata_2021-01.parquet
 Module-5-batch-processing/code/data/
 Module-5-batch-processing/code/fhvhv/
+Module-5-batch-processing/code/tmp/
+Module-5-batch-processing/code/zones/
