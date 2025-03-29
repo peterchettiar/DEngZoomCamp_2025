@@ -965,3 +965,100 @@ Example: Word Count
 | **Not suitable for iterative or interactive queries** due to repeated disk writes. | **Optimized for iterative & interactive workloads**, making it ideal for machine learning and analytics. |
 
 💡 **RDDs power Apache Spark by enabling efficient distributed computing, overcoming the inefficiencies of Hadoop MapReduce.**
+
+## From DataFrame to RDD
+
+Spark dataframes contain a `.rdd` attribute to show the underlying rdd of the dataframe, and if we add the `.take(5)` method, it will return a list of rows in which the dataframe that we have is built on top of - `Row` is a special object that is used for building dataframes.
+
+Following is the SQL query we saw in the GROUP BY section:
+```sql
+SELECT
+    EXTRACT(HOUR FROM lpep_pickup_datetime) AS hour,
+    PULocationID AS zone,
+
+    SUM(total_amount) as revenue,
+    COUNT(1) as number_records
+FROM green
+WHERE lpep_pickup_datetime >= '2020-01-01 00:00:00'
+GROUP BY 1,2
+ORDER BY 1,2
+```
+We can re-implement this query with RDD's instead:
+1. We can re-implement the `SELECT` section by choosing the 3 fields from the RDD's rows.
+```python
+# Select only columns that are needed for the query
+rdd = df_green.select("lpep_pickup_datetime","PULocationID","total_amount").rdd
+```
+
+2. We want to apply the `WHERE` statement from the query - we use the `.filter()` method for RDDs. The filter method applies a function and keeps only those that return True.
+```python
+from datetime import datetime as dt
+rdd.filter(lambda row: row.lpep_pickup_datetime >= dt(2020,1,1)).take(1)
+```
+
+3. So now the next step would be perform the `GROUP BY` statement - to do so we need to apply two methods. First, we need to use the `map()` method to create key-value pairs, we use the transform function to do so. Next, we want to reduce the number of records by the key and aggregate the values such that there is only one key
+and a corresponding aggregated values in the final output.
+```python
+def transform(row):
+    hour = row.lpep_pickup_datetime.hour
+    zone = row.PULocationID
+
+    revenue = row.total_amount
+    count = 1
+
+    # Return key-value pair
+    return ((hour,zone), (revenue, count))
+
+"""
+The reduceByKey() method in Spark groups records by their key and applies the provided
+function to aggregate values associated with the same key. The function operates pairwise, 
+meaning it processes records iteratively rather than all at once.
+
+Aggregation is done in a distributed and efficient manner. Spark applies the function to pairs of values 
+first within each partition, then merges the intermediate results across partitions.
+
+The function takes in two arguments at a time: the previously aggregated value and the next value, 
+accumulating the result iteratively.
+"""
+def calculate(left_value, right_value):
+
+    left_amount, left_count = left_value
+    right_amount, right_count = right_value
+
+    output_amount = left_amount + right_amount
+    output_count = left_count + right_count
+
+    return (output_amount, output_count)
+    
+# Now to see the output of records after mapping
+rdd.filter(lambda row: row.lpep_pickup_datetime >= dt(2020,1,1)) \
+    .map(transform).reduceByKey(calculate).take(10)
+```
+
+> [!NOTE]
+> Keep in mind that any of the methods (i.e.`filter()`, `map()` and `reduceByKey()` used to manupilate the RDD takes in a function as parameter to run on each element of the RDD (row-wise, think of it as customised `lambda functions`).
+
+4. The output we have is already usable but not very nice, so we map the output again in order to _unwrap_ it.
+```python
+from collections import namedtuple
+
+# We need to perform this step as if we converted our output directly into a DF, 
+# the shcema would not be there as well as column names
+RevenueRow = namedtuple('RevenueRow', ['hour', 'zone', 'revenue', 'count'])
+
+# Helper function to help unpack the rdd
+def unwrap(row):
+    return RevenueRow(hour=row[0][0],
+                      zone=row[0][1], 
+                      revenue=row[1][0],
+                      count=row[1][1]
+                      )
+
+df_result = rdd.filter(
+    lambda row: row.lpep_pickup_datetime >= dt(2020,1,1)).map(transform).reduceByKey(calculate).map(unwrap).toDF()
+```
+
+> [!NOTE]
+> We can use `.toDF()` without any schema as an input parameter, but Spark will have to figure out the schema by itself which may take a substantial amount of time. Using `namedtuple` in the previous step allows Spark to infer the column names but Spark will still need to figure out the data types; by passing a schema as a parameter we skip this step and get the output much faster.
+
+As you can see, manipulating RDDs to perform SQL-like queries is complex and time-consuming. Ever since Spark added support for dataframes and SQL, manipulating RDDs in this fashion has became obsolete, but since dataframes are built on top of RDDs, knowing how they work can help us understand how to make better use of Spark.
