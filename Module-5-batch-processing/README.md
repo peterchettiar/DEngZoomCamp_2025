@@ -966,7 +966,7 @@ Example: Word Count
 
 💡 **RDDs power Apache Spark by enabling efficient distributed computing, overcoming the inefficiencies of Hadoop MapReduce.**
 
-## From DataFrame to RDD
+### From DataFrame to RDD
 
 Spark dataframes contain a `.rdd` attribute to show the underlying rdd of the dataframe, and if we add the `.take(5)` method, it will return a list of rows in which the dataframe that we have is built on top of - `Row` is a special object that is used for building dataframes.
 
@@ -1062,3 +1062,5 @@ df_result = rdd.filter(
 > We can use `.toDF()` without any schema as an input parameter, but Spark will have to figure out the schema by itself which may take a substantial amount of time. Using `namedtuple` in the previous step allows Spark to infer the column names but Spark will still need to figure out the data types; by passing a schema as a parameter we skip this step and get the output much faster.
 
 As you can see, manipulating RDDs to perform SQL-like queries is complex and time-consuming. Ever since Spark added support for dataframes and SQL, manipulating RDDs in this fashion has became obsolete, but since dataframes are built on top of RDDs, knowing how they work can help us understand how to make better use of Spark.
+
+## Spark and RDD mapPartition
