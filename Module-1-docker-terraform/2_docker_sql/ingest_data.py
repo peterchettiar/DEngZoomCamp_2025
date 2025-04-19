@@ -1,3 +1,6 @@
+"""
+Data ingestion script to load data into postgres
+"""
 import argparse
 import time
 import pandas as pd
